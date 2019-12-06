@@ -1,0 +1,7 @@
+<!--component/getUserInfo/getUserInfo.wxml-->
+<!-- 需要微信登陆.自动登陆失败.手动登陆按钮 -->
+<view class="com-wx-userinfo" wx:if="{{isGetUserInfo && !hasUserInfo && canIUse}}">
+	<view class="com-wx-text">微信自动获取用户信息失败</view>
+	<view class="com-wx-text2">请点击手动获取</view>
+	<button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 手动获取 </button>
+</view>

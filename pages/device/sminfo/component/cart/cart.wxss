@@ -1,0 +1,106 @@
+/* pages/device/sminfo/component/cart/cart.wxss */
+@import '/static/css/$class.wxss';
+@import '/template/showNotdata/index.wxss';
+.com-shopcart{
+    position: fixed;
+	left: 0;
+    bottom: 100rpx;
+    width: 100%;
+    background-color: var(--wc);
+	z-index: calc(var(--zindex_hd) + 1);
+}
+.com-shopcart .com-shopcart-title{
+    height: 75rpx;
+    border-bottom: 1rpx solid #D4D4D4;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.com-shopcart .com-shopcart-title .icon{
+    width: 25rpx;
+    height: 25rpx;
+    vertical-align: middle;
+}
+.com-shopcart .com-shopcart-title .text{
+    font-weight: Medium;
+    font-size: 24rpx;
+    color: var(--zc9);
+    padding-right: 31rpx;
+    padding-left: 11rpx;
+    line-height: 25rpx;
+}
+.com-shopcart-ul {
+    width: 100%;
+	max-height: 600rpx;
+	overflow-y: scroll;
+}
+.com-shopcart-ul .li{
+    display: flex;
+    align-items: center;
+    height: 122rpx;
+	position: relative;
+}
+.com-shopcart-ul .li .pic{
+    width: 86rpx;
+    height: 86rpx;
+    padding-right: 20rpx;
+    padding-left: 32rpx;
+	text-align: center;
+}
+.com-shopcart-ul .li .pic image{
+    width: calc(var(--pscale) * 86rpx);
+    height: 86rpx;
+}
+.com-shopcart-ul .li .info-warp{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    border-bottom: 1rpx solid #D4D4D4;
+}
+.com-shopcart-ul .li:last-of-type .info-warp{
+    border: none;
+}
+.com-shopcart-ul .li .info-warp .name{
+    font-size:30rpx;
+    font-weight:500;
+    color:var(--zc3);
+    margin: 0;
+}
+.com-shopcart-ul .li .info-warp .price{
+    margin-top: 8rpx;
+}
+.com-shopcart-ul .li .info-warp .price .a{
+    font-size:20rpx;
+    font-weight:500;
+    color:var(--zc);
+}
+.com-shopcart-ul .li .info-warp .price .b{
+    font-family: ArialMT;
+    font-size:30rpx;
+    font-weight:400;
+    color:var(--zc);
+}
+.com-shopcart-ul .li .info-warp .price .c{
+    font-family: ArialMT;
+    font-size:20rpx;
+    font-weight:400;
+    color:var(--zc);
+}
+.com-shopcart-ul .li .count-warp{
+    position: absolute;
+    right: 25rpx;
+    bottom: 35%;
+    height: 36rpx;
+}
+.com-shopcart .com-shopcart-activity{
+    width: 100%;
+    height: 48rpx;
+    line-height: 48rpx;
+    text-align: center;
+    font-weight: Medium;
+    font-size: 24rpx;
+    color: var(--zc);
+    background-color: #FFDCBA;
+}

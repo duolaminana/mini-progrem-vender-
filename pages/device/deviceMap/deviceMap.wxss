@@ -1,0 +1,5 @@
+/* pages/device/deviceMap/deviceMap.wxss */
+.myMap{
+    width: 100%;
+    height: calc(100vh - var(--tpl-header_height));
+}

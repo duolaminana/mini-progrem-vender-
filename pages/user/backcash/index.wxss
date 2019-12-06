@@ -1,0 +1,7 @@
+/* pages/user/backcash/index.wxss */
+.container,.containerX{
+    padding-left: 0;
+    padding-right: 0;
+}
+@import '/pages/user/common/couplet/index.wxss';
+@import '/pages/user/common/info/index.wxss';

@@ -1,0 +1,23 @@
+/* component/getUserInfo/getUserInfo.wxss */
+.com-wx-userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 510;
+	background-color: var(--wc);
+}
+.com-wx-userinfo .com-wx-text{
+    margin-top: 30vh;
+    font-size: calc(18rpx*var(--bs));
+}
+.com-wx-userinfo .com-wx-text2{
+    margin-top: 10rpx;
+    margin-bottom: 20vh;
+    font-size: calc(14rpx*var(--bs));
+    color: #999;
+}

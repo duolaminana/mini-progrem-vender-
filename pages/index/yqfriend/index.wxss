@@ -1,0 +1,62 @@
+/* pages/index/yqfriend/index.wxss */
+page{
+    background-color: #D73F3C;
+}
+.container,.containerX{
+    width: 100%;
+    display: flex;
+}
+.container .pagebg,.containerX .pagebg{
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+/* .containerX .pagebg{
+    top: var(--tpl-header_paddingX);
+} */
+.container .content,.containerX .content{
+    position: absolute;
+    top: calc(147rpx*var(--bs));
+    width: calc(246rpx*var(--bs));
+    height: calc(351rpx*var(--bs));
+    background-color: var(--wc);
+    border-radius: 10rpx;
+    padding: 0 48rpx;
+    box-sizing: border-box;
+}
+.containerX .content{
+    /* top: calc(147rpx*var(--bs) + var(--tpl-header_paddingX)); */
+    top: calc(147rpx*var(--bs));
+}
+.container .title,.containerX .title{
+    text-align: center;
+    font-size: 36rpx;
+    font-weight: var(--w8);
+    color: var(--zc3);
+    margin-bottom: 24rpx;
+    margin-top: 24rpx;
+}
+.container .text,.containerX .text{
+    font-size: 30rpx;
+    color: #D73F3C;
+    font-weight: var(--w5);
+    line-height:48rpx;
+}
+.container .content .icon,.containerX .content .icon{
+    display: block;
+    width: calc(88.5rpx*var(--bs));
+    height: calc(89rpx*var(--bs));
+    margin: 40rpx auto 70rpx;
+}
+.container .content .btn,.containerX .content .btn{
+    width: 304rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    border-radius: 44rpx;
+    background-color: #D73F3C;
+    color: var(--wc);
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    margin: 0 auto;
+    text-align: center;
+}

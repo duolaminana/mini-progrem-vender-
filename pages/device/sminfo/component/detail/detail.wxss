@@ -1,0 +1,124 @@
+/* pages/device/sminfo/component/detail/detail.wxss */
+@import '/static/css/$class.wxss';
+.com-goodsdetail{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: var(--wc);
+	z-index: calc(var(--zindex_zzc) + 10);
+}
+.com-goodsdetail .title{
+    height: 96rpx;
+    line-height: 96rpx;
+    font-weight: bold;
+    font-size: 36rpx;
+    color: var(--zc3);
+    text-align: center;
+    position: relative;
+}
+.com-goodsdetail .title .close{
+    position: absolute;
+    right: 0;
+    top: calc(50% - 16rpx);
+    padding-right: 32rpx;
+    width: 32rpx;
+    height: 32rpx;
+}
+.com-goodsdetail .com-goodsdetail-btns{
+    height: 130rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*position: absolute;
+    bottom: 0;
+    width: 100%;*/
+}
+.com-goodsdetail .com-goodsdetail-btns .gocart,.com-goodsdetail .com-goodsdetail-btns .gopay{
+    line-height: 88rpx;
+    height: 88rpx;
+    text-align: center;
+    border-radius: 8rpx;
+    border: 2rpx solid var(--zc);
+    box-sizing: border-box;
+    width: 49%;
+    color: var(--zc);
+    font-size: 30rpx;
+    font-weight: Medium;
+}
+.com-goodsdetail .com-goodsdetail-btns .gocart{
+    background-color: var(--zc);
+    color: var(--wc);
+}
+.com-goodsdetail .com-goodsdetail-main{
+    max-height: 780rpx;
+}
+.com-goodsdetail .com-goodsdetail-main .top{
+    display: flex;
+    align-items: center;
+	position: relative;
+}
+.com-goodsdetail .com-goodsdetail-main .top .pic{
+    display: flex;
+    align-items: center;
+	justify-content: center;
+    height: 200rpx;
+    width: 200rpx;
+}
+.com-goodsdetail .com-goodsdetail-main .top .pic image{
+    height: 200rpx;
+	width: calc(var(--pscale) * 200rpx);
+}
+.com-goodsdetail .info{
+    width: 100%;
+    height: 200rpx;
+    padding-left: 10rpx;
+}
+.com-goodsdetail .info .name{
+    font-weight: Medium;
+    font-size: 36rpx;
+    color: var(--zc3);
+}
+.com-goodsdetail .info .kc{
+    font-weight: Medium;
+    font-size: 24rpx;
+    color: var(--zc9);
+    margin-top: 17rpx;
+}
+.com-goodsdetail .info .tab{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 65rpx;
+}
+.com-goodsdetail .info .tab .price .a{
+    font-weight: 400;
+    font-size: 30rpx;
+    color: var(--zc3);
+}
+.com-goodsdetail .info .tab .price .b{
+    font-family: ArialMT;
+    font-weight: 400;
+    font-size: 36rpx;
+    color: var(--zc3);
+}
+
+.com-goodsdetail .bottom{
+    width: 100%;
+    margin-top: 30rpx;
+	min-height: 265rpx;
+}
+.com-goodsdetail .bottom .bli{
+    padding-bottom: 30rpx;
+}
+.com-goodsdetail .bottom .bli .bl{
+    font-weight: bold;
+    font-size: 30rpx;
+    color: var(--zc);
+}
+.com-goodsdetail .bottom .bli .bi{
+    margin-top: 12rpx;
+    font-weight: Regular;
+    font-size: 22rpx;
+    color: var(--zc3);
+}

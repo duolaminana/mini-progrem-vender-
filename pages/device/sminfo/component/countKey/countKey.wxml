@@ -1,0 +1,10 @@
+<!--pages/device/sminfo/component/countKey/countKey.wxml-->
+<view class="count" catchtap>
+	<view class="min" catchtap="sub">
+		<image src="/static/img/icon/sub_icon.png" />
+	</view>
+	<view class="result">{{result}}</view>
+	<view class="max" catchtap="add">
+		<image src="/static/img/icon/add_icon.png" />
+	</view>
+</view>

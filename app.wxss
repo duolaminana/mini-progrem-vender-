@@ -1,0 +1,63 @@
+/**app.wxss**/
+@import "/static/css/$class.wxss";
+
+page{
+	--pscale: 0.62;
+  --bs: 2; /* 调整大小的倍数 */
+  --zc: #ee7700;
+  --zcz: #a45f11;
+  --zcl: #4588ec;
+  --zch: #ed4014;
+  --zc3: #333333;
+  --zc9: #999999;
+  --zcb7: #b7b7b7;
+  --zcd4: #D4D4D4;
+  --zcf5: #f5f5f5;
+  --wc: #fff;
+  --bc: #000;
+
+
+  --Heavy: 800;
+  --Bold: 700;
+  --Medium: 500;
+  --Regular: 400;
+
+  --w8: var(--Heavy);
+  --w7: var(--Bold);
+  --w5: var(--Medium);
+  --w4: var(--Regular);
+
+  --ArialMT: Arial;
+  --PingFang-SC: PingFang SC;
+
+  --fa: var(--ArialMT);
+  --fp: var(--PingFang-SC);
+
+
+  /* font-family: PingFangSC-Regular, sans-serif; */
+  font-family: var(--fp);
+
+
+  background-color: #f5f5f5;
+  --zindex_hd: 500; /* z-index层级量，头部标准 */
+  --zindex_zzc: 600; /* z-index层级量，遮罩层标准 */
+}
+.container{
+  --tpl-header_height: var(--height--, 10vh); /*头部高度设置.由--height--在wxml文件里的.container标签上获取,所有必须设置在.container下*/
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+view{
+  display: block;
+  font-family:PingFang SC;
+}
+text{
+  font-family:PingFang SC;
+}
+
+@import "/template/index.wxss";

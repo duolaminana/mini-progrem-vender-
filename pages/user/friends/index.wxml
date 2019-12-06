@@ -1,0 +1,29 @@
+<!--pages/user/friends/index.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/template/yqnav/common.wxml"></import>
+<import src="/template/showNotdata/common.wxml"></import>
+
+<view class="container" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+
+    <navigator class="banner cus-lan" url="/pages/index/yqfriend/index">
+        <image src="/static/img/user/banner_small.png" mode="widthFix"/>
+        <template is="tpl-yqnav-user"></template>
+    </navigator>
+    
+    <view wx:if="{{true}}" class="ullist">
+        <view class="lis" wx:for="{{4}}" wx:key="*this">
+            <view class="pic">
+                <image src="/static/img/user/user_img.png" />
+            </view>
+            <view class="info">
+                <view class="left">
+                    <view class="name cus-sl300">奋斗哈哈哈奋斗哈哈哈奋斗哈哈哈奋斗哈哈哈</view>
+                    <view class="phone">18865954789</view>
+                </view>
+                <view class="right">2019-10-31 16:06:05</view>
+            </view>
+        </view>
+    </view>
+    <template wx:else is="tpl-showNotdata" data="{{text:'暂无好友列表数据',height:'270rpx'}}"></template>
+</view>

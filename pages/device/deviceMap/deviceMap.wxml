@@ -1,0 +1,22 @@
+<!--pages/device/deviceMap/deviceMap.wxml-->
+<import src="/template/head/head.wxml"></import>
+
+<view class="container" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+
+    <map name="myMap" class="myMap"
+        longitude="{{longitude}}" 
+        latitude="{{latitude}}" 
+        markers="{{markers}}" 
+        include-points="{{true}}" 
+        show-location
+        bindmarkertap="markerAir"
+        bindcallouttap="markerAir"
+        >
+        <!-- <cover-view class="marker">
+            <cover-view class="bot">我是文字</cover-view>
+            <button class="goThisMap">去这里</button>
+        </cover-view> -->
+    </map>
+</view>
+

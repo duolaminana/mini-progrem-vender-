@@ -1,0 +1,17 @@
+<!-- 订单信息 -->
+<template name="order-info">
+    <view class="tpl_order_info">
+        <view class="li">
+            <text class="ll">订单号码</text>
+            <text class="rr">6584 1254 2566 1458</text>
+        </view>
+        <view class="li">
+            <text class="ll">下单时间</text>
+            <text class="rr">2019-10-31 17:36:48</text>
+        </view>
+        <view class="li">
+            <text class="ll">支付方式</text>
+            <text class="rr">微信支付</text>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,17 @@
+/* component/floatGlass/floatGlass.wxss */
+.com-wx-floatGlass{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: calc(var(--zindex_zzc) + 100);
+	background-color: var(--zc);
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 50%;
+}
+.content{
+	font-size: 28rpx;
+	color: var(--wc);
+}

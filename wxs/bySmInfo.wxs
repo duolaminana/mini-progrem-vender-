@@ -1,0 +1,20 @@
+module.exports = {
+	showCur: function (a, b){
+		/**
+		 * smInfo.wxml页面goodsList展示的切换选择
+		 * */
+		if(a == 0){
+			if(b == 0){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			if(a == b){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
+}

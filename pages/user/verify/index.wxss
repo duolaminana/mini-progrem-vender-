@@ -1,0 +1,87 @@
+/* pages/user/verify/index.wxss */
+@import '/template/head/index.wxss';
+
+page{
+    background-color: var(--wc);
+}
+.my-camera{
+	--pd: 130rpx;
+	width: 100%;
+	height: calc(100vh - var(--tpl-header_height));
+	position: absolute;
+	top: var(--tpl-header_height);
+	left: 0;
+	z-index: calc(var(--zindex_hd) - 10);
+	box-sizing: border-box;
+	padding-bottom: var(--pd);
+}
+.camera-cover{
+	width: 100%;
+	height: var(--pd);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: absolute;
+	bottom: 0;
+}
+.camera-cover .left,.camera-cover .right{
+	color: var(--wc);
+	flex: 1;
+	height: 100%;
+	line-height: var(--pd);
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.camera-cover .left{
+	background-color: #07c160;
+}
+.camera-cover .right{
+	background-color: var(--zc);
+}
+.verify-title{
+    font-weight: var(--w7);
+    font-size: 30rpx;
+    color: var(--zc);
+    text-align: center;
+    margin-top: 80rpx;
+    margin-bottom: 137rpx;
+}
+.uls{
+    width: 100%;
+    padding: 0 98rpx;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.uls .lis{
+    text-align: center;
+}
+.uls .pic image{
+    width: 185rpx;
+    height: 185rpx;
+    margin-top: 41rpx;
+    margin-bottom: 18rpx;
+}
+.uls .title{
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc3);
+}
+.uls .lis:last-of-type .title{
+    color: #D73F3C;
+}
+.uls .btn{
+    width: 242rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    border-radius: 8rpx;
+    text-align: center;
+    background-color: var(--zc);
+    color: var(--wc);
+    font-weight: var(--w5);
+    font-size: 30rpx;
+	margin: 0 auto;
+}

@@ -1,0 +1,57 @@
+<!--pages/index/hotsell/index.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/template/showNotdata/common.wxml"></import>
+
+<view class="container" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+
+    <view class="thisgoods cus-lan">
+        <view class="pic">
+            <image src="/static/img/goods.png"/>
+        </view>
+        <view class="info">
+            <view class="title">
+                <text class="name">利群(硬烟嘴)</text>
+                <text class="cuxiao">限时抢购</text>
+            </view>
+            <view class="alias">利群</view>
+            <view class="price">
+                <view class="ral">
+                    <text class="ral-a">48</text>
+                    <text class="ral-b">元</text>
+                </view>
+                <text class="fake">50元</text>
+            </view>
+        </view>
+    </view>
+    <view class="ulgoods cus-lan">
+        <block wx:if="{{true}}">
+            <navigator class="li" wx:for="{{10}}" wx:key="*this" url="/pages/device/info/index">
+                <view class="left">
+                    <image class="pic" src="/static/img/goods/yan_img.png"/>
+                </view>
+                <view class="right">
+                    <view class="title">
+                        <text class="no">H0001</text>
+                        <text class="name">新二代智能售烟机</text>
+                        <text class="dec">200m</text>
+                        <view class="price">
+                            <view class="ral">
+                                <text class="ral-a">48</text>
+                                <text class="ral-b">元</text>
+                            </view>
+                            <text class="fake">50元</text>
+                        </view>
+                    </view>
+                    <view class="type">商品种类:76种</view>
+                    <view class="sign">购买过的</view>
+                    <view class="addr">
+                        <image class="cus-addr" src="/static/img/icon/address.png"/>
+                        <text class="text">深圳市宝安区石岩街道办星城购物</text>
+                    </view>
+                </view>
+            </navigator>
+        </block>
+        <template wx:else is="tpl-showNotdata" data="{{text:'附近没有售卖机设备',height:'300rpx'}}"></template>
+    </view>
+</view>

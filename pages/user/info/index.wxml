@@ -1,0 +1,34 @@
+<!--pages/user/info/index.wxml-->
+<!-- 羊毛出在羊身上，功成名就建立在枯骨烂肉之上，江湖就在脚下 -->
+<import src="/template/head/head.wxml"></import>
+
+<view class="container cus-lan" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+
+    <view class="user-info">
+        <view class="li">
+            <view class="text">头像</view>
+            <view class="note pic">
+                <image src="/static/img/user/user_img.png" />
+            </view>
+        </view>
+        <view class="li">
+            <view class="text">手机号码</view>
+            <view class="note">18856548725</view>
+        </view>
+        <view class="li arrow">
+            <navigator url="/pages/user/info/nickname/index">
+                <view class="text">昵称</view>
+                <view class="note cus-sl500">ccicciccicciccicciccicciccicciccicciccicciccicciccicciccicci</view>
+            </navigator>
+        </view>
+        <view class="li arrow">
+            <navigator url="/pages/user/info/identity/index">
+                <view class="text">实名认证</view>
+                <view class="note{{identity==0?' love':' notlove'}}">
+                    <view>{{identity==0?'已认证':'未认证'}}</view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>

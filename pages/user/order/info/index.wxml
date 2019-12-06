@@ -1,0 +1,46 @@
+<!--pages/user/order/info/index.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/pages/common/sbinfo/index.wxml" />
+<import src="/pages/common/goodsinfo/index.wxml" />
+<import src="/pages/common/orderinfo/index.wxml" />
+<import src="/template/showNotdata/common.wxml"></import>
+
+<view class="container cus-lan" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+    <block wx:if="{{true}}">
+        <view class="sbinfo">
+            <view class="title">
+                <view class="pic">
+                    <image src="/static/img/icon/equip_icon.png" />
+                </view>
+                <view class="text">设备信息</view>
+            </view>
+            <view class="con-warp">
+                <template is="sb-info"></template>
+            </view>
+        </view>
+        <view class="goodsinfo">
+            <view class="title">
+                <view class="pic">
+                    <image src="/static/img/icon/commodity_icon.png" />
+                </view>
+                <view class="text">商品信息</view>
+            </view>
+            <view class="con-warp">
+                <template is="goods-info"></template>
+            </view>
+        </view>
+        <view class="orderinfo">
+            <view class="title">
+                <view class="pic">
+                    <image src="/static/img/icon/order_icon.png" />
+                </view>
+                <view class="text">订单信息</view>
+            </view>
+            <view class="con-warp">
+                <template is="order-info"></template>
+            </view>
+        </view>
+    </block>
+    <template wx:else is="tpl-showNotdata" data="{{text:'订单详情页面无数据或错误加载',height:'800rpx'}}"></template>
+</view>

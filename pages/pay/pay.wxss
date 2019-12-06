@@ -1,0 +1,131 @@
+/* pages/pay/pay.wxss */
+@import '/template/head/index.wxss';
+@import '/template/freebtn/index.wxss';
+.paymain{
+    margin-top: 20rpx;
+    background-color: var(--wc);
+    border-radius: 8rpx;
+}
+.paymain .goodsul .li{
+    height: 86rpx;
+    padding: 27rpx;
+    display: flex;
+    align-items: center;
+}
+.paymain .goodsul .pic{
+    height: 86rpx;
+    width: 86rpx;
+	text-align: center;
+}
+.paymain .goodsul .pic image{
+    height: 86rpx;
+    width: calc(var(--pscale) * 86rpx);
+}
+.paymain .goodsul .info{
+    width: 100%;
+    height: 86rpx;
+}
+.paymain .goodsul .info .top{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -8rpx;
+}
+.paymain .name{
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc3);
+}
+.paymain .price .sbl{
+    font-weight: var(--w5);
+    font-size: 20rpx;
+    color: var(--zc);
+}
+.paymain .price .number{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc);
+}
+.paymain .price .suf{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 20rpx;
+    color: var(--zc);
+}
+.paymain .info .count{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc9);
+    text-align: right;
+    margin-top: 20rpx;
+}
+.paymain .total{
+    padding: 34rpx;
+    text-align: right;
+}
+.paymain .total .a{
+    font-weight: var(--w5);
+    font-size: 24rpx;
+    color: var(--zc9);
+}
+.paymain .total .b{
+    font-weight: var(--w5);
+    font-size: 24rpx;
+    color: var(--zc3);
+    margin-left: 25rpx;
+    margin-right: 8rpx;
+}
+.paymain .total .c{
+    font-weight: var(--w7);
+    font-size: 30rpx;
+    color: var(--zc3);
+    margin-left: 2rpx;
+}
+.paymain .total .d{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 36rpx;
+    color: var(--zc3);
+}
+.deduction{
+    height: 96rpx;
+    width: 100%;
+}
+.deduction .confix{
+    position: fixed;
+    bottom: 128rpx;
+    left: 0;
+    right: 0;
+    height: 96rpx;
+    background-color: var(--wc);
+    border-radius: 8rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-left: 22rpx;
+    padding-right: 22rpx;
+}
+.deduction .confix .icon{
+    width: 30rpx;
+    height: 30rpx;
+}
+.deduction .confix .text{
+    margin-left: 14rpx;
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc3);
+}
+.deduction .confix .sel{
+    width: 38rpx;
+    height: 38rpx;
+    border: 2rpx solid var(--zc);
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

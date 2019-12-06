@@ -1,0 +1,13 @@
+<!--pages/index/yqfriend/index.wxml-->
+<import src="/template/head/head.wxml"></import>
+
+<view class="container" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+    <image class="pagebg" src="/static/img/yqfriend/invitation_bg.png" mode="widthFix" />
+    <view class="content">
+        <view class="title">返现规则</view>
+        <text class="text">邀请好友，好友成功绑定账号 并购买香烟，即可获得交易额 3%的返现金额；介绍人也可 获得交易额2%的返现金额；</text>
+        <image class="icon" src="/static/img/yqfriend/friend_img.png" />
+        <button class="btn" open-type="share">去邀请</button>
+    </view>
+</view>

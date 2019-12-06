@@ -1,0 +1,13 @@
+<!-- 积分与返现列表信息-->
+<template name="ib-info">
+    <view class="ib-info">
+        <view class="li" wx:for="{{tpl_ibData.array}}" wx:key="*this">
+            <view class="icon">
+                <image src="{{tpl_ibData.classify=='jifen'?'/static/img/user/user_img.png':'/static/img/user/user_img.png'}}"/>
+            </view>
+            <view class="{{tpl_ibData.classify=='jifen'?'handle':'fx-handle'}}">{{item.title}}</view>
+            <view class="{{tpl_ibData.classify=='jifen'?'time':'fx-time'}}">{{item.time}}</view>
+            <view class="{{item.note>0?'note':'noteK'}}">{{item.note}}</view>
+        </view>
+    </view>
+</template>

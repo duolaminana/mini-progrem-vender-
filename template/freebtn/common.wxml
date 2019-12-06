@@ -1,0 +1,10 @@
+<wxs src="../../wxs/common.wxs" module="wxsCom" />
+
+<template name="tpl-freebtn">
+    <view class="tpl-freebtn">
+        <view class="tpl-freebtn-con cus-lan-m" bind:tap="{{click}}" style="{{wxsCom.objToString(style)}}">
+            <image class="tpl-freebtn-icon" wx:if="{{icon}}" src="{{icon}}" mode="widthFix"/>
+            <text class="tpl-freebtn-text">{{text}}</text>
+        </view>
+    </view>
+</template>

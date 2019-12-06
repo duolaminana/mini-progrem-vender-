@@ -1,0 +1,13 @@
+<!-- 积分与返现头部 -->
+<template name="ib-couplet">
+    <view class="ib-couplet">
+        <view class="pic">
+            <image src="{{tpl_ibData.classify=='jifen'?'/static/img/user/jifen_img.png':'/static/img/user/jifen_img.png'}}" />
+        </view>
+        <view class="info">
+            <view class="num">{{tpl_ibData.number}}<text class="jl" hidden="{{tpl_ibData.classify=='jifen'?true:false}}">.00</text></view>
+            <view class="text">{{tpl_ibData.classify=='jifen'?'积分(分)':'返现(元)'}}</view>
+        </view>
+        <view class="tonav">{{tpl_ibData.classify=='jifen'?'积分商城':'返现可用于抵扣香烟'}}</view>
+    </view>
+</template>

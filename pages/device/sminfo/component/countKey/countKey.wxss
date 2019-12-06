@@ -1,0 +1,29 @@
+/* pages/device/sminfo/component/countKey/countKey.wxss */
+.count,
+.count .min,
+.count .max,
+.count .result{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.count{
+    height: 36rpx;
+}
+.count .min,.count .max{
+    width: 36rpx;
+    height: 36rpx;
+}
+.count .min image,.count .max image{
+    width: 36rpx;
+    height: 36rpx;
+}
+.count .result{
+    width: 36rpx;
+    height: 36rpx;
+    margin: 0 20rpx;
+    font-family: var(--fa);
+    font-size: 24rpx;
+    font-weight: var(--w4);
+    color: var(--zc3);
+}

@@ -1,0 +1,103 @@
+<!--pages/device/sminfo/index.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/template/showNotdata/common.wxml"></import>
+<wxs src="../../../wxs/common.wxs" module="wxsCom" />
+<wxs src="../../../wxs/bySmInfo.wxs" module="wxsCus" />
+
+<view wx:if="{{isHideUnauthorized}}">
+    <view wx:if="{{canIUse}}" >
+        <view class='author-header'>
+            <image src='/static/img/icon/wechat_icon.png'></image>
+        </view>
+  
+        <view class='author-content'>
+            <view>申请获取以下权限</view>
+            <text>获得你的公开信息(昵称，头像等)</text>
+        </view>
+  
+        <button class='author-bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+            授权登录
+        </button>
+    </view>
+    <view wx:else>请升级微信版本</view>
+</view>
+
+<view wx:else class="container" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+    
+    <view class="fixban">
+        <!-- 设备 -->
+        <view class="sbinfo cus-lan">
+            <view class="left">
+                <image class="pic" src="/static/img/goods/yan_img.png"/>
+            </view>
+            <view class="right">
+                <view class="title">
+                    <text class="no">H0001</text>
+                    <text class="name">新二代智能售烟机</text>
+                    <text class="dec">200m</text>
+                </view>
+                <view class="type">商品种类:76种</view>
+                <view class="sign">购买过的</view>
+                <view class="addr">
+                    <image class="cus-addr" src="/static/img/icon/address.png"/>
+                    <text class="text">深圳市宝安区石岩街道办星城购物</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="goodsshow">
+        <!-- 商品导航栏 -->
+        <view class="left">
+            <view bind:tap="barCutAir" wx:for="{{goodsList}}" wx:key="*this" class="li{{index==barCurrent?' active':''}}" data-type="{{index}}">{{item.categoryName}}</view>
+        </view>
+
+        <!-- 商品展示 -->
+        <view class="right-warp">
+			<block wx:if="{{goodsList.length > 1}}">
+			<block wx:for="{{goodsList}}" wx:key="*this">
+            <view wx:if="{{wxsCus.showCur(barCurrent,index)}}" class="right">
+                <view class="title">{{item.categoryName}}</view>
+                <view class="li" wx:for="{{item.products}}" wx:key="*this" wx:for-item="option" bindtap="openComDetail" data-productCode="{{option.productCode}}">
+                    <view class="pic">
+                        <image src="{{option.imageAddress}}"/>
+                    </view>
+                    <view class="info">
+                        <view class="name">{{option.productName}}</view>
+                        <view class="rep">库存 : {{option.stock}}{{option.dictUnitName}}</view>
+						<view class="price">
+							<text class="a">{{wxsCom.toFrontFixed(option.activityPrice?option.activityPrice:option.actualPrice)}}</text>
+							<text class="b">.{{wxsCom.toBackFixed(option.activityPrice?option.activityPrice:option.actualPrice)}}元</text>
+							<text class="c" wx:if="{{option.activityPrice}}">{{wxsCom.toFixed(option.actualPrice)}}<text>元</text></text>
+						</view>
+                    </view>
+					<block wx:if="{{item.categoryId == 182}}">
+						<button class="hbd-gopay" catchtap="gotoPayOrderPage" data-categoryId="{{item.categoryId}}" data-productCode="{{option.productCode}}">去付款</button>
+						<view class="hbd-paynumber">仅限1个</view>
+					</block>
+					<com-countKey wx:else class="count-warp" bind:customDevCount="customDevCountFnc" productCode="{{option.productCode}}" stock="{{option.stock}}"></com-countKey>
+                </view>
+            </view>
+			</block>
+			</block>
+			<template wx:else is="tpl-showNotdata" data="{{text:'该设备暂无商品！',height:'556rpx',backgroundColor:'white'}}"></template>
+        </view>
+    </view>
+	
+	<com-cart byAnimation="{{showComCart}}" touchcart="{{touchcart}}" bind:customTouchcart="touchcartfnc"></com-cart>
+	
+	<com-detail id="goods-detail"  byAnimation="{{showComDetail}}" bind:customTouchcart="touchcartfnc"
+		bind:customcloseDetail="closeComDetail" 
+		bind:customgoPayPage="gotoPayOrderPage"
+		bind:customDevCount="customDevCountFnc"
+	></com-detail>
+	
+	<com-footbar  touchcart="{{touchcart}}"
+		bind:customopenCart="openComCart" 
+		bind:customgoPayPage="gotoPayOrderPage"
+	></com-footbar>
+	
+	<com-getUserInfoUserPhone id="getInfoPhone" bind:customRefreshThisPage="RefreshThisPage"></com-getUserInfoUserPhone>
+
+</view>

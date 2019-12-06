@@ -1,0 +1,47 @@
+<!-- 
+    自定义头部
+    @param {Object} data 传入数据
+    {
+        warp: {
+            style: {
+                backgroundColor: 'white'
+            }
+        },
+        content: {
+            text: '邀请好友',
+            style: {
+                color: 'white'
+            }
+        },
+        left: {
+            class: 'goback || goback-black'
+        },
+        right: {
+            ...
+        }
+    }
+    @param warp
+    @param content
+    @param left
+    @param right
+ -->
+<wxs src="../../wxs/common.wxs" module="wxsCom" />
+
+<template name="tpl-header">
+    <view class="tpl-header-warp">
+        <view class="tpl-header-body" style="--body_height:{{__hdbodyHeight__}};{{wxsCom.objToString(warp.style)}}">
+			<!-- Not what -->
+			<view wx:if="{{!left}}" class="tpl-header-left"></view>
+			<!-- To previous page -->
+			<navigator wx:elif="{{!left.type}}" class="tpl-header-left {{left.class}}" open-type="navigateBack" ></navigator>
+            <!-- Go to free url -->
+			<navigator wx:else class="tpl-header-left{{left.class?' '+left.class:''}}" 
+			data-text="{{left.text?left.text:''}}" 
+			open-type="{{left.type}}" 
+			url="{{left.url}}"
+			></navigator>
+            <view class="tpl-header-content" style="{{wxsCom.objToString(content.style)}}">{{content.text}}</view>
+            <view class="tpl-header-right"></view>
+        </view>
+    </view>
+</template>

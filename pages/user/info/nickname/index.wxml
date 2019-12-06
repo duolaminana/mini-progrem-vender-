@@ -1,0 +1,15 @@
+<!--pages/user/info/nickname/nickname.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/template/button-nav/common.wxml"></import>
+
+<view class="container cus-lan" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+
+    <view class="user-info">
+        <view class="li">
+            <input type="text" value="cci"/>
+        </view>
+    </view>
+
+    <template is="tpl-freebtn" data="{{...fbData}}"></template>
+</view>

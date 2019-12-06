@@ -1,0 +1,39 @@
+<!--pages/pay/finish/finish.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/template/freebtn/common.wxml"></import>
+
+<view class="container" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+
+    <view class="banner-ico">
+        <icon type="success" size="216rpx" />
+    </view>
+    <view class="payresult-title">支付成功</view>
+    <view class="payresult-main">
+        <block>
+            <view class="txt">请在设备下方取走您的商品</view>
+            <view class="pic">
+                <image src="/static/img/code.png" />
+            </view>
+            <view class="jies">取件码可在“我的”页面中查看</view>
+        </block>
+        <!-- <block>
+            <view class="btn">重新支付</view>
+        </block> -->
+    </view>
+
+    <view class="payresult-baruls">
+        <view class="lis">
+            <view class="jf">33积分</view>
+            <view class="lq">领取</view>
+            <view class="sm">积分可用来兑换商品</view>
+        </view>
+        <view class="lis">
+            <view class="jf">¥0.20</view>
+            <view class="lq">领取</view>
+            <view class="sm">下次购烟时可抵用</view>
+        </view>
+    </view>
+
+    <template is="tpl-freebtn" data="{{...fbData}}"></template>
+</view>

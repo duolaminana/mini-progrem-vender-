@@ -1,0 +1,27 @@
+<!--component/getGoodsCode/getGoodsCode.wxml-->
+<import src="/pages/common/sbinfo/index.wxml" />
+<import src="/pages/common/goodsinfo/index.wxml" />
+<import src="/pages/common/orderinfo/index.wxml" />
+
+<view class="container cus-layer" wx:if="{{show}}">
+    <view class="content">
+        <view class="title">取件码</view>
+        <view class="pic">
+            <image src="/static/img/code.png" />
+        </view>
+        <view class="exp">请将二维码对准设备扫描口进行扫描完成取货</view>
+
+        <view class="xline"></view>
+        <template is="sb-info"></template>
+
+        <view class="xline"></view>
+        <template is="order-info"></template>
+
+        <view class="xline"></view>
+        <template is="goods-info"></template>
+
+        <view class="close" bind:tap="tagClose">
+            <image src="/static/img/icon/close_btn_big.png" />
+        </view>
+    </view>
+</view>

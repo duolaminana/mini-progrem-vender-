@@ -1,0 +1,73 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/device/sminfo/index",
+    "pages/pay/finish/index",
+    "pages/user/verify/index",
+    "pages/user/verify/facial/index",
+    "pages/signIn/author/author",
+    "pages/pay/pay",
+    "pages/signIn/signIn",
+    "pages/device/search/index",
+    "pages/user/user",
+    "pages/device/device",
+    "pages/user/order/index",
+    "pages/device/deviceMap/deviceMap",
+    "pages/device/info/index",
+    "pages/index/hotsell/index",
+    "pages/user/friends/index",
+    "pages/user/order/info/index",
+    "pages/user/info/identity/index",
+    "pages/user/info/index",
+    "pages/user/integral/index",
+    "pages/user/backcash/index",
+    "pages/user/info/nickname/index",
+    "pages/index/yqfriend/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "环阳通信息技术",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#EE7700",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/static/img/tabBar/tab_index_normal.png",
+        "selectedIconPath": "/static/img/tabBar/tab_index_select.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/device/device",
+        "iconPath": "/static/img/tabBar/tab_find_normal.png",
+        "selectedIconPath": "/static/img/tabBar/tab_find_select.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "/static/img/tabBar/tab_mine_normal.png",
+        "selectedIconPath": "/static/img/tabBar/tab_mine_select.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": " "
+    }
+  }
+}

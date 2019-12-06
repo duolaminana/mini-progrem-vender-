@@ -1,0 +1,38 @@
+<!--pages/device/sminfo/component/cart/cart.wxml-->
+<import src="/template/showNotdata/common.wxml"></import>
+<wxs src="../../../../../wxs/common.wxs" module="wxsCom" />
+
+<view class="cus-layer" animation="{{animationCusLayer}}" wx:if="{{cus_layer_display}}"></view>
+<view class="com-shopcart" id="com-shopcart" animation="{{animationData}}" style="transform: translateY({{shopcart_translateY_begin}});">
+	<view class="com-shopcart-title" bindtap="clearCartData">
+		<image class="icon" src="/static/img/icon/delete.png" mode="widthFix" />
+		<text class="text">清空购物车</text>
+	</view>
+	<view class="com-shopcart-ul">
+		<block wx:if="{{thisData.length>0}}">
+		<view class="li" wx:for="{{thisData}}" wx:key="*this">
+			<view class="pic">
+				<image src="{{item.imageAddress}}"/>
+			</view>
+			<view class="info-warp">
+				<view class="info">
+					<view class="name">{{item.productName}}</view>
+					<view class="price">
+						<text class="a">￥</text>
+						<text class="b">{{wxsCom.toFrontFixed(item.activityPrice)}}</text>
+						<text class="c">.{{wxsCom.toBackFixed(item.activityPrice)}}</text>
+					</view>
+				</view>
+				<com-countKey class="count-warp" 
+				stock="{{item.stock}}" 
+				result ="{{item.dev_custom_count}}" 
+				productCode="{{item.productCode}}"
+				bind:customDevCount="customDevCountFnc"
+				></com-countKey>
+			</view>
+		</view>
+		</block>
+		<template wx:else is="tpl-showNotdata" data="{{text:'购物车空空如也',height:'230rpx'}}"></template>
+	</view>
+	<view wx:if="{{totalSubPrice != 0}}" class="com-shopcart-activity">活动已减 {{totalSubPrice}}元</view>
+</view>

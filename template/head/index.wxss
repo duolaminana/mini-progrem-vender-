@@ -1,0 +1,60 @@
+/* 头部 */
+.tpl-header-warp{
+    width: 100%;
+    height: var(--tpl-header_height);
+}
+.tpl-header-body{
+    --body_height: 6vh;
+    position: fixed;
+    left: 0;
+    z-index: var(--zindex_hd);
+    width: 100%;
+    height: var(--body_height);
+    padding-top: calc(var(--tpl-header_height) - var(--body_height));
+    background-color: transparent;
+    display: flex;
+    align-items:center; /*垂直居中*/
+}
+.tpl-header-body .tpl-header-left,.tpl-header-body .tpl-header-content,.tpl-header-body .tpl-header-right{
+    flex: 1;
+    height: var(--body_height);
+    line-height: var(--body_height);
+}
+.tpl-header-body .tpl-header-content{
+    font-size: 30rpx;
+    font-weight: var(--w7);
+    color: var(--bc);
+    text-align: center;
+}
+/* 头部返回按钮样式 .goback .goback-color-black*/
+.tpl-header-body .goback,.tpl-header-body .goback-black{
+    position: relative;
+}
+.tpl-header-body .goback::before{ /*border-color*/
+    --bc: white;
+}
+.tpl-header-body .goback-black::before{ /*border-color*/
+    --bc: black;
+}
+.tpl-header-body .goback::before,.goback-black::before{
+    content: '';
+    width: 23rpx;
+    height: 23rpx;
+    border: 4rpx solid transparent;
+    border-left-color: var(--bc);
+    border-top-color: var(--bc);
+    transform: rotate(-45deg);
+    border-radius: 4rpx;
+    position: absolute;
+    top: calc(50% - 12rpx);
+    left: 45rpx;
+}
+.tpl-header-body .goback::after,.goback-black::after{
+    content: attr(data-text);
+    position: absolute;
+    left: 80rpx;
+	font-size: 30rpx;
+	/* font-weight: var(--w7); */
+	color: var(--bc);
+	text-align: center;
+}

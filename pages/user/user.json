@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "com-getGoodsCode": "/pages/user/common/getGoodsCode/getGoodsCode",
+    "com-getUserInfo": "/component/getUserInfo/getUserInfo"
+  },
+  "navigationBarTitleText": "我的",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#ee7700"
+}

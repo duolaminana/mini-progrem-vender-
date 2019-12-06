@@ -1,0 +1,99 @@
+/* pages/device/sminfo/component/footBar/footbar.wxss */
+@import '/static/css/$class.wxss';
+/* 支付购物车导航栏 */
+.com-paynav{
+    width: 100%;
+    height:100rpx;
+}
+.com-paynav .com-paynav-con{
+    display: flex;
+    align-items:center; /*垂直居中*/
+    width:100%;
+    height:100rpx;
+    background-color: var(--wc);
+    position: fixed;
+    bottom: 0;
+	left: 0;
+    z-index: 601;
+    box-shadow:0px 1px 10px 0px rgba(51,51,51,0.2);
+}
+.com-paynav .com-paynav-con .pic{
+    width: 100rpx;
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.com-paynav .com-paynav-con .pic image{
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}
+.com-paynav .price{
+    margin-left: 25rpx;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.com-paynav .price .a{
+    font-size: 30rpx;
+    font-weight: bold;
+    color: var(--zc3);
+    padding-right: 4rpx;
+    height: 60rpx;
+    display: flex;
+    align-items: flex-end;
+}
+.com-paynav .price .b{
+    font-family: ArialMT;
+    font-size: 48rpx;
+    font-weight: Regular;
+    color: var(--zc3);
+    height: 60rpx;
+    display: flex;
+    align-items: flex-end;
+    margin-top: 10rpx;
+}
+.com-paynav .price .c,.com-paynav .price .d{
+    font-family: ArialMT;
+    font-size: 30rpx;
+    font-weight: Regular;
+    color: var(--zc3);
+    height: 60rpx;
+    display: flex;
+    align-items: flex-end;
+	margin-top: 5rpx;
+}
+.com-paynav .price .d{
+    color: var(--zc9);
+    margin-left: 20rpx;
+    text-decoration: line-through;
+}
+.com-paynav .btn{
+    font-size: 30rpx;
+    font-weight: Medium;
+    color: var(--wc);
+    width: 284rpx;
+    height: 100%;
+    background-color: var(--zc);
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.com-paynav .showcount{
+    width: 38rpx;
+    height: 36rpx;
+    text-align: center;
+    line-height: 36rpx;
+    font-family: ArialMT;
+    font-weight: 400;
+    font-size: 30rpx;
+    color: var(--wc);
+    position: absolute;
+    right: -5rpx;top: 10rpx;
+    background-color: #D73F3C;
+    border-radius: 50%;
+}

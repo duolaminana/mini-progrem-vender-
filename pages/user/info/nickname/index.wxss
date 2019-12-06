@@ -1,0 +1,24 @@
+/* pages/user/info/nickname/nickname.wxss */
+.container,.containerX{
+    padding-left: 0;
+    padding-right: 0;
+}
+.user-info{
+    margin-top: 20rpx;
+    background-color: white;
+    padding-left: 32rpx;
+    box-sizing: border-box;
+    width: 100%;
+}
+.user-info .li{
+    height: 90rpx;
+    line-height: 90rpx;
+    padding-right: 32rpx;
+}
+.user-info .li input{
+    height: 90rpx;
+    line-height: 90rpx;
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc3);
+}

@@ -1,0 +1,95 @@
+<!-- index.wxml -->
+<import src="/template/head/head.wxml"></import>
+<import src="/template/yqnav/common.wxml"></import>
+<import src="/template/freebtn/common.wxml"></import>
+<import src="/template/showNotdata/common.wxml"></import>
+<import src="/template/showNotLocation/common.wxml"></import>
+
+<view class="container" style="--height--:{{__hdHeight__}};">
+  <template is="tpl-header" data="{{...hdData}}"></template>
+
+  <!--轮播图-->
+  <view class="banner">
+    <block wx:if="{{bannerSwiperArr.length > 0}}">
+      <swiper indicator-dots="{{false}}" autoplay="{{true}}" interval="{{3000}}" duration="{{1200}}" circular="{{true}}" bindchange="swiperBannerIdx">
+        <navigator wx:for="{{bannerSwiperArr}}" wx:key="*this" url="/pages/index/yqfriend/index">
+          <swiper-item class="cus-lan">
+              <image src="{{item.imgurl}}" mode="widthFix" />
+            <template is="tpl-yqnav-index"></template>
+          </swiper-item>
+        </navigator>
+      </swiper>
+      <view class="dots"><!-- 自定义下标 -->
+        <block wx:for="{{bannerSwiperArr.length}}" wx:key="*this"> 
+          <view class="{{index == dots_active ? 'active' : ''}}"></view> 
+        </block>
+      </view>
+    </block>
+    <template wx:else is="tpl-showNotdata" data="{{text:'暂无轮播图数据',height:'270rpx'}}"></template>
+  </view>
+
+  <!-- 热销商品 -->
+  <view class="hot-goods icus-goods-list">
+    <view class="icus-couplet cus-lan">热销商品</view>
+	
+	<template wx:if="{{!tpl_isLocation}}" is="tpl-showNotLocation" data=""></template>
+	<template wx:elif="{{hotGoodsArr.length <= 0}}" is="tpl-showNotdata" data="{{text:'暂无为你推荐数据',height:'300rpx'}}"></template>
+	
+    <swiper wx:else display-multiple-items="3.5" previous-margin="18rpx" next-margin="18rpx">
+      <block wx:for-items="{{hotGoodsArr}}" wx:key="*this">
+        <swiper-item>
+          <navigator url="/pages/index/hotsell/index">
+            <view class="lis">
+              <view wx:if="{{item.activityPrice > 0}}" class="susp bcolor2">热销商品</view>
+              <view class="pic">
+                <image src="{{item.productImageAddress}}"/>
+              </view>
+              <view class="name cus-sl200">{{item.productName}}</view>
+              <view class="price">
+                <view class="ral">
+                  <text class="ral-a">{{item.activityPrice}}</text>
+                  <text class="ral-b">元</text>
+                </view>
+                <text class="fake">{{item.sellPrice}}元</text>
+              </view>
+            </view>
+          </navigator>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 推荐商品 -->
+  <view class="recommend-goods icus-goods-list">
+    <view class="icus-couplet cus-lan">为你推荐</view>
+
+    <template wx:if="{{!tpl_isLocation}}" is="tpl-showNotLocation" data=""></template>
+    <template wx:elif="{{recommendGoodsArr.length <= 0}}" is="tpl-showNotdata" data="{{text:'暂无为你推荐数据',height:'256rpx'}}"></template>
+
+    <swiper wx:else display-multiple-items="3.5" previous-margin="18rpx" next-margin="18rpx">
+      <block wx:for-items="{{recommendGoodsArr}}" wx:key="*this">
+        <swiper-item>
+          <navigator url="/pages/device/info/index">
+            <view class="lis {{item.type==0?'bcolor-yan':item.type==1?'bcolor-yao':'bcolor-tang'}}">
+              <view class="susp {{item.susp==1?'bcolor2':'bcolor1'}}" wx:if="{{item.susp==0?false:true}}">{{item.susp==1?'购买过的':'新款发售'}}</view>
+              <view class="title {{item.type==0?'fcolor1':item.type==1?'fcolor2':'fcolor3'}}">{{item.name}}</view>
+              <view class="pic">
+                <image src="{{item.imgurl}}" mode="widthFix"/>
+              </view>
+              <view class="bot">
+                <image class="cus-addr" src="/static/img/icon/address.png" mode="widthFix"/>
+                <text class="distance">{{item.distance}}m</text>
+                <text class="addr cus-sl80">{{item.addr}}</text>
+              </view>
+            </view>
+          </navigator>
+        </swiper-item>
+      </block>
+    </swiper>
+  
+  </view>
+
+  <template is="tpl-freebtn" data="{{...fbData}}"></template>
+</view>
+
+<!-- <com-floatGlass wx:if="{{showFloatGlass}}" bind:customClickTab="floatGlass"></com-floatGlass> -->

@@ -1,0 +1,10 @@
+<!--pages/user/integral/index.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/pages/user/common/couplet/index.wxml" />
+<import src="/pages/user/common/info/index.wxml" />
+
+<view class="container cus-lan" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+    <template is="ib-couplet" data="{{tpl_ibData}}"></template>
+    <template is="ib-info" data="{{tpl_ibData}}"></template>
+</view>

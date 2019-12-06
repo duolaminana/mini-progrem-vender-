@@ -1,0 +1,13 @@
+<!-- 设备信息 -->
+<template name="sb-info">
+    <view class="tpl_sb_info">
+        <view class="pic">
+            <image src="/static/img/goods/yan_img.png" />
+        </view>
+        <view class="info">
+            <view class="no cus-sl400">H00001H00001H00001H00001H00001H00001H00001</view>
+            <view class="addr cus-sl400">深圳市宝安区石岩街道办星城购物中心深圳市宝安区石岩街道办星城购物中心</view>
+            <image class="icon" src="/static/img/icon/my_address.png" />
+        </view>
+    </view>
+</template>

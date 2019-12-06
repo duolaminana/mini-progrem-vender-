@@ -1,0 +1,10 @@
+/* component/errMsgAjax/errMsgAjax.wxss */
+.errmsgajax{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: var(--wc);
+	z-index: calc(var(--zindex_hd) + 110);
+}

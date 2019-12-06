@@ -1,0 +1,87 @@
+<!--pages/user/user.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/template/yqnav/common.wxml"></import>
+<import src="/template/showNotdata/common.wxml"></import>
+
+<com-getUserInfo bind:customUserInfo="takeUserInfo"></com-getUserInfo>
+
+<com-getGoodsCode show="{{isGetgoods}}"></com-getGoodsCode>
+
+<view class="container cus-lan" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+    
+    <image class="headbg" src="/static/img/user/mine_bg.png" mode="widthFix"/>
+    <navigator class="uinfo" hover-class="navigator-hover" url="/pages/user/info/index">
+        <image class="icon" src="/static/img/user/user_img.png" />
+        <view class="into">
+            <view class="name cus-sl400">H0001H0001H0001H0001H0001H0001H0001H0001</view>
+            <view class="auth">已实名认证</view>
+        </view>
+    </navigator>
+    <view class="bar">
+        <navigator class="left" url="/pages/user/integral/index">
+            <image class="icon" src="/static/img/user/jifen_img.png" />
+            <view class="con">
+                <view class="jifen">
+                    <text class="num">75</text>
+                    <text class="dw">积分(分)</text>
+                </view>
+                <view class="text">
+                    <text>积分商城兑换好礼</text>
+                </view>
+            </view>
+        </navigator>
+        <navigator class="right" url="/pages/user/backcash/index">
+            <image class="icon" src="/static/img/user/fanxian_img.png" />
+            <view class="con">
+                <view class="fanxian">
+                    <text class="num">35</text>
+                    <text class="dw">返现(元)</text>
+                </view>
+                <view class="text">
+                    <text>下次购烟时可抵扣</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <navigator class="banner" url="/pages/index/yqfriend/index">
+        <image src="/static/img/user/banner_small.png" mode="widthFix"/>
+        <template is="tpl-yqnav-user"></template>
+    </navigator>
+    <view class="dqh" wx:if="{{true}}">
+        <view class="title cus-lan">待取货（2）</view>
+        <swiper display-multiple-items="1.126" previous-margin="17.1rpx" next-margin="17.1rpx">
+            <block wx:for="{{2}}" wx:key="*this">
+                <swiper-item>
+                    <view class="lineor" bind:tap="gotoGetCodeCom">
+                        <view class="pic">
+                            <image src="/static/img/code.png" mode="widthFix"/>
+                        </view>
+                        <view class="con">
+                            <view class="row-a">
+                                <view class="no cus-sl300">H0001H0001H0001H0001H0001H0001H0001H0001</view>
+                                <view class="tag">去取货</view>
+                            </view>
+                            <view class="time">2019-10-30  11:01:s26</view>
+                            <view class="addr">
+                                <image class="cus-addr" src="/static/img/icon/address.png"/>
+                                <text class="text cus-sl400">深圳市宝安区石岩街道办星城购物深圳市宝安区石岩街道办星城购物</text>
+                            </view>
+                        </view>
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+    
+    <view class="ullist">
+        <navigator class="li" url="/pages/user/order/index">
+            <view class="icon-w"><image class="goumaijilu_icon" src="/static/img/user/goumaijilu_icon.png" /></view>
+            <text class="text">购买记录</text>
+        </navigator>
+        <navigator class="li" url="/pages/user/friends/index">
+            <view class="icon-w"><image class="haoyouliebiao_icon" src="/static/img/user/haoyouliebiao_icon.png" /></view>
+            <text class="text">好友列表</text>
+        </navigator>
+    </view>
+</view>

@@ -1,0 +1,48 @@
+<!--pages/pay/pay.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/template/freebtn/common.wxml"></import>
+<wxs src="../../wxs/common.wxs" module="wxsCom" />
+
+<view class="container" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+
+    <view class="paymain cus-lan-m">
+        <view class="goodsul">
+            <view class="li" wx:for="{{thisData}}" wx:key="*this">
+                <view class="pic">
+                    <image src="{{item.imageAddress}}" />
+                </view>
+                <view class="info">
+                    <view class="top">
+                        <view class="name">{{item.productName}}</view>
+                        <view class="price">
+                            <text class="sbl">￥</text>
+                            <text class="number">{{wxsCom.toFixed(item.activityPrice)}}</text>
+                            <text class="suf">.00</text>
+                        </view>
+                    </view>
+                    <view class="count">×{{item.dev_custom_count}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="total">
+            <text class="a">共{{totalArticle}}件</text>
+            <text class="b">合计</text>
+            <text class="c">¥</text>
+            <text class="d">{{totalActivityPrice}}</text>
+        </view>
+    </view>
+    <view class="deduction">
+        <view class="confix cus-lan-m">
+            <view class="info">
+                <image class="icon" src="/static/img/icon/red_packet_small.png" />
+                <text class="text">可用{{rebate}}元返现金额抵扣</text>
+            </view>
+            <view class="sel" bindtap="clickRebate">
+                <icon wx:if="{{rebateIcon}}" type="success" size="38rpx" color="#EE7700" />
+            </view>
+        </view>
+    </view>
+    
+    <template is="tpl-freebtn" data="{{...fbData}}"></template>
+</view>

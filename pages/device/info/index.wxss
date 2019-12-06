@@ -1,0 +1,178 @@
+/* pages/device/info/index.wxss */
+@import '/template/freebtn/index.wxss';
+.container,.containerX{
+    --sbinfo_height: 172rpx;
+    --sbinfo_padding: 40rpx;
+    --bar_height: 78rpx;
+}
+.fixban{
+    position: fixed;
+    top: var(--tpl-header_height);
+    width: 100%;
+}
+.sbinfo{
+    overflow: hidden;
+    padding-top: calc(var(--sbinfo_padding) / 2);
+    padding-bottom: calc(var(--sbinfo_padding) / 2);
+    position: relative;
+    background-color: var(--wc);
+}
+.sbinfo .pic{
+    width: 120rpx;
+    height: 120rpx;
+}
+.sbinfo .left{
+    float: left;
+    width: 172rpx;
+    height: var(--sbinfo_height);
+    border-radius: 4rpx;
+    background-color: #FFEACF;
+    display: flex;
+    align-items:center; /*垂直居中*/
+    justify-content: center; /*水平居中*/
+}
+.sbinfo .right{
+    float: left;
+    padding-left: 30rpx;
+    padding-right: 20rpx;
+}
+.sbinfo .title{
+    line-height: 30rpx;
+}
+.sbinfo .title .no{
+    font-size: 30rpx;
+    font-weight: var(--w7);
+    color: var(--zc3);
+    padding-right: 24rpx;
+}
+.sbinfo .title .name{
+    font-size: 24rpx;
+    font-weight: var(--w5);
+    color: var(--zc3);
+}
+.sbinfo .title .dec{
+    font-size: 24rpx;
+    font-weight: var(--w5);
+    color: var(--zc);
+    position: absolute;
+    right: 32rpx;
+    top: 24rpx;
+}
+.sbinfo .type{
+    font-size: 24rpx;
+    font-weight: var(--w5);
+    color: var(--zc9);
+    padding-top: 6rpx;
+    margin-top: 8rpx;
+}
+.sbinfo .sign{
+    font-size: 20rpx;
+    font-weight: var(--w4);
+    color: var(--zc);
+    height: 24rpx;
+    min-width: 2rpx;
+    margin-top: 5rpx;
+}
+.sbinfo .addr{
+    display: flex;
+    align-items:center; /*垂直居中*/
+    padding-top: 13rpx;
+    margin-top: 22rpx;
+}
+.sbinfo .addr .text{
+    font-size: 24rpx;
+    font-weight: var(--w5);
+    color: var(--zc9);
+}
+
+.bar{ /* 46rpx + 18rpx + 14rpx = 78rpx = --bar_height */
+    width: 100%;
+    align-items:center; /*垂直居中*/
+    background-color: #F5F5F5;
+    padding-top: 18rpx;
+    padding-bottom: 14rpx;
+    overflow-x: scroll;
+    white-space:nowrap;
+}
+.bar .barli{
+    display: inline-block;
+    line-height: 46rpx;
+    padding: 0 23rpx;
+    font-size: 24rpx;
+    font-weight: var(--w7);
+    color: var(--zc9);
+    text-align: center;
+    background-color: var(--wc);
+    border: 2rpx solid var(--zc9);
+    border-radius: 23rpx;
+    box-sizing: border-box;
+    margin-right: 14rpx;
+}
+.bar .barli:nth-last-of-type(1){
+    margin-right: 0;
+}
+.bar .barli.active{
+    color: var(--wc);
+    border-color: transparent;
+    background-color: var(--zc);
+}
+
+.goodslist{
+    width: 100%;
+    padding-top: calc(var(--sbinfo_height) + var(--sbinfo_padding) + var(--bar_height));
+}
+.goodslist .li{
+    float: left;
+    width: 31.5%;
+    background-color: var(--wc);
+    box-sizing: border-box;
+    padding: 18rpx;
+    margin-right: 2.25%;
+    margin-bottom: 18rpx;
+}
+.goodslist .li:nth-of-type(3n){
+    margin-right: 0;
+}
+.goodslist .li .name{
+    font-size: 24rpx;
+    font-weight: var(--w5);
+    color: var(--zc3);
+}
+.goodslist .li .pic{
+    width: 110rpx;
+    height: 110rpx;
+    padding: 15rpx 0;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.goodslist .li .pic image{
+    width: 110rpx;
+    height: 110rpx;
+}
+.goodslist .li .bot{
+    height: 30rpx;
+    display: flex;
+    align-items: center;
+}
+.goodslist .li .price,.goodslist .li .number{
+    flex: 1;
+}
+.goodslist .li .price .a{
+    font-family: var(--fa);
+    font-size: 30rpx;
+    font-weight: var(--w4);
+    color: var(--zc);
+}
+.goodslist .li .price .b{
+    font-size: 20rpx;
+    font-weight: var(--w5);
+    color: var(--zc);
+}
+.goodslist .li .number{
+    font-size: 24rpx;
+    color: var(--zc9);
+    font-weight: var(--w5);
+    text-align: right;
+}

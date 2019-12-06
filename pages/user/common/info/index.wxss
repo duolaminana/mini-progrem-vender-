@@ -1,0 +1,74 @@
+.ib-info{
+    background-color: white;
+    padding-left: 32rpx;
+    box-sizing: border-box;
+    width: 100%;
+}
+.ib-info .li{
+    border-bottom: 1rpx solid #D4D4D4;
+    height: 90rpx;
+    line-height: 90rpx;
+    padding-right: 32rpx;
+    position: relative;
+}
+.ib-info .li:last-of-type{
+    border-bottom: none;
+}
+.ib-info .li .icon{
+    float: left;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.ib-info .li .icon image{
+    width: 46rpx;
+    height: 46rpx;
+}
+.ib-info .handle{
+    float: left;
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc3);
+    width: 180rpx;
+    text-indent: 40rpx;
+    padding-right: 20rpx;
+    box-sizing: border-box;
+}
+.ib-info .fx-handle{
+    float: left;
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc3);
+    text-indent: 40rpx;
+}
+.ib-info .time{
+    float: left;
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc9);
+}
+.ib-info .fx-time{
+    float: right;
+    margin-right: 105rpx;
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc9);
+}
+.ib-info .note{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc3);
+    position: absolute;
+    right: 32rpx;
+}
+.ib-info .noteK{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: #D73F3C;
+    position: absolute;
+    right: 32rpx;
+}

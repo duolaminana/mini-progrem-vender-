@@ -1,0 +1,195 @@
+/* pages/index/hotsell/index.wxss */
+.container,.containerX{
+    --thisgoods_height: 172rpx;
+    --thisgoods_padding: 40rpx;
+}
+.thisgoods{
+    width: 100%;
+    padding-top: calc(var(--thisgoods_padding) / 2);
+    padding-bottom: calc(var(--thisgoods_padding) / 2);
+    background-color: var(--wc);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: var(--tpl-header_height);
+    z-index: 1;
+}
+.thisgoods .pic{
+    width: 172rpx;
+    height: var(--thisgoods_height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.thisgoods .pic image{
+    width: 172rpx;
+    height: 172rpx;
+}
+.thisgoods .info{
+    padding-left: 26rpx;
+    height: var(--thisgoods_height);
+    width: 100%;
+}
+.thisgoods .title{
+    line-height: 30rpx;
+}
+.thisgoods .title .name{
+    font-size: 30rpx;
+    font-weight: var(--w7);
+    color: var(--zc3);
+}
+.thisgoods .cuxiao{
+    position: absolute;
+    right: 32rpx;
+    font-size: 20rpx;
+    font-weight: var(--w7);
+    color: var(--wc);
+    height: 33rpx;
+    line-height: 33rpx;
+    padding: 0 10rpx;
+    border-radius: 2rpx;
+    background-color: var(--zc);
+}
+.thisgoods .alias{
+    display: inline-block;
+    height: 28rpx;
+    line-height: 28rpx;
+    border-radius: 14rpx;
+    border: 2rpx solid var(--zc);
+    padding: 0 15rpx;
+    font-size: 20rpx;
+    font-weight: var(--w5);
+    color: var(--zc);
+}
+.thisgoods .price{
+  margin-top: 50rpx;
+  line-height: 36rpx;
+}
+.thisgoods .price .ral{
+  display: inline-block;
+}
+.thisgoods .price .fake{
+  display: inline-block;
+  padding-bottom: 15rpx;
+  padding-left: 10rpx;
+  font-size: 24rpx;
+  font-weight: var(--w5);
+  color: var(--zc9);
+  text-decoration: line-through;
+}
+.thisgoods .ral-a{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 36rpx;
+    color: var(--zc);
+}
+.thisgoods .ral-b{
+  font-size: 20rpx;
+  font-weight: var(--w5);
+  color: var(--zc);
+}
+
+.ulgoods{
+    width: 100%;
+    padding-top: calc(var(--thisgoods_height) + var(--thisgoods_padding));
+    margin-top: 20rpx;
+}
+.ulgoods .li{
+    height: 134rpx;
+    padding: 18rpx;
+    border-radius: 8rpx;
+    background-color: var(--wc);
+    margin-bottom: 20rpx;
+    position: relative;
+    overflow: hidden;
+}
+.ulgoods .pic{
+    width: 88rpx;
+    height: 88rpx;
+}
+.ulgoods .left{
+    float: left;
+    width: 132rpx;
+    height: 134rpx;
+    border-radius: 4rpx;
+    background-color: #FFEACF;
+    display: flex;
+    align-items:center; /*垂直居中*/
+    justify-content: center; /*水平居中*/
+}
+.ulgoods .right{
+    float: left;
+    padding-left: 30rpx;
+    padding-right: 20rpx;
+}
+.ulgoods .title{
+    line-height: 30rpx;
+}
+.ulgoods .title .no{
+    font-size: 34rpx;
+    font-weight: var(--w4);
+    color: var(--zc3);
+    padding-right: 24rpx;
+}
+.ulgoods .title .name{
+    font-size: 26rpx;
+    font-weight: var(--w5);
+    color: var(--zc3);
+}
+.ulgoods .title .dec{
+    font-size: 24rpx;
+    font-weight: var(--w5);
+    color: var(--zc);
+    position: absolute;
+    right: 10rpx;
+    bottom: 16rpx;
+}
+.ulgoods .price{
+    padding: 0 10rpx;
+    position: absolute;
+    right: 10rpx;
+    top: 16rpx;
+}
+.ulgoods .price .ral{
+    display: inline-block;
+}
+.ulgoods .price .fake{
+    display: inline-block;
+    padding-bottom: 15rpx;
+    padding-left: 10rpx;
+    font-size: 24rpx;
+    color: var(--zc9);
+    text-decoration: line-through;
+}
+.ulgoods .ral-a{
+    font-size: 30rpx;
+    color: var(--zc3);
+    font-weight: var(--w7);
+}
+.ulgoods .ral-b{
+    font-size: 20rpx;
+    color: var(--zc3);
+}
+.ulgoods .type{
+    font-size: 26rpx;
+    font-weight: var(--w5);
+    color: var(--zc9);
+    padding-top: 6rpx;
+}
+.ulgoods .sign{
+    font-size: 22rpx;
+    font-weight: var(--w4);
+    color: var(--zc);
+    height: 24rpx;
+    min-width: 2rpx;
+}
+.ulgoods .addr{
+    display: flex;
+    align-items:center; /*垂直居中*/
+    padding-top: 13rpx;
+}
+.ulgoods .addr .text{
+    font-size: 23rpx;
+    font-weight: var(--w4);
+    color: var(--zc9);
+}

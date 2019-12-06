@@ -1,0 +1,98 @@
+.cus-lan{ /* 两边留白 */
+    box-sizing: border-box;
+    padding-left: calc(16rpx*var(--bs));
+    padding-right: calc(16rpx*var(--bs));
+}
+.cus-lan-m{
+    width: 686rpx;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cus-addr{ /* 小地图图标尺寸，位置微调 */
+    width: 20rpx;
+    height: 20rpx;
+    min-height: 22rpx;
+    margin: 0;
+    margin-right: 10rpx;
+}
+.cus-layer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--zindex_hd);
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,.5);
+}
+.clearfix:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+.cus-sl{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.cus-sl60{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 60rpx;
+}
+.cus-sl80{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 80rpx;
+}
+.cus-sl100{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 100rpx;
+}
+.cus-sl120{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 120rpx;
+}
+.cus-sl200{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 200rpx;
+}
+.cus-sl250{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 250rpx;
+}
+.cus-sl300{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 300rpx;
+}
+.cus-sl400{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 400rpx;
+}
+.cus-sl450{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 450rpx;
+}
+.cus-sl500{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 500rpx;
+}

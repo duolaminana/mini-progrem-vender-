@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+	  "com-floatGlass": "/component/floatGlass/floatGlass"
+  },
+  "navigationBarTitleText": "首页"
+}

@@ -1,0 +1,57 @@
+<!--pages/device/info/index.wxml-->
+<import src="/template/head/head.wxml"></import>
+<import src="/template/freebtn/common.wxml"></import>
+<import src="/template/showNotdata/common.wxml"></import>
+
+<view class="container" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+
+    <view class="fixban">
+        <!-- 设备 -->
+        <view class="sbinfo cus-lan">
+            <view class="left">
+                <image class="pic" src="/static/img/goods/yan_img.png"/>
+            </view>
+            <view class="right">
+                <view class="title">
+                    <text class="no">H0001</text>
+                    <text class="name">新二代智能售烟机</text>
+                    <text class="dec">200m</text>
+                </view>
+                <view class="type">商品种类:76种</view>
+                <view class="sign">购买过的</view>
+                <view class="addr">
+                    <image class="cus-addr" src="/static/img/icon/address.png"/>
+                    <text class="text">深圳市宝安区石岩街道办星城购物</text>
+                </view>
+            </view>
+        </view>
+
+        <!-- 商品导航栏 -->
+        <view class="bar cus-lan">
+            <text bind:tap="barAir" wx:for="{{barArr}}" wx:key="*this" class="barli{{index==barCurrent?' active':''}}" data-type="{{index}}">{{item.note}}</text>
+        </view>
+    </view>
+
+    <!-- 商品展示 -->
+    <view class="goodslist cus-lan">
+        <block wx:if="{{true}}">
+            <view class="li" wx:for="{{27}}" wx:key="*this">
+                <view class="name">利群(硬烟嘴)</view>
+                <view class="pic">
+                    <image src="/static/img/goods.png" />
+                </view>
+                <view class="bot">
+                    <text class="price">
+                        <text class="a">66</text>
+                        <text class="b">元</text>
+                    </text>
+                    <text class="number">22包</text>
+                </view>
+            </view>
+        </block>
+        <template wx:else is="tpl-showNotdata" data="{{text:'该设备拥有的商品已售罄请等待工作人员补货',height:'300rpx'}}"></template>
+    </view>
+
+    <template is="tpl-freebtn" data="{{...footButtonData}}"></template>
+</view>

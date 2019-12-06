@@ -1,0 +1,136 @@
+/* pages/user/order/index.wxss */
+.orderli{
+    border-radius: 8rpx;
+    background-color: var(--wc);
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    width: 100%;
+    margin-top: 20rpx;
+    display: flex;
+    position: relative;
+}
+.orderli:last-of-type{
+    margin-bottom: 20rpx;
+}
+.orderli .pic image{
+    width: 68rpx;
+    height: 68rpx;
+}
+.orderli .pic{
+    width: 68rpx;
+    height: 68rpx;
+    display: flex;
+    justify-content: center;
+    margin-left: 20rpx;
+}
+.xianshang .top{
+    line-height: 24rpx;
+}
+.xianshang .top .no{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc3);
+    float: left;
+}
+.xianshang .bottom{
+    margin-top: 16rpx;
+    display: flex;
+    align-items: center;
+}
+.xianshang .bottom .addr{
+    font-weight: var(--w5);
+    font-size: 24rpx;
+    color: var(--zc9);
+}
+
+.xianxia .dataprice{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 22rpx;
+    height: 22rpx;
+    padding-top: 20rpx;
+    padding-bottom: 30rpx;
+}
+.xianxia .dataprice .time{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 24rpx;
+    color: var(--zc9);
+}
+.xianxia .dataprice .price{
+    padding-right: 20rpx;
+}
+.xianxia .dataprice .price .a{
+    font-weight: var(--w5);
+    font-size: 24rpx;
+    color: var(--zc3);
+}
+.xianxia .dataprice .price .b,.xianxia .dataprice .price .c{
+    font-weight: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc3);
+}
+.xianxia .dataprice .price .c{
+    color: var(--zc3);
+}
+.xianxia .row .name{
+    font-weight: var(--w5);
+    font-size: 26rpx;
+    color: var(--zc3);
+}
+.xianxia .row .num,.xianxia .row .price{
+    font-weight: var(--w5);
+    font-size: 24rpx;
+    color: var(--zc9);
+}
+.xianxia .way{
+    font-weight: var(--w5);
+    font-size: 24rpx;
+    color: var(--zc);
+    padding-top: 22rpx;
+}
+.xianxia{
+    border-top: 1rpx solid #D4D4D4;
+    margin-top: 24rpx;
+    display: block;
+    width: 100%;
+
+}
+.orderli .info{
+    width: 100%;
+    padding-left: 18rpx;
+    box-sizing: border-box;
+}
+.orderli .rowlu{
+    /* padding: 20rpx 0; */
+}
+.orderli .row{
+    margin-bottom: 21rpx;
+    line-height: 25rpx;
+}
+.orderli .row:last-of-type{
+    margin-bottom: 0;
+}
+.orderli .row .name{
+    float: left;
+}
+.orderli .row .num{
+    float: right;
+}
+.orderli .row .price{
+    float: right;
+    min-width: 120rpx;
+    text-align: right;
+    margin-right: 20rpx;
+}
+.orderli .way{
+    text-align: right;
+    padding-right: 20rpx;
+    box-sizing: border-box;
+}
+.orderli .way .price{
+    padding-left: 32rpx;
+}

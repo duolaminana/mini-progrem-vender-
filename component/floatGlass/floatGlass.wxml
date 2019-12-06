@@ -1,0 +1,5 @@
+<!--component/floatGlass/floatGlass.wxml-->
+<!-- 浮动按钮 -->
+<view class="com-wx-floatGlass" style="transform: translate({{left}},{{top}});" bindtouchmove="handlMove" bindtouchend="handlEnd" bindtap="clickTab">
+	<view class="content">刷新</view>
+</view>

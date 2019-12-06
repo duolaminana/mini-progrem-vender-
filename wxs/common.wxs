@@ -1,0 +1,98 @@
+function objectKeys(obj){
+    /**
+     * 遍历对象key转换成数组
+     * @param {Object} obj
+     */
+    var str = JSON.stringify(obj);
+    var reg = getRegExp('"(\w+)":|[{}]', "g");
+    var keys = [];
+    var nested = 0;
+    var result = null;
+
+    while((result = reg.exec(str)) !== null) {
+        var match = result[0]
+
+        switch(match) {
+            case "{":
+            nested++;
+            break;
+            case "}":
+            nested--;
+            break;
+            default:
+            if (nested === 1) keys.push(result[1]);
+            break;
+        }
+    }
+    
+    return keys;
+}
+
+function regMax(str){
+    /**
+     * 字符串中的大写字母转换成: "-"+小写
+     * @param {String} str
+     */
+    var reg = getRegExp('[A-Z]','g')
+    var val = reg.exec(str)
+    if(val){
+        val = val.toString()
+        return str.replace(val, '-'+val.toLowerCase())
+    }else{
+        return str
+    }
+}
+
+function toFixed(val, dig){
+	/**
+	 * 保留两位小数
+	 * 超过位数的直接截取，采用四舍五入（若不采用四舍五入，截取2位，则把Math.round改为Math.floor）
+	 * @param { string || number }  val 传入的数值
+	 * @param { undefiend || number }  dig 要保留多少位小数
+	 * */
+	dig = dig ? (dig * 100) : 100;
+	if(!val && val != 0) return '--';
+	var f_x = parseFloat(val);
+	if(isNaN(f_x)){
+		return 0;
+	}
+	var f_x = Math.floor(val*dig)/dig;
+	var s_x = f_x.toString();
+	var pos_decimal = s_x.indexOf('.');
+	if(pos_decimal < 0){
+		pos_decimal = s_x.length;
+		s_x += '.';
+	}
+	while (s_x.length <= pos_decimal + 2){
+		s_x += '0';
+	}
+	return s_x;
+}
+
+module.exports = {
+    keys: objectKeys,
+    objToString: function(obj) {
+        /**
+         * 对象中的键值对转换成css样式的书写格式
+         * @param {Object} obj {
+         *  color: red,
+         *  fontSize: 24rpx
+         *  ...
+         * }
+         * @returns {String} str 'color:red;font-size:24rpx;'
+         */
+        var keys = objectKeys(obj)
+        var str = ''
+        keys.forEach(function(item,idx,arr){
+            str += (regMax(item) +':'+ obj[item] + ';')
+        })
+        return str
+    },
+	toFixed: toFixed,
+	toFrontFixed: function(val, dig) {
+		return toFixed(val, dig).split(".")[0]
+	},
+	toBackFixed: function(val, dig) {
+		return toFixed(val, dig).split(".")[1]
+	}
+}

@@ -1,0 +1,46 @@
+/* pages/user/order/info/index.wxss */
+@import '/pages/common/sbinfo/index.wxss';
+@import '/pages/common/goodsinfo/index.wxss';
+@import '/pages/common/orderinfo/index.wxss';
+.sbinfo,.goodsinfo,.orderinfo{
+    margin-top: 20rpx;
+    width: 100%;
+    border-radius: 8rpx;
+    background-color: var(--wc);
+}
+.sbinfo .title,.goodsinfo .title,.orderinfo .title{
+    padding: 21rpx 14rpx;
+    border-bottom: 1rpx solid #D4D4D4;
+    display: flex;
+    align-items: center;
+}
+.sbinfo .title .pic,.goodsinfo .title .pic,.orderinfo .title .pic{
+    width: 32rpx;
+    height: 32rpx;
+    padding-right: 12rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sbinfo .title .pic image{
+    width: 28rpx;
+    height: 32rpx;
+}
+.goodsinfo .title .pic image{
+    width: 30rpx;
+    height: 32rpx;
+}
+.orderinfo .title .pic image{
+    width: 28rpx;
+    height: 32rpx;
+}
+.sbinfo .title .text,.goodsinfo .title .text,.orderinfo .title .text{
+    font-weight: var(--w7);
+    font-size: 30rpx;
+    color: var(--bc);
+}
+.sbinfo .con-warp,.goodsinfo .con-warp,.orderinfo .con-warp{
+    padding-left: 56rpx;
+    padding-right: 26rpx;
+    padding-bottom: 10rpx;
+}

@@ -1,0 +1,2 @@
+@import './head/index.wxss';
+@import './showNotdata/index.wxss';

@@ -1,0 +1,51 @@
+<!--pages/device/sminfo/component/detail/detail.wxml-->
+<wxs src="../../../../../wxs/common.wxs" module="wxsCom" />
+
+<view class="cus-layer" animation="{{animationCusLayer}}" wx:if="{{cus_layer_display}}"></view>
+<view class="com-goodsdetail" id="com-goodsdetail" animation="{{animationData}}" style="transform: translateY({{shopcart_translateY_begin}});">
+	<view class="title">商品详情<image class="close" src="/static/img/icon/close_btn.png" bindtap="closeComDetail" /></view>
+	<scroll-view class="com-goodsdetail-main cus-lan" scroll-y="true">
+		<view class="top">
+			<view class="pic">
+				<image src="{{parentData.imageAddress}}"/>
+			</view>
+			<view class="info">
+				<view class="name">{{parentData.productName}}</view>
+				<view class="kc">库存 : {{parentData.stock}}{{parentData.dictUnitName}}</view>
+				<view class="tab">
+					<view class="price">
+						<text class="a">￥</text>
+						<text class="b">{{wxsCom.toFixed(parentData.activityPrice?parentData.activityPrice:parentData.actualPrice)}}</text>
+					</view>
+					<com-countKey stock="{{parentData.stock}}" result="{{parentData.dev_custom_count}}" bind:customDevCount="customDevCountFnc"></com-countKey>
+				</view>
+			</view>
+		</view>
+		<view class="bottom">
+			<view class="bli" wx:if="{{parentData.productFunction}}">
+				<view class="bl">功能主治</view>
+				<view class="bi">{{parentData.productFunction}}</view>
+			</view>
+			<view class="bli" wx:if="{{parentData.productIngredient}}">
+				<view class="bl">药品成分</view>
+				<view class="bi">{{parentData.productIngredient}}</view>
+			</view>
+			<view class="bli" wx:if="{{parentData.productSpecification}}">
+				<view class="bl">包装规格</view>
+				<view class="bi">{{parentData.productSpecification}}</view>
+			</view>
+			<view class="bli" wx:if="{{parentData.productDesc}}">
+				<view class="bl">产品描述</view>
+				<view class="bi">{{parentData.productDesc}}</view>
+			</view>
+			<view class="bli" wx:if="{{parentData.remark}}">
+				<view class="bl">备注</view>
+				<view class="bi">{{parentData.remark}}</view>
+			</view>
+		</view>
+	</scroll-view>
+	<view class="com-goodsdetail-btns cus-lan">
+		<view class="gocart" bindtap="addCartAir">加入购物车</view>
+		<view class="gopay" bindtap="goPayPage">去付款</view>
+	</view>
+</view>

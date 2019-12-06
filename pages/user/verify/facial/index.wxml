@@ -1,0 +1,15 @@
+<!--pages/user/verify/facial/index.wxml-->
+<import src="/template/head/head.wxml"></import>
+
+<view class="container" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+
+    
+    <view class="container">
+		<camera device-position="front" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
+		<view class="test">
+			<button type="primary" bindtap="register">拍照注册</button>
+			<button id="verify" type="primary" bindtap="verify">拍照验证</button>
+		</view>
+    </view>
+</view>

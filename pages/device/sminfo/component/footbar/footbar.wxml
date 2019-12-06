@@ -1,0 +1,18 @@
+<!--pages/device/sminfo/component/footBar/footbar.wxml-->
+<wxs src="../../../../../wxs/common.wxs" module="wxsCom" />
+
+<view class="com-paynav">
+	<view class="com-paynav-con">
+		<view class="pic" bindtap="openComCart">
+			<image src="{{thisData.length>0?'/static/img/icon/shopping_car.png':'/static/img/icon/shopping_car_empty.png'}}" />
+			<view class="showcount" wx:if="{{thisData.length>0}}">{{thisData.length}}</view>
+		</view>
+		<view class="price" wx:if="{{thisData.length>0}}">
+			<text class="a">¥</text>
+			<text class="b">{{wxsCom.toFrontFixed(totalActivityPrice)}}</text>
+			<text class="c">.{{wxsCom.toBackFixed(totalActivityPrice)}}</text>
+			<text class="d" wx:if="{{totalPrice > totalActivityPrice}}">¥{{totalPrice}}</text>
+		</view>
+		<view class="btn" bindtap="goPayPage" style="background-color:{{thisData.length>0?'#EE7700':'#999999'}}">去付款</view>
+	</view>
+</view>

@@ -1,0 +1,44 @@
+/* pages/user/info/identity/identity.wxss */
+@import '/template/freebtn/index.wxss';
+
+.container,.containerX{
+    padding-left: 0;
+    padding-right: 0;
+}
+.user-info{
+    margin-top: 20rpx;
+    background-color: white;
+    padding-left: 32rpx;
+    box-sizing: border-box;
+    width: 100%;
+}
+.user-info .li{
+    border-bottom: 1rpx solid #D4D4D4;
+    height: 90rpx;
+    line-height: 90rpx;
+    padding-right: 32rpx;
+    position: relative;
+}
+.user-info .li:last-of-type{
+    border-bottom: none;
+}
+.user-info .text{
+    float: left;
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc3);
+}
+.user-info .note{
+    float: right;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.user-info input{
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc9);
+    line-height:21px;
+    text-align: right;
+    width: 550rpx;
+}
