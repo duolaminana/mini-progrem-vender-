@@ -17,7 +17,7 @@
                         <view class="name">{{item.productName}}</view>
                         <view class="price">
                             <text class="sbl">￥</text>
-                            <text class="number">{{wxsCom.toFixed(item.activityPrice)}}</text>
+                            <text class="number">{{wxsCom.toFixed(item.activityPrice?item.activityPrice:item.actualPrice)}}</text>
                             <text class="suf">.00</text>
                         </view>
                     </view>

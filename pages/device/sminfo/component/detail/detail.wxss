@@ -46,7 +46,7 @@
     font-size: 30rpx;
     font-weight: Medium;
 }
-.com-goodsdetail .com-goodsdetail-btns .gocart{
+.com-goodsdetail .com-goodsdetail-btns .gopay{
     background-color: var(--zc);
     color: var(--wc);
 }
@@ -121,4 +121,9 @@
     font-weight: Regular;
     font-size: 22rpx;
     color: var(--zc3);
+}
+.hbd-paynumber{
+	font-size: 28rpx;
+	font-weight: var(--w4);
+	color: var(--zc);
 }

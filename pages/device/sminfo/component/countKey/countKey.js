@@ -1,4 +1,6 @@
 // pages/device/sminfo/component/countKey/countKey.js
+const app = getApp()
+
 Component({
   /**
    * 组件的属性列表
@@ -36,15 +38,20 @@ Component({
 		this.setData({
 			result: this.data.result != 0 ? --this.data.result : 0
 		})
-		this.currCount(this.data.result)
+		this.currCount()
 	},
 	add () {
+		if(this.data.stock <= this.data.result)
+		wx.showToast({
+			title: '库存不足!',
+			icon: 'none'
+		})
 		this.setData({
 			result: ++this.data.result > this.data.stock ? --this.data.result : this.data.result
 		})
-		this.currCount(this.data.result)
+		this.currCount()
 	},
-	currCount () {
+	currCount () { // 传出值
 		if(this.temporaryCountArray){
 			let have = false
 			for(let val of this.temporaryCountArray){
@@ -70,7 +77,7 @@ Component({
 				count: this.data.result
 			}]
 		}
-		this.triggerEvent('customDevCount', { ComponentTemporaryCountArray: this.temporaryCountArray })
+		this.triggerEvent('customComputeCount', { ComponentTemporaryCountArray: this.temporaryCountArray })
 	}
   }
 })

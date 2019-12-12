@@ -2,7 +2,6 @@
 const {app,$,cusAppData} = require('../../../utils/public.js')
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -39,10 +38,10 @@ Page({
 		})
 	}
   },
-  
+
   showCamera () {
 	this.setData({
-		isShowCamera: this.data.isShowCamera?false:true
+		isShowCamera: !this.data.isShowCamera
 	})
   },
 
@@ -61,22 +60,23 @@ Page({
 		  content: '您已经进行过身份证认证\n请直接进行人脸验证',
 		  showCancel: false
 		})
-	}else{
-		this.registerCard()
+		return
 	}
+	this.registerCard()
   },
-  
-  registerFace () {
-	console.log('首次人脸认证成功')
+
+  registerFace () { // 人脸验证
 	this.setData({
 		bindingFace: true
 	})
+	if(this.data.bindingCard){
+		app.globalData.isBindingCard = true
+	}
 	this.loginFace()
   },
-  
-  registerCard () {
-	console.log('首次身份证认证成功')
-	$.postMask('').then((res)=>{
+
+  registerCard () { // 身份证验证
+	$.getMask($.host_cardMessage + 'evoke',{machineCode: app.globalData.machineCode}).then((res)=>{
 		if(res){
 			let num = 0
 			let timer = setInterval(()=>{ // 循环获取
@@ -84,33 +84,29 @@ Page({
 					return clearInterval(timer)
 				}
 				++num
-				$.postMask('').then((res)=>{
+				$.postMask($.host_cardMessage + 'gain',{machineCode: app.globalData.machineCode}).then((res)=>{
 					if(res){
 						clearInterval(timer)
 						this.setData({
 							bindingCard: true
 						})
+						if(this.data.bindingFace){
+							app.globalData.isBindingCard = true
+						}
 						this.goPayPage()
-						wx.showModal({
-						  title: '系统提示',
-						  content: '身份证认证成功,请进行人脸认证!',
-						  showCancel: false
-						})
 					}
 				})
-			},800)
+			},3000)
 		}
 	})
   },
-  
+
   loginFace () {
 	console.log('开始验证人脸!!')
 	const ctx = wx.createCameraContext(); //创建相机上下文
-	console.log(ctx.takePhoto)
 	ctx.takePhoto({
 		quality: 'high',
 		success: (res) => {
-			// console.log('拍照',res)
 			this.setData({
 				src: res.tempImagePath //相机拍照得到照片的地址
 			})
@@ -147,7 +143,30 @@ Page({
   },
 
   goPayPage () {
-	if(this.data.bindingCard && this.data.bindingFace && this.data.currVerfiyFace)
+	if(!this.data.bindingCard){
+		wx.showModal({
+			title: '系统提示',
+			content: '请进行身份证认证!',
+			showCancel: false
+		})
+		return
+	}
+	if(!this.data.bindingFace){
+		wx.showModal({
+			title: '系统提示',
+			content: '请进行人脸认证!',
+			showCancel: false
+		})
+		return
+	}
+	if(!this.data.currVerfiyFace){
+		wx.showModal({
+			title: '系统提示',
+			content: '请进行人脸验证!',
+			showCancel: false
+		})
+		return
+	}
 	wx.navigateTo({
 		url: `/pages/pay/pay`
 	})

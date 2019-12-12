@@ -3,9 +3,9 @@
 
 <view class="com-paynav">
 	<view class="com-paynav-con">
-		<view class="pic" bindtap="openComCart">
+		<view class="pic" bindtap="showCompCart">
 			<image src="{{thisData.length>0?'/static/img/icon/shopping_car.png':'/static/img/icon/shopping_car_empty.png'}}" />
-			<view class="showcount" wx:if="{{thisData.length>0}}">{{thisData.length}}</view>
+			<view class="showcount" wx:if="{{thisData.length>0}}">{{totalArticle}}</view>
 		</view>
 		<view class="price" wx:if="{{thisData.length>0}}">
 			<text class="a">¥</text>

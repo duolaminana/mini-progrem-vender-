@@ -2,9 +2,9 @@
 <import src="/template/showNotdata/common.wxml"></import>
 <wxs src="../../../../../wxs/common.wxs" module="wxsCom" />
 
-<view class="cus-layer" animation="{{animationCusLayer}}" wx:if="{{cus_layer_display}}"></view>
-<view class="com-shopcart" id="com-shopcart" animation="{{animationData}}" style="transform: translateY({{shopcart_translateY_begin}});">
-	<view class="com-shopcart-title" bindtap="clearCartData">
+<view class="cus-layer" animation="{{animationCusLayer}}" hidden="{{!cus_layer_display}}" bindtap="closeCartComp"></view>
+<view class="com-shopcart" id="com-shopcart" animation="{{animationData}}" hidden="{{!cus_layer_display}}" style="transform: translateY({{shopcart_translateY_begin}});">
+	<view class="com-shopcart-title" bindtouchstart="clearCartData">
 		<image class="icon" src="/static/img/icon/delete.png" mode="widthFix" />
 		<text class="text">清空购物车</text>
 	</view>
@@ -19,20 +19,15 @@
 					<view class="name">{{item.productName}}</view>
 					<view class="price">
 						<text class="a">￥</text>
-						<text class="b">{{wxsCom.toFrontFixed(item.activityPrice)}}</text>
-						<text class="c">.{{wxsCom.toBackFixed(item.activityPrice)}}</text>
+						<text class="b">{{wxsCom.toFrontFixed(item.activityPrice?item.activityPrice:item.actualPrice)}}</text>
+						<text class="c">.{{wxsCom.toBackFixed(item.activityPrice?item.activityPrice:item.actualPrice)}}</text>
 					</view>
 				</view>
-				<com-countKey class="count-warp" 
-				stock="{{item.stock}}" 
-				result ="{{item.dev_custom_count}}" 
-				productCode="{{item.productCode}}"
-				bind:customDevCount="customDevCountFnc"
-				></com-countKey>
+				<com-countKey class="count-warp" stock="{{item.stock}}" result ="{{item.dev_custom_count}}" productCode="{{item.productCode}}" bind:customComputeCount="customComputeCountFnc"></com-countKey>
 			</view>
 		</view>
 		</block>
-		<template wx:else is="tpl-showNotdata" data="{{text:'购物车空空如也',height:'230rpx'}}"></template>
+		<template wx:else is="tpl-showNotdata" data="{{text:'购物车空空如也',height:'122rpx'}}"></template>
 	</view>
 	<view wx:if="{{totalSubPrice != 0}}" class="com-shopcart-activity">活动已减 {{totalSubPrice}}元</view>
 </view>

@@ -13,15 +13,13 @@
 .count .min,.count .max{
     width: 36rpx;
     height: 36rpx;
+	padding: 28rpx;
 }
 .count .min image,.count .max image{
     width: 36rpx;
     height: 36rpx;
 }
 .count .result{
-    width: 36rpx;
-    height: 36rpx;
-    margin: 0 20rpx;
     font-family: var(--fa);
     font-size: 24rpx;
     font-weight: var(--w4);

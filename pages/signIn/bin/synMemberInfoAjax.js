@@ -21,7 +21,7 @@ module.exports = function (res) {
 			'content-type': 'application/x-www-form-urlencoded'
 		},
 		success (data) {
-			console.log('同步会员成功')
+			// console.log('同步会员成功',data)
 			res.success?res.success(data):void(0)
 		}
 		// complete () {}

@@ -6,14 +6,20 @@ Component({
    * 组件的属性列表
    */
   properties: {
-	touchcart: { // 
-		type: Boolean,
+	touchcart: {
+		type: String || Number || Boolean,
 		value: false,
 		observer (newVal,oldVal,path) {
 			this.setData({
 				thisData: app.CartStockApi.say()
 			})
 			this.totalCount()
+			
+			if(newVal == 'showCompCart'){
+				this.data.toCompCart = 'hideCompCart'
+			}else if(newVal == 'hideCompCart'){
+				this.data.toCompCart = 'showCompCart'
+			}
 		}
 	}
   },
@@ -25,22 +31,26 @@ Component({
 	thisData: app.CartStockApi.say(),
 	totalActivityPrice: 0,
 	totalPrice: 0,
+	totalArticle: 0,
+	
+	// 判断打开还是关闭\打开
+	toCompCart: 'showCompCart'
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-	openComCart () { // 定义绑定在父页面调用该组件的属性
-		this.triggerEvent('customopenCart', { click: true }) // 向父组件传递信息
+	showCompCart () { // 定义绑定在父页面调用该组件的属性
+		this.triggerEvent('customTouchcart', { click: this.data.toCompCart }) // 向父组件传递信息
 	},
 	goPayPage () {
-		console.log(app.CartStockApi.say())
-		this.triggerEvent('customgoPayPage', { categoryId: 'cartOut' })
+		this.triggerEvent('customgoPayPage', { click: 'footbar' })
 	},
-	totalCount () { // 价钱总和
+	totalCount () { // 价钱总和更换函数
 		this.setData({
 			totalActivityPrice: app.CartStockApi.totalActivityPrice,
+			totalArticle: app.CartStockApi.totalArticle,
 			totalPrice: app.CartStockApi.totalPrice
 		})
 	}

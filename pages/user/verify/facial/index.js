@@ -10,7 +10,7 @@ const {
 	api_key:'KIOpCvIPTeD_ntL9Kb5V6v6S9OTdK6-N',
 	api_secret:'hpkPFmLRfTHT0gjQZm2gMa-6AfIzNdh0',
 }
-console.log(outer_id)
+// console.log(outer_id)
 
 Page({
 

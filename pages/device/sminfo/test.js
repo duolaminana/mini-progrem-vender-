@@ -6,7 +6,8 @@ module.exports = [
 		"products": [
 			{
 				"categorylName": "仙丹", // 商品渠道类目名称
-				"categorylId": 151, // 商品渠道类目id
+				"categoryId": 182, // 商品渠道类目id
+				"categorylId": 182, // 商品渠道类目id
 				"productName": "闭气药丸(起死回生)", // 商品名称
 				"productCode": "11111111111", // 商品编码
 				"imageAddress": "/static/img/goods.png", // 商品图片地址
@@ -154,6 +155,7 @@ module.exports = [
 		"products": [
 			{
 				"categorylName": "环保袋A", // 商品渠道类目名称
+				"categoryId": 182, // 商品渠道类目id
 				"categorylId": 151, // 商品渠道类目id
 				"productName": "环保袋(大)", // 商品名称
 				"productCode": "101010101010", // 商品编码
@@ -167,7 +169,8 @@ module.exports = [
 				"sort": 10
 			},{
 				"categorylName": "环保袋B", // 商品渠道类目名称
-				"categorylId": 151, // 商品渠道类目id
+				"categoryId": 182, // 商品渠道类目id
+				"categorylId": 182, // 商品渠道类目id
 				"productName": "环保袋(小)", // 商品名称
 				"productCode": "010101010101", // 商品编码
 				"imageAddress": "/static/img/goods.png", // 商品图片地址

@@ -85,7 +85,7 @@ Component({
 		}
 	},
 	initChange () {
-		console.log('initChange',app.globalData.isBindingPhone)
+		// console.log('initChange',app.globalData.isBindingPhone)
 		if(app.globalData.isBindingPhone){
 			this.setData({
 				isBindingPhone: true

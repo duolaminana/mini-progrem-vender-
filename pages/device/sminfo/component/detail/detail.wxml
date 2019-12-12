@@ -1,9 +1,9 @@
 <!--pages/device/sminfo/component/detail/detail.wxml-->
 <wxs src="../../../../../wxs/common.wxs" module="wxsCom" />
 
-<view class="cus-layer" animation="{{animationCusLayer}}" wx:if="{{cus_layer_display}}"></view>
+<view class="cus-layer" animation="{{animationCusLayer}}" wx:if="{{cus_layer_display}}" bindtap="closeThisComp"></view>
 <view class="com-goodsdetail" id="com-goodsdetail" animation="{{animationData}}" style="transform: translateY({{shopcart_translateY_begin}});">
-	<view class="title">商品详情<image class="close" src="/static/img/icon/close_btn.png" bindtap="closeComDetail" /></view>
+	<view class="title">商品详情<image class="close" src="/static/img/icon/close_btn.png" bindtap="closeThisComp" /></view>
 	<scroll-view class="com-goodsdetail-main cus-lan" scroll-y="true">
 		<view class="top">
 			<view class="pic">
@@ -11,13 +11,16 @@
 			</view>
 			<view class="info">
 				<view class="name">{{parentData.productName}}</view>
-				<view class="kc">库存 : {{parentData.stock}}{{parentData.dictUnitName}}</view>
+				<view class="kc">库存 : {{parentData.stock?parentData.stock:0}}{{parentData.dictUnitName}}</view>
 				<view class="tab">
 					<view class="price">
 						<text class="a">￥</text>
 						<text class="b">{{wxsCom.toFixed(parentData.activityPrice?parentData.activityPrice:parentData.actualPrice)}}</text>
 					</view>
-					<com-countKey stock="{{parentData.stock}}" result="{{parentData.dev_custom_count}}" bind:customDevCount="customDevCountFnc"></com-countKey>
+					<block wx:if="{{parentData.categoryId == 182}}">
+						<view class="hbd-paynumber">仅限1个</view>
+					</block>
+					<com-countKey wx:else stock="{{parentData.stock}}" result="{{parentData.dev_custom_count}}" bind:customComputeCount="customComputeCountFnc"></com-countKey>
 				</view>
 			</view>
 		</view>
@@ -45,7 +48,7 @@
 		</view>
 	</scroll-view>
 	<view class="com-goodsdetail-btns cus-lan">
-		<view class="gocart" bindtap="addCartAir">加入购物车</view>
-		<view class="gopay" bindtap="goPayPage">去付款</view>
+		<view class="gocart" wx:if="{{!hideCart}}" bindtap="addCartAir">加入购物车</view>
+		<view class="gopay" style="{{hideCart?'width: 100%':''}}" bindtap="goPayPage">去付款</view>
 	</view>
 </view>

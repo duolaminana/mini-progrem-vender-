@@ -11,6 +11,7 @@
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": true,
+		"uglifyFileName": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -18,8 +19,7 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"uglifyFileName": true
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.8.3",
@@ -73,6 +73,13 @@
 					"id": -1,
 					"name": "验证页面",
 					"pathName": "pages/user/verify/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "支付成功页面",
+					"pathName": "pages/pay/finish/index",
 					"query": "",
 					"scene": null
 				}

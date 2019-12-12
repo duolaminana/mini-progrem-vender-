@@ -9,12 +9,12 @@
         <view class='author-header'>
             <image src='/static/img/icon/wechat_icon.png'></image>
         </view>
-  
+
         <view class='author-content'>
             <view>申请获取以下权限</view>
             <text>获得你的公开信息(昵称，头像等)</text>
         </view>
-  
+
         <button class='author-bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
             授权登录
         </button>
@@ -24,7 +24,7 @@
 
 <view wx:else class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
-    
+
     <view class="fixban">
         <!-- 设备 -->
         <view class="sbinfo cus-lan">
@@ -61,7 +61,7 @@
                 <view class="title">{{item.categoryName}}</view>
                 <view class="li" wx:for="{{item.products}}" wx:key="*this" wx:for-item="option" bindtap="openComDetail" data-productCode="{{option.productCode}}">
                     <view class="pic">
-                        <image src="{{option.imageAddress}}"/>
+                        <image src="{{option.imageAddress}}" style="{{item.categoryId == 182?'width: calc(0.785 * 110rpx)':''}}" />
                     </view>
                     <view class="info">
                         <view class="name">{{option.productName}}</view>
@@ -76,7 +76,7 @@
 						<button class="hbd-gopay" catchtap="gotoPayOrderPage" data-categoryId="{{item.categoryId}}" data-productCode="{{option.productCode}}">去付款</button>
 						<view class="hbd-paynumber">仅限1个</view>
 					</block>
-					<com-countKey wx:else class="count-warp" bind:customDevCount="customDevCountFnc" productCode="{{option.productCode}}" stock="{{option.stock}}"></com-countKey>
+					<com-countKey catchtap wx:else class="count-warp" bind:customComputeCount="customComputeCountFnc" result="{{option.dev_custom_count?option.dev_custom_count:0}}" productCode="{{option.productCode}}" stock="{{option.stock}}"></com-countKey>
                 </view>
             </view>
 			</block>
@@ -85,18 +85,11 @@
         </view>
     </view>
 	
-	<com-cart byAnimation="{{showComCart}}" touchcart="{{touchcart}}" bind:customTouchcart="touchcartfnc"></com-cart>
+	<com-cart touchcart="{{touchcart}}" bind:customTouchcart="touchcartfnc" bind:customComputeCount="customComputeCountFnc"></com-cart>
 	
-	<com-detail id="goods-detail"  byAnimation="{{showComDetail}}" bind:customTouchcart="touchcartfnc"
-		bind:customcloseDetail="closeComDetail" 
-		bind:customgoPayPage="gotoPayOrderPage"
-		bind:customDevCount="customDevCountFnc"
-	></com-detail>
+	<com-detail id="goods-detail" touchcart="{{touchcart}}" bind:customTouchcart="touchcartfnc" bind:customgoPayPage="gotoPayOrderPage" bind:customComputeCount="customComputeCountFnc"></com-detail>
 	
-	<com-footbar  touchcart="{{touchcart}}"
-		bind:customopenCart="openComCart" 
-		bind:customgoPayPage="gotoPayOrderPage"
-	></com-footbar>
+	<com-footbar touchcart="{{touchcart}}" bind:customTouchcart="touchcartfnc" bind:customopenCart="openComCart"  bind:customgoPayPage="gotoPayOrderPage"></com-footbar>
 	
 	<com-getUserInfoUserPhone id="getInfoPhone" bind:customRefreshThisPage="RefreshThisPage"></com-getUserInfoUserPhone>
 

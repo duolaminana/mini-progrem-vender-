@@ -21,7 +21,7 @@ App({
 					this.wxLoginGetMemberInfoResponseCallback(res)
 				}
 			}).then((res) => {
-				console.log('info',res)
+				// console.log('info',res)
 				this.globalData.isSyn = res.isSyn
 				this.globalData.isBindingPhone = res.isBindingPhone
 				this.globalData.isBindingCard = res.isBindingCard
@@ -31,6 +31,7 @@ App({
 	})
 	
 	this.CartStockApi = new CartStockApi() // 购物车仓库
+	this.CartStockApi_Dummy = new CartStockApi() // 购物车仓库
   },
   onShow(options) {
 	// Do something when show.
@@ -61,5 +62,6 @@ App({
 	isBindingPhone: false, // 是否有手机号
 	isBindingCard: false, // 是否有绑定身份证等
 	wxUserInfo: null ,// 会员信息
+	orderNO: []
   }
 })
