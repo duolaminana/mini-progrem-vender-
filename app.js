@@ -21,7 +21,7 @@ App({
 					this.wxLoginGetMemberInfoResponseCallback(res)
 				}
 			}).then((res) => {
-				// console.log('info',res)
+				console.log('用户信息',res)
 				this.globalData.isSyn = res.isSyn
 				this.globalData.isBindingPhone = res.isBindingPhone
 				this.globalData.isBindingCard = res.isBindingCard

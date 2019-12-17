@@ -117,8 +117,15 @@ Page({
 			paySign: res.signs,
 			success (res) {
 				console.log('支付成功',res)
-				wx.navigateTo({
-					url: `/pages/pay/finish/index`
+				wx.showModal({
+					title: '系统提示',
+					content: '请等待出货...',
+					showCancel: false,
+					success() {
+						wx.navigateTo({
+							url: `/pages/pay/finish/index`
+						})
+					}
 				})
 			},
 			fail (res) {

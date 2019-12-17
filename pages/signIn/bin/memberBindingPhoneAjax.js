@@ -21,6 +21,7 @@ module.exports = function (res) {
 				memberId : res.id,
 				phone : res.phone?res.phone:'',
 			}).then(data => {
+				console.log('-----绑定手机号接口调用成功',data)
 				res.success?res.success(data):void(0)
 			})
 		}

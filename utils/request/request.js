@@ -1,6 +1,3 @@
-/**
- * 梅花树
- * */
 function argumentsToparamsArr(){
 	/**
 	 * 转换传入的参数
@@ -119,7 +116,7 @@ function thisRequest2(job, resolve, reject, mask){
 }
 
 /**
- * 档期001
+ * 001
  * */
 function get(){
 	return new Promise((resolve, reject) => {
@@ -138,7 +135,7 @@ function ajax(){
 }
 
 /**
- * 档期002	mask风沙
+ * 002	mask
  * */
 function getMask(){
 	return new Promise((resolve, reject) => {

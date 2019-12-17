@@ -180,6 +180,7 @@ Page({
   },
 
   gotoPayOrderPage (e) { // 去付款按钮
+	console.log('点击了付款按钮')
 	let categoryId = e.detail.categoryId ? e.detail.categoryId : e.currentTarget.dataset.categoryid
 	let productCode = e.detail.productCode ? e.detail.productCode : e.currentTarget.dataset.productcode
 	let option = e.detail.option ? e.detail.option : undefined
@@ -234,6 +235,7 @@ Page({
 					icon: 'none',
 					duration: 2000
 				})
+				app.globalData.isSyn = true
 				app.globalData.unauthorized = false
 				this.setData({
 					isHideUnauthorized: false
@@ -274,6 +276,7 @@ Page({
 		getSettingFnc.call(this)
 	}else{
 		app.wxLoginGetMemberInfoResponseCallback = res => { // 未获取到会员用户信息/ app.js 获取会员响应回调
+			console.log('app.js同步会员回调响应',res)
 			getMemberInfoFnc.call(this, res)
 		}
 	}
@@ -338,6 +341,7 @@ Page({
 										icon: 'none',
 										duration: 2000
 									})
+									app.globalData.isSyn = true
 									app.globalData.unauthorized = false
 									this.setData({
 										isHideUnauthorized: false

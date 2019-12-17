@@ -94,5 +94,8 @@ module.exports = {
 	},
 	toBackFixed: function(val, dig) {
 		return toFixed(val, dig).split(".")[1]
+	},
+	plusZero: function(num){
+		return num.toString().length!=1?num:'0'+num.toString()
 	}
 }

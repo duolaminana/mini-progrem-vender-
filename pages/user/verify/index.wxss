@@ -85,3 +85,37 @@ page{
     font-size: 30rpx;
 	margin: 0 auto;
 }
+.ajaxGain{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 600;
+	background-color: rgba(0,0,0,.7);
+}
+.ajaxGain .main{
+	position: absolute;
+	width: 80%;
+	height: 70%;
+	top: 15%;
+	left: 10%;
+	border-radius: 20rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 32rpx;
+	color: #999;
+	border: 5rpx solid yellow;
+	box-sizing: border-box;
+	background-color: #202020;
+}
+.ajaxGain .time{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 150rpx;
+	color: white;
+	font-size: 50rpx;
+	text-align: center;
+}

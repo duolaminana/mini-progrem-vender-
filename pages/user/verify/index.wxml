@@ -1,26 +1,20 @@
 <!--pages/user/verify/index.wxml-->
+<wxs src="../../../wxs/common.wxs" module="wxsCom" />
+
 <import src="/template/head/head.wxml"></import>
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
-
 	<com-author></com-author>
-	
     <view class="verify-title">请选择验证方式进行购烟</view>
-	<camera wx:if="{{isShowCamera}}" device-position="front" flash="off" binderror="error" class="my-camera">
-		<cover-view class="camera-cover">
-			<cover-view class="left" bind:tap="verfiyFace">确定</cover-view>
-			<cover-view class="right" bind:tap="showCamera">退出</cover-view>
-		</cover-view>
-	</camera>
-    <view class="uls" style="{{false?'display: block':''}}">
+    <view class="uls">
         <view class="lis">
             <view class="title">再次购烟推荐使用</view>
             <view class="pic">
                 <image src="/static/img/verify/renlianshibie_img.png" />
             </view>
-            <button class="btn" bind:tap="showCamera">人脸识别购烟</button>
+            <button class="btn" bind:tap="verfiyFace">人脸识别购烟</button>
         </view>
-        <view class="lis" wx:if="{{true}}">
+        <view class="lis">
             <view class="title">首次购烟使用</view>
             <view class="pic">
                 <image src="/static/img/verify/shenfenrenzheng_img.png" />
@@ -28,4 +22,20 @@
             <button class="btn" bind:tap="verfiyCard">身份认证购烟</button>
         </view>
     </view>
+	
+	<view class="ajaxGain" wx:if="{{showGain}}" animation="{{animationData}}">
+		<view class="main">
+			<view>
+				<text class="title">请在设备扫描器上扫描身份证</text>
+				<view class="time">{{wxsCom.plusZero(time)}}s</view>
+			</view>
+		</view>
+	</view>
+	
+	<camera wx:if="{{isShowCamera}}" device-position="front" flash="off" binderror="error" class="my-camera">
+		<cover-view class="camera-cover">
+			<cover-view class="left" bind:tap="verfiyFace">确定</cover-view>
+			<cover-view class="right" bind:tap="showCamera">退出</cover-view>
+		</cover-view>
+	</camera>
 </view>

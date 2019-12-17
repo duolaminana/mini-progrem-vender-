@@ -1,5 +1,5 @@
 /**
- * 过年咯,开不开心!!
+ * 过年
  * */
 
 const protocol = 'http'
