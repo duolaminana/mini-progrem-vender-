@@ -192,4 +192,25 @@
     font-size: 23rpx;
     font-weight: var(--w4);
     color: var(--zc9);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 360rpx;
+}
+
+.read-title{
+	display: flex;
+	align-items: center;
+	padding-bottom: 15rpx;
+	margin-top: -5rpx;
+}
+.read-title image{
+	width: 26rpx;
+	height: 26rpx;
+	margin-right: 8rpx;
+  margin-top: 2rpx
+}
+.read-title text{
+	font-size: 24rpx;
+	color: var(--zc);
 }

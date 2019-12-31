@@ -23,7 +23,7 @@ Component({
 						animationCusLayer: this.animationCusLayer.export()
 					})
 				})
-			}else if(newVal.indexOf('synCount') == -1 && newVal == 'hideCompCart'){
+			}else if(newVal.indexOf('synCount') == -1 && (newVal == 'hideCompCart' || newVal == 'clearCompCart')){
 				this.shopcart.boundingClientRect((rect)=> { // 获取元素的高度
 					this.animation.translateY((rect.height + 500) +"px").step()
 					this.setData({
@@ -83,9 +83,16 @@ Component({
    * 组件的方法列表
    */
   methods: {
+	imagesOnload(e){
+		this.data.imgScaleCC = this.data.imgScaleCC || {}
+		this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * e.currentTarget.dataset.height) + 'rpx'
+		this.setData({
+			imgScaleCC: this.data.imgScaleCC
+		})
+	},
 	clearCartData () { // 清空购物车事件
 		app.CartStockApi.subAll()
-		this.triggerEvent('customTouchcart', { click: 'hideCompCart' })
+		this.triggerEvent('customTouchcart', { click: 'clearCompCart' })
 	},
 	closeCartComp () { // 关闭购物车
 		this.triggerEvent('customTouchcart', { click: 'hideCompCart' })

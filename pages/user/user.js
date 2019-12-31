@@ -1,5 +1,6 @@
 // pages/user/user.js
 const {app,$,cusAppData} = require('../../utils/public.js')
+const { returnMoney , queryPersonalInfo } = require('../../api/api.js')
 
 Page({
   /**
@@ -16,7 +17,15 @@ Page({
         }
       }
     },
-    isGetgoods: false
+    isGetgoods: false,
+	WX_USERLOGIN_STATE: false,
+	UserImg: '/static/img/user/user_img.png',
+	UserName: '',
+	UserAuth: '未实名认证',
+	ajaxUserInfo: null,
+	UserCashMoney: '-',
+	UserIntegral: '-',
+	UserOrderNO: [1]
   },
 
   gotoGetCodeCom () { // 去取货
@@ -33,11 +42,42 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
-    // wx.showToast()
-    // wx.showModal()
-    // wx.showLoading()
-    // wx.showActionSheet()
+	if(app.globalData.wxUserInfo){
+		this.initUserInfo()
+	}else{
+		app.wxLoginGetMemberInfoResponseCallback = res => { // 未获取到会员用户信息/ app.js 获取会员响应回调
+			this.initUserInfo()
+		}
+	}
+  },
+
+  initUserInfo (){
+	this.WX_USERLOGIN_STATE = true
+	returnMoney({orderId:this.data.orderId}).then(res=>{
+		this.setData({
+			UserIntegral: res.result * 100,
+			UserCashMoney: res.result
+		})
+	})
+	queryPersonalInfo().then(res=>{
+		res = res.result
+		this.setData({
+			ajaxUserInfo: res,
+			UserImg: res.memberImg,
+			UserName: res.nickName,
+			UserAuth: res.isAutonym==1?'已实名认证':'未实名认证',
+		})
+	})
+  },
+  
+  gotoUserInfoPage(){
+	wx.navigateTo({
+		url: `/pages/user/info/index`,
+		success: res => {
+			// 通过eventChannel向被打开页面传送数据
+			res.eventChannel.emit('acceptDataFromOpenerPage', this.data.ajaxUserInfo)
+		}
+	})  
   },
 
   /**

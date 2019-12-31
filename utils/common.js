@@ -6,6 +6,7 @@ module.exports = {
 		 * @return { Object } paramObj ---- 参数的对象形式
 		 * */
 		let wh_idx = urlstr.indexOf('?')
+		if(wh_idx == -1) return {}
 		let paramStr = urlstr.substring(wh_idx + 1)
 		let paramArr = paramStr.split("&")
 		let paramObj = {}

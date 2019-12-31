@@ -4,44 +4,26 @@
 <wxs src="../../../wxs/common.wxs" module="wxsCom" />
 <wxs src="../../../wxs/bySmInfo.wxs" module="wxsCus" />
 
-<view wx:if="{{isHideUnauthorized}}">
-    <view wx:if="{{canIUse}}" >
-        <view class='author-header'>
-            <image src='/static/img/icon/wechat_icon.png'></image>
-        </view>
-
-        <view class='author-content'>
-            <view>申请获取以下权限</view>
-            <text>获得你的公开信息(昵称，头像等)</text>
-        </view>
-
-        <button class='author-bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
-            授权登录
-        </button>
-    </view>
-    <view wx:else>请升级微信版本</view>
-</view>
-
-<view wx:else class="container" style="--height--:{{__hdHeight__}};">
+<view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
 
     <view class="fixban">
         <!-- 设备 -->
         <view class="sbinfo cus-lan">
             <view class="left">
-                <image class="pic" src="/static/img/goods/yan_img.png"/>
+                <image class="pic" src="{{sbinfoData.imageAddress}}"/>
             </view>
             <view class="right">
                 <view class="title">
-                    <text class="no">H0001</text>
-                    <text class="name">新二代智能售烟机</text>
-                    <text class="dec">200m</text>
+                    <text class="no">{{sbinfoData.machineCode}}</text>
+                    <text class="name">{{sbinfoData.machineName}}</text>
+                    <!-- <text class="dec">200m</text> -->
                 </view>
-                <view class="type">商品种类:76种</view>
-                <view class="sign">购买过的</view>
+                <view class="type">商品种类:{{sbinfoData.items}}种</view>
+                <view class="sign">{{alreadyPay?'购买过的':' '}}</view>
                 <view class="addr">
                     <image class="cus-addr" src="/static/img/icon/address.png"/>
-                    <text class="text">深圳市宝安区石岩街道办星城购物</text>
+                    <text class="text">{{sbinfoData.positionAddress}}</text>
                 </view>
             </view>
         </view>
@@ -55,13 +37,19 @@
 
         <!-- 商品展示 -->
         <view class="right-warp">
-			<block wx:if="{{goodsList.length > 1}}">
-			<block wx:for="{{goodsList}}" wx:key="*this">
+			<block wx:if="{{goodsList.length > 0}}">
+			<block wx:for="{{goodsList}}" wx:key="item">
             <view wx:if="{{wxsCus.showCur(barCurrent,index)}}" class="right">
                 <view class="title">{{item.categoryName}}</view>
-                <view class="li" wx:for="{{item.products}}" wx:key="*this" wx:for-item="option" bindtap="openComDetail" data-productCode="{{option.productCode}}">
+                <view class="li" wx:for="{{item.products}}" wx:key="option" wx:for-item="option" wx:for-index="idx" bindtap="openComDetail" data-productCode="{{option.productCode}}">
                     <view class="pic">
-                        <image src="{{option.imageAddress}}" style="{{item.categoryId == 182?'width: calc(0.785 * 110rpx)':''}}" />
+						<view wx:if="{{option.activityPrice}}" class="icus-couplet">热销</view>
+                        <image 
+						src="{{option.imageAddress}}" 
+						bindload="imagesOnload" 
+						data-scale="{{'goodsshow'+idx+option.productCode}}" 
+						style="width:{{imgScaleCC['goodsshow'+idx+option.productCode]}}" 
+						/>
                     </view>
                     <view class="info">
                         <view class="name">{{option.productName}}</view>
@@ -84,6 +72,10 @@
 			<template wx:else is="tpl-showNotdata" data="{{text:'该设备暂无商品！',height:'556rpx',backgroundColor:'white'}}"></template>
         </view>
     </view>
+	
+	<COM-authorization id="com-authorization" show="{{!AUTHORIZATION}}" bind:touch="AUTHORIZATION_fnc"></COM-authorization>
+	
+	<COM-bindPhone id="com-bindPhone"></COM-bindPhone>
 	
 	<com-cart touchcart="{{touchcart}}" bind:customTouchcart="touchcartfnc" bind:customComputeCount="customComputeCountFnc"></com-cart>
 	

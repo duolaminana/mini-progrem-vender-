@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-	  "com-floatGlass": "/component/floatGlass/floatGlass"
+	  "com-floatGlass": "/component/floatGlass/floatGlass",
+		"COM-winButton": "/components/winButton/winButton",
+		"COM-noLocation": "/components/noLocation/noLocation",
+		"COM-emptyData": "/components/emptyData/emptyData"
   },
   "navigationBarTitleText": "首页"
 }

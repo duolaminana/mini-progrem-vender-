@@ -37,102 +37,114 @@ Page({
 	
 	dummy: false
   },
+  
+  imagesOnload(e){
+  	this.data.imgScaleCC = this.data.imgScaleCC || {}
+  	this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * 100) + '%'
+  	this.setData({
+  		imgScaleCC: this.data.imgScaleCC
+  	})
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	if(app.CartStockApi_Dummy.say().length > 0)
-	this.data.dummy = !this.data.dummy
-	if(this.data.dummy)
-	this.setData({ // 从虚拟购物车库绑定数据
-		thisData: app.CartStockApi_Dummy.say(),
-		totalActivityPrice: app.CartStockApi_Dummy.totalActivityPrice,
-		totalArticle: app.CartStockApi_Dummy.totalArticle,
-		initTotalPrice: app.CartStockApi_Dummy.totalActivityPrice
-	})
-	else
-	this.setData({ // 从购物车库绑定数据
-		thisData: app.CartStockApi.say(),
-		totalActivityPrice: app.CartStockApi.totalActivityPrice,
-		totalArticle: app.CartStockApi.totalArticle,
-		initTotalPrice: app.CartStockApi.totalActivityPrice
-	})
-	$.postMask($.host_memberProfit+'findMemberProfitByMemberId?memberId='+app.globalData.wxUserInfo.id,{
-		memberId:app.globalData.wxUserInfo.id
-	}).then((res)=>{ // 返现数据请求
+    if(app.CartStockApi_Dummy.say().length > 0)
+    this.data.dummy = !this.data.dummy
+    if(this.data.dummy)
+    this.setData({ // 从虚拟购物车库绑定数据
+      thisData: app.CartStockApi_Dummy.say(),
+      totalActivityPrice: app.CartStockApi_Dummy.totalActivityPrice,
+      totalArticle: app.CartStockApi_Dummy.totalArticle,
+      initTotalPrice: app.CartStockApi_Dummy.totalActivityPrice
+    })
+    else
+    this.setData({ // 从购物车库绑定数据
+      thisData: app.CartStockApi.say(),
+      totalActivityPrice: app.CartStockApi.totalActivityPrice,
+      totalArticle: app.CartStockApi.totalArticle,
+      initTotalPrice: app.CartStockApi.totalActivityPrice
+    })
+    $.postMask($.host_memberProfit+'findMemberProfitByMemberId?memberId='+app.globalData.wxUserInfo.id,{
+      memberId:app.globalData.wxUserInfo.id
+    }).then((res)=>{ // 返现数据请求
+      this.setData({
+        rebate: res.remainingProfit
+      })
+      this.clickRebate()
+    })
+    },
+
+    clickRebate () { // 返现事件
 		this.setData({
-			rebate: res.remainingProfit
+		  rebateIcon: !this.data.rebateIcon
 		})
-		this.clickRebate()
-	})
-  },
-
-  clickRebate () { // 返现事件
-	this.setData({
-		rebateIcon: !this.data.rebateIcon
-	})
-	let totalPrice = this.data.initTotalPrice - (this.data.rebateIcon ? this.data.rebate : 0)
-	if(totalPrice < 0){
-		totalPrice = 0
-	}
-	this.setData({
-		totalActivityPrice: totalPrice
-	})
-  },
-
-  makePayAir () { // 确定订单事件
-	let arrMy = this.data.dummy ? app.CartStockApi_Dummy.say() : app.CartStockApi.say()
-	let details = []
-	for(let item of arrMy){
-		details.push({
-			categoryId: item.categoryId,
-			categorylId: item.categorylId,
-			productCode: item.productCode,
-			productNumber: item.dev_custom_count
-		})
-	}
-	$.postMask($.host_pay+'createPayByWxMini',{
-		"details": details,
-		"memberId": app.globalData.wxUserInfo.id,
-		"openid": app.globalData.wxUserInfo.appOpenId,
-		"machineCode": app.globalData.machineCode,
-		"price": this.data.dummy ? app.CartStockApi_Dummy.totalActivityPrice : app.CartStockApi.totalActivityPrice,
-		"productNums": this.data.totalArticle,
-		"realPrice": this.data.totalActivityPrice,
-		"preferentialPrice": this.data.rebate
-	}).then((res) => {
-		for(let item of details){
-			if(this.data.dummy)
-			app.CartStockApi_Dummy.sub({productCode:item.productCode})
-			else
-			app.CartStockApi.sub({productCode:item.productCode})
+		let totalPrice = this.data.initTotalPrice - (this.data.rebateIcon ? this.data.rebate : 0)
+		if(totalPrice < 0){
+		  totalPrice = 0
 		}
-		app.globalData.orderNO.push(res.orderId)
-		wx.requestPayment({
-			timeStamp: res.timeStamp,
-			nonceStr: res.nonceStr,
-			package: res.packaAge,
-			signType: res.signType,
-			paySign: res.signs,
-			success (res) {
-				console.log('支付成功',res)
-				wx.showModal({
-					title: '系统提示',
-					content: '请等待出货...',
-					showCancel: false,
-					success() {
-						wx.navigateTo({
-							url: `/pages/pay/finish/index`
-						})
-					}
-				})
-			},
-			fail (res) {
-				console.log('支付错误',res)
-			}
+		this.setData({
+		  totalActivityPrice: totalPrice
 		})
-	})
+    },
+
+    makePayAir () { // 确定订单事件
+    let arrMy = this.data.dummy ? app.CartStockApi_Dummy.say() : app.CartStockApi.say()
+    let details = []
+    for(let item of arrMy){
+      details.push({
+        categoryId: item.categoryId,
+        categorylId: item.categorylId,
+        productCode: item.productCode,
+        productNumber: item.dev_custom_count
+      })
+    }
+    $.postMask($.host_pay+'createPayByWxMini',{
+      "details": details,
+      "memberId": app.globalData.wxUserInfo.id,
+      "openid": app.globalData.wxUserInfo.appOpenId,
+      "machineCode": app.globalData.machineCode,
+      "price": this.data.dummy ? app.CartStockApi_Dummy.totalActivityPrice : app.CartStockApi.totalActivityPrice,
+      "productNums": this.data.totalArticle,
+      "realPrice": this.data.totalActivityPrice,
+      "preferentialPrice": this.data.rebate
+    }).then((res) => {
+      console.log('createPayByWxMini',res)
+      wx.requestPayment({
+        timeStamp: res.timeStamp,
+        nonceStr: res.nonceStr,
+        package: res.packaAge,
+        signType: res.signType,
+        paySign: res.signs,
+        success :(ress)=> {
+          console.log('支付成功',ress)
+          for(let item of details){
+            if(this.data.dummy)
+            app.CartStockApi_Dummy.sub({productCode:item.productCode})
+            else
+            app.CartStockApi.sub({productCode:item.productCode})
+          }
+          app.globalData.orderNO.push(res.orderId)
+          wx.showModal({
+            title: '系统提示',
+            content: '请等待出货...',
+            showCancel: false,
+            success() {
+              wx.navigateTo({
+                url: `/pages/pay/finish/index?orderId=${res.orderId}`
+              })
+            }
+          })
+        },
+        fail (res) {
+          wx.navigateTo({
+            url: `/pages/pay/finish/index?fail=true`
+          })
+          console.log('支付错误',res)
+        }
+      })
+    })
   },
 
   /**

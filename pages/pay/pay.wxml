@@ -10,7 +10,11 @@
         <view class="goodsul">
             <view class="li" wx:for="{{thisData}}" wx:key="*this">
                 <view class="pic">
-                    <image src="{{item.imageAddress}}" />
+                    <image 
+					src="{{item.imageAddress}}" 
+					bindload="imagesOnload" 
+					data-scale="{{'goodsshow'+index}}" 
+					style="width:{{imgScaleCC['goodsshow'+index]}}" />
                 </view>
                 <view class="info">
                     <view class="top">

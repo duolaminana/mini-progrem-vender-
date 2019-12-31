@@ -83,6 +83,10 @@
     font-size: 24rpx;
     font-weight: var(--w5);
     color: var(--zc9);
+	max-width: 430rpx;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 
 .bar{ /* 46rpx + 18rpx + 14rpx = 78rpx = --bar_height */

@@ -1,5 +1,8 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+	  "COM-noLocation": "/components/noLocation/noLocation",
+	  "COM-emptyData": "/components/emptyData/emptyData"
+  },
   "navigationBarTitleText": "发现",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#ee7700"

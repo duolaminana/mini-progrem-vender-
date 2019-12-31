@@ -26,6 +26,7 @@
 .uinfo .icon{
     width: 102rpx;
     height: 102rpx;
+	border-radius: 50%;
 }
 .uinfo .into{
     padding-left: 26rpx;

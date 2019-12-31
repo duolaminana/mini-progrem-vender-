@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+	  "COM-winButton": "/components/winButton/winButton",
+		"COM-emptyData": "/components/emptyData/emptyData"
+  },
   "navigationBarTitleText": "设备详情"
 }

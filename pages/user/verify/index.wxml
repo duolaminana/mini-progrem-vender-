@@ -23,7 +23,7 @@
         </view>
     </view>
 	
-	<view class="ajaxGain" wx:if="{{showGain}}" animation="{{animationData}}">
+	<view class="ajaxGain" hidden="{{!showGain}}" animation="{{animationData}}">
 		<view class="main">
 			<view>
 				<text class="title">请在设备扫描器上扫描身份证</text>
@@ -34,7 +34,7 @@
 	
 	<camera wx:if="{{isShowCamera}}" device-position="front" flash="off" binderror="error" class="my-camera">
 		<cover-view class="camera-cover">
-			<cover-view class="left" bind:tap="verfiyFace">确定</cover-view>
+			<cover-view class="left" bind:tap="photograph">确定</cover-view>
 			<cover-view class="right" bind:tap="showCamera">退出</cover-view>
 		</cover-view>
 	</camera>

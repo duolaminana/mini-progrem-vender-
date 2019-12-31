@@ -1,34 +1,4 @@
 /* pages/device/sminfo/index.wxss */
-.author-header {
-    margin: 90rpx 0 90rpx 50rpx;
-    border-bottom: 1px solid #ccc;
-    text-align: center;
-    width: 650rpx;
-    height: 300rpx;
-    line-height: 450rpx;
-}
- 
-.author-header image {
-    width: 170rpx;
-    height: 170rpx;
-}
- 
-.author-content {
-    margin-left: 50rpx;
-    margin-bottom: 90rpx;
-}
- 
-.author-content text {
-    display: block;
-    color: #9d9d9d;
-    margin-top: 40rpx;
-}
- 
-.author-bottom {
-    border-radius: 80rpx;
-    font-size: 35rpx;
-	width: 85%;
-}
 .container{
     --sbinfo_height: 172rpx;
     --sbinfo_padding: 58rpx;
@@ -112,6 +82,10 @@
     font-size: 24rpx;
     font-weight: var(--w4);
     color: var(--zc9);
+	max-width: 430rpx;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 .goodsshow{
     width: 100%;
@@ -174,10 +148,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+	position: relative;
 }
 .goodsshow .right .li .pic image{
-    width: calc(var(--pscale) * 110rpx);
-    height: 110rpx;
+    /* width: calc(var(--pscale) * 110rpx); */
+    /* height: 110rpx; */
+	height: 100%;
+}
+.goodsshow .icus-couplet{
+  background-color: var(--zc);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20rpx;
+  color: var(--wc);
+  padding: 5rpx 8rpx;
+  line-height: 18rpx;
+  height: 20rpx;
 }
 .goodsshow .right .info{
     height: 120rpx;

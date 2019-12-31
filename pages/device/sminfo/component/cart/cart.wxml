@@ -12,7 +12,13 @@
 		<block wx:if="{{thisData.length>0}}">
 		<view class="li" wx:for="{{thisData}}" wx:key="*this">
 			<view class="pic">
-				<image src="{{item.imageAddress}}"/>
+				<image 
+				src="{{item.imageAddress}}"
+				bindload="imagesOnload"
+				data-scale="{{'hotgoods_img_'+index}}" 
+				data-height="{{86}}" 
+				style="width:{{imgScaleCC['hotgoods_img_'+index]}}"
+				/>
 			</view>
 			<view class="info-warp">
 				<view class="info">

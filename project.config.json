@@ -80,7 +80,41 @@
 					"id": 3,
 					"name": "支付成功页面",
 					"pathName": "pages/pay/finish/index",
+					"query": "fail=true",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "支付页面",
+					"pathName": "pages/pay/pay",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/user/user",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发现",
+					"pathName": "pages/device/device",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "搜索",
+					"pathName": "pages/device/search/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "热销商品详情",
+					"pathName": "pages/index/hotsell/index",
 					"scene": null
 				}
 			]

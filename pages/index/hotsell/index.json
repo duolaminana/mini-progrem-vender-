@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+	  "COM-emptyData": "/components/emptyData/emptyData"
+  },
   "navigationBarTitleText": "热销商品"
 }

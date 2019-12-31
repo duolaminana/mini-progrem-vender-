@@ -63,12 +63,12 @@ function thisRequest(resolve, reject, type, mask){
 		},
 		fail(res) {
 			console.log('请求fail错误: ',res)
-			// wx.showModal({
-			// 	title: `系统提示`,
-			// 	content: `访问错误!\n${res.errMsg}`,
-			// 	showCancel: false,
-			// 	success (res) {}
-			// })
+			wx.showModal({
+				title: `系统提示`,
+				content: `访问错误!\n${res.errMsg}`,
+				showCancel: false,
+				success (res) {}
+			})
 			reject()
 		},
 		complete: (res)=> {

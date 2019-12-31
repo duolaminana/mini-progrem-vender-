@@ -24,68 +24,21 @@ Page({
     },
     latitude: null,
     longitude: null,
-    markers: [
-      // {
-      //   latitude: 24.4455700000,
-      //   longitude: 118.0824000000,
-      //   callout:{
-      //     content: " 厦门思明区政府",
-      //     padding:10,
-      //     display:'ALWAYS',
-      //     textAlign:'center',
-      //     borderRadius: 10
-      //   }
-      // }
-    ]
+    markers: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(app.globalData.myLocation)
-    this.setLocation(app.globalData.myLocation)
-    else{
-        wx.showLoading({
-            title:"定位中",
-            mask:true
-        })
-        $.getLocation(true).then(res => {
-            if(res){
-                this.setLocation(res)
-            }else{
-                let timer = setInterval(() => { // 自定义监听用户打开定位系统
-                    $.getLocation().then(res => {
-                        if(res){
-                            wx.hideLoading()
-                            this.setLocation(res)
-                            clearInterval(timer)
-                        }
-                    })
-                }, 1000);
-            }
-        })
-    }
+    
   },
 
-  setLocation (res) { // 设置定位
+  setLocation () { // 设置定位
     this.setData({
-        latitude: res[0],
-        longitude: res[1],
-        markers: [
-            {
-                id: 1,
-                latitude: res[0]+0.001,
-                longitude: res[1]+0.001,
-                callout:{
-                    content: "厦门思明区政府",
-                    padding:10,
-                    display:'BYCLICK',
-                    textAlign:'center',
-                    borderRadius: 10
-                }
-            }
-        ]
+        latitude: app.globalData.myLocation[0],
+        longitude: app.globalData.myLocation[1],
+        markers: this.data.markers
     })
   },
 
@@ -107,7 +60,40 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+	let that = this
+	const eventChannel = this.getOpenerEventChannel()
+	eventChannel.on('acceptDataFromOpenerPage', function(data) {
+	  console.log('index.wxml',data)
+	  that.execThis(data)
+	})
+  },
+  
+  execThis(data){
+	  for(let item of data){
+		this.data.markers.push({
+			latitude: item.latitude,
+			longitude: item.longitude,
+				callout:{
+					content: item.positionAddress,
+					padding:10,
+					display:'BYCLICK',
+					textAlign:'center',
+					borderRadius: 10
+				}
+		})
+	  }
+	  if(app.globalData.myLocation)
+	  this.setLocation()
+	  else{
+		wx.showLoading({
+			title:"定位中",
+			mask:true
+		})
+	  	loopLocation(res=>{
+	  		wx.hideLoading()
+	  		this.setLocation()
+	  	})
+	  }
   },
 
   /**

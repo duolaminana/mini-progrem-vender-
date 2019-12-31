@@ -18,8 +18,9 @@
 	text-align: center;
 }
 .paymain .goodsul .pic image{
-    height: 86rpx;
-    width: calc(var(--pscale) * 86rpx);
+    /*height: 86rpx; 
+    width: calc(var(--pscale) * 86rpx); */
+	height: 100%;
 }
 .paymain .goodsul .info{
     width: 100%;

@@ -1,5 +1,7 @@
 {
   "usingComponents": {
+	  "COM-authorization": "/components/authorization/authorization",
+	  "COM-bindPhone": "/components/bindPhone/bindPhone",
 	  "com-cart": "./component/cart/cart",
 	  "com-detail": "./component/detail/detail",
 	  "com-footbar": "./component/footbar/footbar",

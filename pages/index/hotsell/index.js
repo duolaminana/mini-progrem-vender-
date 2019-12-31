@@ -1,5 +1,6 @@
 // pages/index/hotsell/index.js
 const {app,$,cusAppData} = require('../../../utils/public.js')
+import { queryHotMachineProduct } from '../../../api/api.js'
 
 Page({
 
@@ -22,6 +23,7 @@ Page({
         class: 'goback-black'
       }
     },
+	thisGoodsData:{}
   },
 
   /**
@@ -35,7 +37,35 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+	let that = this
+	const eventChannel = this.getOpenerEventChannel()
+	eventChannel.on('acceptDataFromOpenerPage', function(data) {
+	  console.log('index.wxml',data)
+	  that.execThis(data)
+	})
+  },
+  
+  execThis(data){
+		this.setData({
+			thisGoodsData: data
+		})
+		queryHotMachineProduct(data.productCode).then(res => {
+			this.setData({thisGoods:res.result})
+		})
+  },
+  
+  goToDeviceInfo(e){
+  	let code = e.currentTarget.dataset.code
+  	for(let item of this.data.thisGoods){
+  		if(item.machineCode == code)
+  		wx.navigateTo({
+  		  url: `/pages/device/info/index`,
+  		  success: res => {
+  		    // 通过eventChannel向被打开页面传送数据
+  		    res.eventChannel.emit('acceptDataFromOpenerPage', item)
+  		  }
+  		})
+  	}
   },
 
   /**

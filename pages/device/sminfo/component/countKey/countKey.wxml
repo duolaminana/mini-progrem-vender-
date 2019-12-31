@@ -5,6 +5,7 @@
 	</view>
 	<view class="result" wx:if="{{result<=0?false:true}}">{{result}}</view>
 	<view class="max" catchtouchstart="add">
-		<image src="/static/img/icon/add_icon.png" />
+		<image wx:if="{{addIconOk}}" src="/static/img/icon/add_icon.png" />
+		<image wx:else src="/static/img/icon/add_icon_2.png" />
 	</view>
 </view>

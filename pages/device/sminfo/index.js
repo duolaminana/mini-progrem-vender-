@@ -1,6 +1,7 @@
 // pages/device/sminfo/index.js
 const {app,$,cusAppData} = require('../../../utils/public.js')
 const synMemberInfoAjax = require('../../signIn/bin/synMemberInfoAjax')
+import { memberFindOrderByMachCode , queryMachine , getGoodsyn } from "../../../api/api.js"
 
 Page({
 
@@ -28,7 +29,6 @@ Page({
     },
 	//判断小程序的API，回调，参数，组件等是否在当前版本可用。
 	canIUse: wx.canIUse('button.open-type.getUserInfo'),
-	isHideUnauthorized: false,
 	goodsList: [
 		{
 			categoryName: '全部',
@@ -54,12 +54,20 @@ Page({
       addCart: 'addCartAir',
 	  animationData: {}
     },
+	sbinfoData: {},
+	alreadyPay: false,
+	AUTHORIZATION:true // 页面的展示状态(默认已授权状态)
   },
   
-  RefreshThisPage () {
-	console.log('刷新')
-	this.onLoad(this.options)
+  AUTHORIZATION_fnc (e){
+	  this.setData({AUTHORIZATION:true})
+	  this.selectComponent('#com-bindPhone').showThat()
   },
+  
+ //  RefreshThisPage () {
+	// console.log('刷新')
+	// this.onLoad(this.options)
+ //  },
 
   barCutAir (e) { // 导航事件
     this.setData({
@@ -67,11 +75,19 @@ Page({
     })
   },
   
+  imagesOnload(e){
+  	this.data.imgScaleCC = this.data.imgScaleCC || {}
+  	this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * 100) + '%'
+  	this.setData({
+  		imgScaleCC: this.data.imgScaleCC
+  	})
+  },
+  
   touchcartfnc (e) { // 刷新购物车和底部导航的显示/跟打开关闭相关
 	this.setData({
 		touchcart: e.detail.click
 	})
-	if(e.detail.click == 'hideCompCart'){ // 购物车清空时调整index.js dev_custom_count
+	if(e.detail.click == 'clearCompCart'){ // 购物车清空时调整index.js dev_custom_count
 		for(let [index, option] of this.data.goodsList.entries()){
 			if(option.products)
 			for(let [idx, select] of option.products.entries()){
@@ -83,7 +99,7 @@ Page({
 		this.data.myMakeUseOne = [] // 清除标记
 	}
   },
-  
+
   openComDetail (e) { // 商品详情\\打开
 	let productCode = e.currentTarget.dataset.productcode
 	$.postMask($.host_product+'findProductChannel',{ // 详情数据获取
@@ -92,7 +108,7 @@ Page({
 		productCode: productCode
 	}).then(res => {
 		console.log('打开productCode='+productCode+' 详情数据:',res)
-		this.DETAIL.setParentData({ ...res, ...this.getProducts(productCode) }) // 执行详情页的组件的函数给组件传数据
+		this.selectComponent('#goods-detail').setParentData({ ...res, ...this.getProducts(productCode) }) // 执行详情页的组件的函数给组件传数据
 		this.setData({
 			touchcart: 'open' // 特定指令/打开详情组件
 		})
@@ -109,7 +125,7 @@ Page({
 	 * @param {String}  productCode 唯一标识
 	 * @param {Number}  dev_custom_count 数值
 	 * @param {Boolean}  MakeUse count==1时是否需要操作
-	 * 只愿岁岁年年与你相伴
+	 * 只愿岁岁年年
 	 * */
 	for(let item of e.detail.ComponentTemporaryCountArray){
 		for(let [index, option] of this.data.goodsList.entries()){
@@ -180,7 +196,6 @@ Page({
   },
 
   gotoPayOrderPage (e) { // 去付款按钮
-	console.log('点击了付款按钮')
 	let categoryId = e.detail.categoryId ? e.detail.categoryId : e.currentTarget.dataset.categoryid
 	let productCode = e.detail.productCode ? e.detail.productCode : e.currentTarget.dataset.productcode
 	let option = e.detail.option ? e.detail.option : undefined
@@ -188,7 +203,7 @@ Page({
 	let itemw = this.getProducts(productCode)
 	
 	if(!app.globalData.isSyn || !app.globalData.isBindingPhone){
-		return this.GUIUP.showBlock() // 显示绑定手机号弹框
+		return this.COM_authorization.author()
 	}else{
 		// 进入支付
 		if(e.detail.click == 'footbar'){
@@ -224,189 +239,75 @@ Page({
 		})
 	}
   },
-  
-  bindGetUserInfo: function(e) { // 微信授权/同步后台会员/按钮
-	if (e.detail.userInfo) {
-		app.globalData.setting = e.detail
-		synMemberInfoAjax({...e.detail, id: app.globalData.wxUserInfo.id, success: res => {
-			if(res){
-				wx.showToast({
-					title: '系统已同步您的会员!',
-					icon: 'none',
-					duration: 2000
-				})
-				app.globalData.isSyn = true
-				app.globalData.unauthorized = false
-				this.setData({
-					isHideUnauthorized: false
-				})
-			}else{
-				wx.showToast({
-					title: '系统同步您的会员失败!',
-					icon: 'none',
-					duration: 2000
-				})
-			}
-			this.GUIUP.initChange()
-		}})
-	}else{
-		wx.showModal({
-			title: '系统提示',
-			content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
-			showCancel: false,
-			confirmText: '返回授权',
-			success: function(res) {
-				if (res.confirm) {
-					// console.log('用户点击了“返回授权”');
-				}
-			}
-		})
-	}
-  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	this.options = options
-	this.GUIUP = this.selectComponent('#getInfoPhone')
-	this.DETAIL = this.selectComponent('#goods-detail')
-	if(app.globalData.wxUserInfo){
-		 // 已经获取到会员信息了
-		getSettingFnc.call(this)
-	}else{
-		app.wxLoginGetMemberInfoResponseCallback = res => { // 未获取到会员用户信息/ app.js 获取会员响应回调
-			console.log('app.js同步会员回调响应',res)
-			getMemberInfoFnc.call(this, res)
-		}
-	}
-	function getMemberInfoFnc(res) {
-		/**
-		 * manageInitResponse  首次处理获取会员问题 *****(重要)
-		 * @miss 1	网络慢的时候会执行
-		 * @miss 2	接口访问不了的时候会执行
-		 * */
-		if(res.errMsg != 'request:ok'){
-			// 网络等原因导致接口无法访问
-			wx.showModal({
-				title: '系统提示',
-				content: '服务器无法访问',
-				showCancel: false,
-				confirmText: '重新加载',
-				success: res => {
-					if (res.confirm) {
-						$.getMask(`${$.host_order}getMemberInfo?jsCode=${app.globalData.code}`, (res)=> {
-							// 网络异步请求,可用回调获取状态.获取微信会员请求响应回调
-							getMemberInfoFnc.call(this, res)
-							this.onLoad(this.options)
-						})
-					}
-				}
-			})
-			return
-		}
-		if(res.data.code==200){
-			// 成功获取用户会员信息操作
-			// 设置globalData等重要信息
-			res = res.data.result
-			if(!app.globalData.wxUserInfo){
-				/**
-				 * 网络异步处理
-				 * 或
-				 * 第二次以上请求返回赋值
-				 * */
-				app.globalData.isSyn = res.isSyn
-				app.globalData.isBindingPhone = res.isBindingPhone
-				app.globalData.isBindingCard = res.isBindingCard
-				app.globalData.wxUserInfo = res.data
-				// console.log('wxUserInfo',app.globalData.wxUserInfo)
-			}
-			getSettingFnc.call(this)
-		}else{
-			// 服务器返回错误!!!
-		}
-	}
-	function getSettingFnc() {
-		wx.getSetting({ // 微信授权/同步后台会员
-			success: res => {
-				if (res.authSetting['scope.userInfo']) {
-					// console.log('用户已授权!!')
-					wx.getUserInfo({
-						success: res => {
-							app.globalData.setting = res
-							synMemberInfoAjax({...res, id: app.globalData.wxUserInfo.id, success: res => {
-								if(res){
-									wx.showToast({
-										title: '系统已同步您的会员!',
-										icon: 'none',
-										duration: 2000
-									})
-									app.globalData.isSyn = true
-									app.globalData.unauthorized = false
-									this.setData({
-										isHideUnauthorized: false
-									})
-									this.GUIUP.initChange()
-								}else{
-									wx.showToast({
-										title: '系统同步您的会员失败!',
-										icon: 'none',
-										duration: 2000
-									})
-								}
-							}})
-						},
-						fail: res => {
-							console.log('获取用户信息fail: ', res)
-						}
-					})
-				}else{
-					console.log('用户未授权!!')
-					app.globalData.unauthorized = true
-					this.setData({
-						isHideUnauthorized: true
-					})
-				}
-			}
-		})
-	}
-	
-	// 扫码进来,获取machineCode
-	if(options && options.machineCode && options.channelId){ // 小程序码进入
-		goodsynFnc.call(this, options)
-	}else if(JSON.stringify(options).indexOf('"q":') != -1){ // 普通二维码进入
-		goodsynFnc.call(this, $.getUrlParam(decodeURIComponent(options.q)))
-	}else{
-		wx.switchTab({
-			url: `/pages/index/index`
-		})
-	}
-	function goodsynFnc(optionsParams) {
-		app.globalData.machineCode = $.trim(optionsParams.machineCode)
-		app.globalData.channelId = $.trim(optionsParams.channelId)
-		$.getMask($.host_device+'goodsyn',{machineCode:app.globalData.machineCode,isNeedType:true}).then((res) => {
-			/**
-			 * 请求大分类商品
-			 * */
-			console.log('大分类商品数据:',res)
-			res = res.filter(filitem => filitem.categoryName)
-			// res = require('./test')
-			app.CartStockApi.AddGoodsType('activityPrice')
-			for(let [index, item] of res.entries()){ // 更正返回详情数据
-				for(let [idx, option] of item.products.entries()){
-					res[index].products[idx] = app.CartStockApi.corr(option)
-				}
-			}
-			this.setData({
-				goodsList: [...this.data.goodsList, ...res]
-			})
-		})
-	}
+    console.log('扫码结果',options)
+    this.options = options
+    wx.showLoading({title:'加载中',mask:true})
+    this.appGetwxUserInfoSuccess(res => {
+      wx.hideLoading()
+      this.selectComponent('#com-authorization').author()
+      memberFindOrderByMachCode(app.globalData.machineCode).then(res => {
+        // 是否购买过的
+        this.setData({
+          alreadyPay: res.result
+        })
+      })
+    },res=>{
+      wx.hideLoading()
+    })
+    
+    // 扫码进来,获取machineCode
+    if(options && options.machineCode && options.channelId){ // 小程序码进入
+      this.goodsynFnc(options)
+    }else if(JSON.stringify(options).indexOf('"q":') != -1){ // 普通二维码进入
+      this.goodsynFnc($.getUrlParam(decodeURIComponent(options.q)))
+    }else{
+      wx.switchTab({
+        url: `/pages/index/index`
+      })
+    }
   },
 
-  update_navigate_isBindingPhoneBack_data (val) {
-	// 绑定页面返回时数据更新
-	this.GUIUP.initChange()
+  appGetwxUserInfoSuccess (callback){
+    if(app.globalData.wxUserInfo){
+      callback()
+    }else{
+      app.wxLoginGetMemberInfoResponseCallback = res => {
+        callback()
+      }
+    }
+  },
+  
+  goodsynFnc (optionsParams) {
+  	app.globalData.machineCode = $.trim(optionsParams.machineCode)
+  	app.globalData.channelId = $.trim(optionsParams.channelId)
+  	queryMachine(app.globalData.machineCode).then(res => {
+  		console.log('查询设备信息:',res)
+  		res = res.result
+  		this.setData({
+  			sbinfoData: res
+  		})
+  		app.globalData.shippingWay = res.shippingWay
+  	})
+  	getGoodsyn({machineCode:app.globalData.machineCode,isNeedType:true}).then(res => {
+  		console.log('大分类商品数据:',res)
+  		res = res.result
+  		res = res.filter(filitem => filitem.categoryName)
+  		// res = require('./test')
+  		app.CartStockApi.AddGoodsType('activityPrice')
+  		for(let [index, item] of res.entries()){ // 更正返回详情数据
+  			for(let [idx, option] of item.products.entries()){
+  				res[index].products[idx] = app.CartStockApi.corr(option)
+  			}
+  		}
+  		this.setData({
+  			goodsList: [...this.data.goodsList, ...res]
+  		})
+  	})
   },
 
   /**

@@ -2,7 +2,8 @@
  * 过年
  * */
 
-const protocol = 'http'
+const protocol = 'https'
+const protocols = 'http'
 
 const www = 'vendor-platform-test.sun-hyt.com'
 const uploadFile = 'vendor-miniprogram-aliy.sun-hyt.com'
@@ -30,7 +31,7 @@ module.exports = {
     host_device: `${protocol}://${www}/${position}/${machineRoad}/`,
     host_product: `${protocol}://${www}/${product}/${productChannel}/`,
     host_pay: `${protocol}://${www}/${pay}/`,
-    host_face: `${protocol}://${uploadFile}/${face}/`,
+    host_face: `${protocols}://${uploadFile}/${face}/`,
     host_memberProfit: `${protocol}://${www}/${order}/${memberProfit}/`,
     host_cardMessage: `${protocol}://${www}/${mqtt}/${cardMessage}/`,
 }

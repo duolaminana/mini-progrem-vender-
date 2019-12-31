@@ -2,6 +2,7 @@
 <import src="/template/head/head.wxml"></import>
 <import src="/template/showNotdata/common.wxml"></import>
 <import src="/template/showNotLocation/common.wxml"></import>
+<wxs src="../../wxs/common.wxs" module="wxsCom" />
 
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
@@ -9,44 +10,82 @@
     <view class="fixban">
         <!-- 搜索 -->
         <view class="search cus-lan">
-            <navigator class="input" url="/pages/device/search/index">
-                <image class="icon" src="/static/img/icon/search_icon.png" mode="widthFix"/>
-                <input class="text" type="text" disabled="{{true}}"/>
-            </navigator>
-            <navigator class="btn" url="/pages/device/deviceMap/deviceMap">
+            <view class="input">
+                <image class="icon" 
+				src="/static/img/icon/search_icon.png" 
+				bind:tap="searchImg"
+				mode="widthFix"/>
+                <input class="text" 
+				type="text" 
+				value="{{inputvalue}}" 
+				bind:tap="searchInput"
+				bindinput="bindInputChange"/>
+            </view>
+            <view class="btn" bind:tap="gotoDeviceMap">
                 <image src="/static/img/icon/location_btn.png"/>
-            </navigator>
+            </view>
         </view>
 
         <!-- 商品导航栏 -->
         <view class="bar cus-lan">
-            <view bind:tap="barAir" wx:for="{{barArr}}" wx:key="*this" class="{{index==barCurrent?'active':''}}" data-type="{{index}}">{{item.note}}</view>
+            <view 
+			bind:tap="barAir" 
+			wx:for="{{barArr}}"
+			wx:key="*this" 
+			class="{{index==barCurrent?'active':''}}" 
+			data-type="{{index}}"
+			>{{wxsCom.toChinses(item.categoryId)}}</view>
         </view>
     </view>
 
     <!-- 商品展示列表 -->
     <view class="ulgoods cus-lan">
-        <template wx:if="{{!tpl_isLocation}}" is="tpl-showNotLocation" data="{{paddingTop:90}}"></template>
-        <template wx:elif="{{false}}" is="tpl-showNotdata" data="{{text:'没有发现附近设备',height:'500rpx'}}"></template>
-        <block wx:else>
-            <navigator class="li" wx:for="{{4}}" wx:key="*this" url="/pages/device/info/index">
-                <view class="left">
-                    <image class="pic" src="/static/img/goods/yan_img.png"/>
-                </view>
-                <view class="right">
-                    <view class="title">
-                        <text class="no">H0001</text>
-                        <text class="name">新二代智能售烟机</text>
-                        <text class="dec">200m</text>
-                    </view>
-                    <view class="type">商品种类:76种</view>
-                    <view class="sign">购买过的</view>
-                    <view class="addr">
-                        <image class="cus-addr" src="/static/img/icon/address.png"/>
-                        <text class="text">深圳市宝安区石岩街道办星城购物</text>
-                    </view>
-                </view>
-            </navigator>
-        </block>
+		<COM-noLocation
+			show="{{!LOCATION}}"
+			height="300"
+			size="27"
+			icosize="118"
+		></COM-noLocation>
+        <COM-emptyData
+			show="{{ThisShopData_All.length <= 0}}"
+			height="500"
+			size="27"
+			text="没有发现附近设备啊!!"
+        ></COM-emptyData>
+		<scroll-view
+		wx:if="{{ThisShopData_All.length > 0}}"
+		scroll-y="true"
+		bindscrolltolower="scrolltolower">
+			<view 
+			class="li" 
+			wx:for-items="{{ThisShopData_All}}" 
+			wx:key="*index" 
+			bind:tap="goToDeviceInfo" 
+			data-code="{{item.machineCode}}"
+			wx:if="{{barArr[barCurrent].categoryId === ''?true:item.categoryId === barArr[barCurrent].categoryId?true:false}}"
+			>
+				<view class="left">
+					<image class="pic" 
+					src="{{item.machineImageAddress}}"
+					bindload="imagesOnload"
+					data-scale="{{'recommendgoods_img_'+index}}" 
+					style="width:{{imgScaleCC['recommendgoods_img_'+index]}}"/>
+				</view>
+				<view class="right">
+					<view class="title">
+						<text class="no">{{item.machineCode}}</text>
+						<text class="name">{{item.machineName}}</text>
+						<text class="dec">{{wxsCom.toFixed(item.distance)}}km</text>
+					</view>
+					<view class="type">商品种类: {{item.articleCategory}}种</view>
+					<view class="sign">{{item.bought==1?'购买过的':' '}}</view>
+					<view class="addr">
+						<image class="cus-addr" src="/static/img/icon/address.png"/>
+						<text class="text">{{item.positionAddress}}</text>
+					</view>
+				</view>
+			</view>
+			<view class="paging-loading" wx:if="{{SWITCH_PAGING_LOADING}}">加载更多<image src="../../static/img/icon/load.gif"></image></view>
+		</scroll-view>
     </view>
 </view>

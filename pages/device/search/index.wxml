@@ -5,41 +5,22 @@
 
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
-    
-    <view class="fixban">
-        <!-- 搜索 -->
-        <view class="search cus-lan">
-            <view class="input">
-                <input class="text" type="text" value="{{inputValue}}" placeholder="请收入关键词"/>
-            </view>
-            <button class="btn">搜索</button>
-        </view>
-    </view>
-
-    <!-- 商品展示列表 -->
-    <view class="ulgoods cus-lan">
-        <template wx:if="{{!tpl_isLocation}}" is="tpl-showNotLocation" data="{{paddingTop:90}}"></template>
-        <template wx:elif="{{false}}" is="tpl-showNotdata" data="{{text:'没有发现附近设备',height:'500rpx'}}"></template>
-        <block wx:else>
-            <navigator class="li" wx:for="{{20}}" wx:key="*this" url="/pages/device/info/index">
-                <view class="left">
-                    <image class="pic" src="/static/img/goods/yan_img.png"/>
-                </view>
-                <view class="right">
-                    <view class="title">
-                        <text class="no">H0001</text>
-                        <text class="name">新二代智能售烟机</text>
-                        <text class="dec">200m</text>
-                    </view>
-                    <view class="type">商品种类:76种</view>
-                    <view class="sign">购买过的</view>
-                    <view class="addr">
-                        <image class="cus-addr" src="/static/img/icon/address.png"/>
-                        <text class="text">深圳市宝安区石岩街道办星城购物</text>
-                    </view>
-                </view>
-            </navigator>
-        </block>
-    </view>
+	<view class="search cus-lan">
+		<image class="icon" src="/static/img/icon/ic_mall_search.png" mode="widthFix"/>
+		<input 
+		class="input" 
+		type="text" 
+		value="{{inputValue}}" 
+		placeholder="请收入关键词"
+		bindinput="inputedit"
+		/>
+		<view class="btn" bind:tap="submit">搜索</view>
+	</view>
+	<view class="history">
+		<view class="title">搜索历史</view>
+		<view class="list" wx:if="{{history.length>0}}">
+			<view wx:for="{{history}}" wx:key="*this">{{item}}</view>
+		</view>
+	</view>
 </view>
 

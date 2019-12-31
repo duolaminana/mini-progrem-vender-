@@ -1,5 +1,6 @@
 // pages/user/verify/index.js
 const {app,$,cusAppData} = require('../../../utils/public.js')
+import { cardMessageEvoke , cardMessageGain , setBindCard , witnessCheck , checkFace } from '../../../api/api.js'
 
 Page({
   /**
@@ -48,11 +49,11 @@ Page({
 
   verfiyFace () {
 	if(app.globalData.isBindingCard){
-		this.loginFace()
+		this.showCamera()
 	}else{
-		if(this.data.bindingCard)
-		this.registerFace()
-		else
+		if(this.data.bindingCard){
+			this.showCamera()
+		}else
 		wx.showModal({
 		  title: '系统提示',
 		  content: '请先进行身份证验证',
@@ -70,157 +71,153 @@ Page({
 		})
 		return
 	}
-	$.getMask($.host_cardMessage + 'evoke',{machineCode: app.globalData.machineCode}).then((res)=>{
-		if(res){
-			this.showAjaxGain()
-			let num = 30
+	wx.showLoading({title:'正在打开扫描',mask:true})
+	cardMessageEvoke().then(res=>{
+		wx.hideLoading()
+		this.showAjaxGain()
+		let num = 30
+		this.setData({
+			time: num
+		})
+		let timer = setInterval(()=>{ // 循环获取
+			if(num <= 0){
+				if(!this.data.bindingCard){
+					wx.showModal({
+						title: '系统提示',
+						content: '请重新验证!',
+						showCancel: false
+					})
+				}
+				this.hideAjaxGain()
+				clearInterval(timer)
+				return
+			}
 			this.setData({
-				time: num
+				time: --num
 			})
-			let timer = setInterval(()=>{ // 循环获取
-				if(num <= 0){
-					if(!this.data.bindingCard){
-						wx.showModal({
-							title: '系统提示',
-							content: '请重新验证!',
-							showCancel: false
-						})
-					}
-					this.hideAjaxGain()
+			if((num % 2) == 0)
+			cardMessageGain().then(res=>{
+				console.log('cardMessageGain api 响应:',res)
+				res = res.result
+				if(res){
+					console.log('刷身份证信息记入.....',res.faceAttribute)
 					clearInterval(timer)
+					this.hideAjaxGain()
+					this.gain = res
+					this.data.bindingCard = true
+					wx.showToast({
+						title: "请进行人脸验证!",
+						duration: 1500
+					})
 					return
 				}
-				this.setData({
-					time: --num
-				})
-				if((num % 3) == 0)
-				$.get($.host_cardMessage + 'gain',{machineCode: app.globalData.machineCode}).then((res)=>{
-					if(res){
-						clearInterval(timer)
-						this.hideAjaxGain()
-						this.gain = res.faceAttribute
-						this.data.bindingCard = true
-						wx.showToast({
-							title: "请进行人脸验证!",
-							duration: 1500
-						})
-					}
-				})
-			},1000)
-		}
+			})
+		},1000)
 	})
   },
 
-  MemberBindingCard () {
-	$.getMask(`${$.host_order}MemberBindingCard?cardNo=${this.gain.card}&memberId=${app.globalData.wxUserInfo.id}`).then((res) => {
-		app.globalData.isBindingCard = true
-		app.globalData.wxUserInfo.id = res
-		wx.navigateTo({
-			url: `/pages/pay/pay`
+  photograph () {
+	  const ctx = wx.createCameraContext(); //创建相机上下文
+	  ctx.takePhoto({
+		quality: 'high',
+		success: (res) => {
+			if(app.globalData.isBindingCard)
+			this.loginFace(res)
+			else
+			this.registerFace(res)
+		},
+		fail: (res)=> {
+			console.log('拍照错误',res)
+			wx.showModal({
+				title: '提示',
+				content: '拍照错误,请重新拍照!',
+				showCancel: false
+			})
+		}
+	  })
+  },
+
+  registerFace (res) { // 人脸认证
+	console.log('进入人证核验 registerFace方法')
+	wx.showToast({ 
+		icon: "loading",
+		title: "正在上传中。。。",
+		mask: true
+	})
+	let q = {
+		filePath: res.tempImagePath,
+		data: {
+			faceAttribute: JSON.stringify(this.gain.faceAttribute)
+		}
+	}
+	witnessCheck(q).then(res => {
+		this.data.bindingFace = true
+		this.showCamera()
+		console.log('卡号',this.gain.faceAttribute.card)
+		setBindCard(this.gain.faceAttribute.card).then(res => {
+			console.log('绑定用户身份证接口 api success响应',res)
+			wx.hideLoading()
+			res = res.result
+			app.globalData.isBindingCard = true
+			app.globalData.wxUserInfo.id = res
+			wx.navigateTo({
+				url: `/pages/pay/pay`
+			})
+		}, res => {
+			console.log('绑定用户身份证接口 api fail响应',res)
+			wx.hideLoading()
+			wx.showModal({
+				title: '提示',
+				content: res,
+				showCancel: false
+			})
+		})
+	}, res => {
+		console.log('witnessCheck api fail响应:',res)
+		wx.showModal({
+			title: '提示',
+			content: res,
+			showCancel: false
 		})
 	})
   },
 
-  registerFace () { // 人脸认证
-	this.showCamera()
-	console.log('人脸认证registerFace')
-	const ctx = wx.createCameraContext(); //创建相机上下文
-	ctx.takePhoto({
-		quality: 'high',
-		success: (res) => {
-			console.log('人脸',res)
-			wx.showToast({
-				icon: "loading",
-				title: "正在上传中。。。"
-			})
-			console.log(wx.uploadFile)
-			wx.uploadFile({
-				url: $.host_face + 'witnessCheck',
-				filePath: res.tempImagePath,
-				name: 'multipartFile',
-				formData: {
-					faceAttribute: JSON.stringify(this.gain)
-				},
-				success:(res)=>{
-					console.log('witnessCheck api 响应:',res)
-					if (res.statusCode != 200) {
-						wx.showModal({
-							title: '提示',
-							content: '上传失败',
-							showCancel: false
-						})
-						return
-					}
-					if(res.data){
-						this.data.bindingFace = true
-						this.showCamera()
-						this.MemberBindingCard()
-					}else{
-						wx.showModal({
-							title: '提示',
-							content: '验证失败,请重新验证!',
-							showCancel: false
-						})
-					}
-				},
-				complete:(res)=>{
-					console.log('uploadFile',res)
-					wx.hideLoading()
-				}
-			})
-			console.log('盗贼')
-		},
-		fail: (res)=> {
-			console.log('拍照错误',res)
-		}
+  loginFace (res) { // 人脸验证
+	wx.showToast({
+		icon: "loading",
+		title: "正在上传中。。。"
 	})
-  },
-
-  loginFace () { // 人脸验证
-	this.showCamera()
-	const ctx = wx.createCameraContext(); //创建相机上下文
-	ctx.takePhoto({
-		quality: 'high',
-		success: (res) => {
-			wx.showToast({
-				icon: "loading",
-				title: "正在上传中。。。"
+	let q = {
+		filePath: res.tempImagePath
+	}
+	checkFace(q).then(res => {
+		console.log('checkFace api 响应:',res)
+		wx.hideLoading()
+		if(res.code != 200){
+			wx.showModal({
+				title: '提示',
+				content: '验证失败,请重新验证!',
+				showCancel: false
 			})
-			wx.uploadFile({
-				url: $.host_face + 'checkFace', //仅为示例，非真实的接口地址
-				filePath: res.tempImagePath,
-				name: 'multipartFile',
-				formData: {},
-				success:(res)=>{
-					console.log('Face api 响应:',res)
-					if (res.statusCode != 200) {
-						wx.showModal({
-							title: '提示',
-							content: '上传失败',
-							showCancel: false
-						})
-						return
-					}
-					this.showCamera()
-					wx.navigateTo({
-						url: `/pages/pay/pay`
-					})
-				},
-				complete:()=>{
-					wx.hideLoading()
-				}
-			})
-		},
-		fail: (res)=> {
-			console.log('拍照错误',res)
+			return
 		}
+		wx.navigateTo({
+			url: `/pages/pay/pay`
+		})
+	}, res => {
+		wx.hideLoading()
+		wx.showModal({
+			title: '提示',
+			content: res,
+			showCancel: false
+		})
 	})
   },
 
   showAjaxGain () {
 	this.setData({
 		showGain: true
-	}, ()=>{
+	}, () => {
 		this.animation.opacity(1).step()
 		this.setData({
 			animationData: this.animation.export()

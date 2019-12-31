@@ -7,15 +7,23 @@
 	<scroll-view class="com-goodsdetail-main cus-lan" scroll-y="true">
 		<view class="top">
 			<view class="pic">
-				<image src="{{parentData.imageAddress}}"/>
+				<image 
+				src="{{parentData.imageAddress}}" 
+				bindload="imagesOnload" 
+				data-scale="{{'hotgoods_img_'}}" 
+				data-height="{{200}}" 
+				style="width:{{imgScaleCC['hotgoods_img_']}}"
+				/>
 			</view>
 			<view class="info">
 				<view class="name">{{parentData.productName}}</view>
 				<view class="kc">库存 : {{parentData.stock?parentData.stock:0}}{{parentData.dictUnitName}}</view>
 				<view class="tab">
 					<view class="price">
-						<text class="a">￥</text>
-						<text class="b">{{wxsCom.toFixed(parentData.activityPrice?parentData.activityPrice:parentData.actualPrice)}}</text>
+						<!-- <text class="a">￥</text> -->
+						<text class="d">{{wxsCom.toFrontFixed(parentData.activityPrice?parentData.activityPrice:parentData.actualPrice)}}</text>
+						<text class="b">.{{wxsCom.toBackFixed(parentData.activityPrice?parentData.activityPrice:parentData.actualPrice)}}元</text>
+						<text class="c" wx:if="{{parentData.activityPrice}}">{{wxsCom.toFixed(parentData.actualPrice)}}<text>元</text></text>
 					</view>
 					<block wx:if="{{parentData.categoryId == 182}}">
 						<view class="hbd-paynumber">仅限1个</view>

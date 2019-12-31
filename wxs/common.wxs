@@ -97,5 +97,24 @@ module.exports = {
 	},
 	plusZero: function(num){
 		return num.toString().length!=1?num:'0'+num.toString()
+	},
+	toChinses: function(val){
+		switch (typeof val == 'string' ? val : val.toString())
+		{
+			case '157':
+				return '药品'
+			case '174':
+				return '烟'
+			case '175':
+				return '棉花糖'
+			case '182':
+				return '购物袋'
+			case '183':
+				return '电子烟'
+			case '0':
+				return '混合机'
+			case '':
+				return '全部'
+		}
 	}
 }

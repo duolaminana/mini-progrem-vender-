@@ -83,6 +83,9 @@ page{
     border-radius: 4rpx;
     margin: 18rpx auto 20rpx;
 }
+.payresult-baruls .lq.color{
+	background-color: #B7B7B7;
+}
 .payresult-baruls .sm{
     font-weight: var(--w5);
     font-size: 24rpx;

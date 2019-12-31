@@ -9,7 +9,16 @@ Component({
 	stock: {
 		type: Number,
 		value: 0,
-		observer (newVal,oldVal,path) {}
+		observer (newVal,oldVal,path) {
+			if(this.data.stock == 0)
+			this.setData({
+				addIconOk: false
+			})
+			else
+			this.setData({
+				addIconOk: true
+			})
+		}
 	},
 	result: {
 		type: Number,
@@ -27,7 +36,18 @@ Component({
    * 组件的初始数据
    */
   data: {
-	
+	addIconOk: true
+  },
+  
+  ready () {
+	if(this.data.stock == 0)
+	this.setData({
+		addIconOk: false
+	})
+	else
+	this.setData({
+		addIconOk: true
+	})
   },
 
   /**
@@ -35,19 +55,33 @@ Component({
    */
   methods: {
 	sub () {
+		let result = this.data.result-1
+		if(result < this.data.stock){
+			this.setData({
+				addIconOk: true
+			})
+		}
 		this.setData({
-			result: this.data.result != 0 ? --this.data.result : 0
+			result: result
 		})
 		this.currCount()
 	},
 	add () {
-		if(this.data.stock <= this.data.result)
-		wx.showToast({
-			title: '库存不足!',
-			icon: 'none'
-		})
+		let result = this.data.result + 1
+		if(result > this.data.stock){
+			wx.showToast({
+				title: '库存不足!',
+				icon: 'none',
+				duration: 500
+			})
+			return
+		}else if(result == this.data.stock){
+			this.setData({
+				addIconOk: false
+			})
+		}
 		this.setData({
-			result: ++this.data.result > this.data.stock ? --this.data.result : this.data.result
+			result: result
 		})
 		this.currCount()
 	},

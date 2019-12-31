@@ -92,16 +92,36 @@
     margin-top: 65rpx;
 }
 .com-goodsdetail .info .tab .price .a{
-    font-weight: 400;
+    font-family: var(--fa);
     font-size: 30rpx;
-    color: var(--zc3);
+    font-weight: var(--w4);
+    color: var(--zc);
 }
 .com-goodsdetail .info .tab .price .b{
-    font-family: ArialMT;
-    font-weight: 400;
-    font-size: 36rpx;
-    color: var(--zc3);
+    font-size: 26rpx;
+    font-weight: var(--w4);
+    color: var(--zc);
 }
+.com-goodsdetail .info .tab .price .c{
+	text-decoration: line-through;
+    color: var(--zc9);
+	margin-left: 14rpx;
+	font-size: 26rpx;
+	font-family: var(--fa);
+	font-weight: var(--w4);
+	color: var(--zc9);
+}
+.com-goodsdetail .info .tab .price .c text{
+	font-size: 24rpx;
+	font-family: var(--fp);
+}
+.com-goodsdetail .info .tab .price .d{
+	font-family: var(--fa);
+	font-size: 37rpx;
+	font-weight: var(--w4);
+	color: var(--zc);
+}
+
 
 .com-goodsdetail .bottom{
     width: 100%;

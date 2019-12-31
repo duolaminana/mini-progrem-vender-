@@ -62,3 +62,4 @@ text{
 }
 
 @import "/template/index.wxss";
+@import "./templates/index.wxss";

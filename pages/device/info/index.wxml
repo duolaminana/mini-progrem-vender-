@@ -1,7 +1,6 @@
 <!--pages/device/info/index.wxml-->
 <import src="/template/head/head.wxml"></import>
-<import src="/template/freebtn/common.wxml"></import>
-<import src="/template/showNotdata/common.wxml"></import>
+<wxs src="../../../wxs/common.wxs" module="wxsCom" />
 
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
@@ -10,48 +9,53 @@
         <!-- 设备 -->
         <view class="sbinfo cus-lan">
             <view class="left">
-                <image class="pic" src="/static/img/goods/yan_img.png"/>
+                <image class="pic" src="{{thisDeviceDetails.machineImageAddress}}"/>
             </view>
             <view class="right">
                 <view class="title">
-                    <text class="no">H0001</text>
-                    <text class="name">新二代智能售烟机</text>
-                    <text class="dec">200m</text>
+                    <text class="no">{{thisDeviceDetails.machineCode}}</text>
+                    <text class="name">{{thisDeviceDetails.machineName}}</text>
+                    <text class="dec">{{wxsCom.toFixed(thisDeviceDetails.distance)}}m</text>
                 </view>
-                <view class="type">商品种类:76种</view>
-                <view class="sign">购买过的</view>
+                <view class="type">商品种类:{{thisDeviceDetails.articleCategory}}种</view>
+                <view class="sign">{{item.bought==1?'购买过的':' '}}</view>
                 <view class="addr">
-                    <image class="cus-addr" src="/static/img/icon/address.png"/>
-                    <text class="text">深圳市宝安区石岩街道办星城购物</text>
+                    <image class="cus-addr" src="../../../static/img/icon/my_address.png"/>
+                    <text class="text">{{thisDeviceDetails.positionAddress}}</text>
                 </view>
             </view>
         </view>
 
         <!-- 商品导航栏 -->
         <view class="bar cus-lan">
-            <text bind:tap="barAir" wx:for="{{barArr}}" wx:key="*this" class="barli{{index==barCurrent?' active':''}}" data-type="{{index}}">{{item.note}}</text>
+            <text bind:tap="barAir" wx:for="{{thisGoods}}" wx:key="*this" class="barli{{index==barCurrent?' active':''}}" data-type="{{index}}">{{item.categoryName}}</text>
         </view>
     </view>
 
     <!-- 商品展示 -->
     <view class="goodslist cus-lan">
-        <block wx:if="{{true}}">
-            <view class="li" wx:for="{{27}}" wx:key="*this">
-                <view class="name">利群(硬烟嘴)</view>
+        <block wx:if="{{thisGoods.length>0}}">
+            <view class="li" wx:for="{{thisGoods[barCurrent].products}}" wx:key="*this">
+                <view class="name">{{item.productName}}</view>
                 <view class="pic">
-                    <image src="/static/img/goods.png" />
+                    <image src="{{item.imageAddress}}" />
                 </view>
                 <view class="bot">
                     <text class="price">
-                        <text class="a">66</text>
+                        <text class="a">{{item.activityPrice?item.activityPrice:item.actualPrice}}</text>
                         <text class="b">元</text>
                     </text>
-                    <text class="number">22包</text>
+                    <text class="number">{{item.stock}}{{item.dictUnitName}}</text>
                 </view>
             </view>
         </block>
-        <template wx:else is="tpl-showNotdata" data="{{text:'该设备拥有的商品已售罄请等待工作人员补货',height:'300rpx'}}"></template>
+		<COM-emptyData
+		show="{{thisGoods.length <= 0}}"
+		height="300"
+		size="27"
+		text="该设备拥有的商品已售罄请等待工作人员补货!!"
+		></COM-emptyData>
     </view>
 
-    <template is="tpl-freebtn" data="{{...footButtonData}}"></template>
 </view>
+<COM-winButton text="去这里" icon="/static/img/icon/go_addr.png" type="tap" bind:touch="goThatAddress"></COM-winButton>

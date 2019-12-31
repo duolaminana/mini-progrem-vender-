@@ -1,5 +1,6 @@
 // pages/device/info/index.js
 const {app,$,cusAppData} = require('../../../utils/public.js')
+const { getDeviceGoods, memberFindOrderByMachCode } = require('../../../api/api.js')
 
 Page({
 
@@ -22,38 +23,9 @@ Page({
         class: 'goback-black'
       }
     },
-    footButtonData: {
-      icon: '/static/img/icon/go_addr.png',
-      text: '去这里',
-      click: 'goThatAddress'
-    },
-    barArr: [
-      {
-        note: '全部'
-      },
-      {
-        note: '黄鹤楼'
-      },
-      {
-        note: '利群'
-      },
-      {
-        note: '冬虫夏草'
-      },
-      {
-        note: '好日子'
-      },
-      {
-        note: '好日子'
-      },
-      {
-        note: '好日子'
-      },
-      {
-        note: '好日子'
-      }
-    ],
-    barCurrent: 0
+    barCurrent: 0,
+	thisDeviceDetails:{},
+	thisGoods:[]
   },
 
   barAir (e) { // 导航事件
@@ -78,18 +50,9 @@ Page({
     //   // complete
     //   }
     // })
-    
-    if(app.globalData.myLocation)
     wx.openLocation({
-        latitude:app.globalData.myLocation[0],
-        longitude:app.globalData.myLocation[1]
-    })
-    else
-    require('../../../utils/tpl/wxLocation').call(this, (res)=>{
-        wx.openLocation({
-            latitude:res[0],
-            longitude:res[1]
-        })
+        latitude:this.data.thisDeviceDetails.latitude,
+        longitude:this.data.thisDeviceDetails.longitude
     })
   },
 
@@ -97,38 +60,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ // 商品导航设置
-      barArr:[
-        {
-          note: '全部'
-        },
-        {
-          note: '黄鹤楼'
-        },
-        {
-          note: '利群'
-        },
-        {
-          note: '冬虫夏草'
-        },
-        {
-          note: '双喜'
-        },
-        {
-          note: '好日子'
-        },
-        {
-          note: '五叶神'
-        }
-      ]
-    })
+	
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+	let that = this
+	const eventChannel = this.getOpenerEventChannel()
+	eventChannel.on('acceptDataFromOpenerPage', function(data) {
+	  console.log('index.wxml',data)
+	  that.execThis(data)
+	})
+  },
+  
+  execThis(data){
+	  this.setData({
+	  	thisDeviceDetails: data
+	  })
+	  getDeviceGoods(data.machineCode).then(res=>{
+		  console.log(res)
+		  this.setData({thisGoods:res.result})
+	  })
   },
 
   /**

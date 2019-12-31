@@ -49,18 +49,21 @@
 
 .bar{
     width: 100%;
-    display: flex;
-    align-items:center; /*垂直居中*/
     height: var(--bar_height);
+    line-height: var(--bar_height);
     background-color: var(--zc);
+	overflow-x: scroll;
+	white-space:nowrap;
 }
 .bar view{
-    line-height: 78rpx;
+    line-height: calc(var(--bar_height) - 10rpx);
     padding: 0 40rpx;
+	box-sizing: border-box;
     font-size: 30rpx;
     font-weight: var(--w5);
     color: var(--wc);
     opacity: 0.5;
+	display: inline-block;
 }
 .bar view.active{
     font-weight: var(--w7);
@@ -71,6 +74,23 @@
 .ulgoods{
     width: 100%;
     padding-top: calc(var(--search_height) + var(--search_padding) + var(--bar_height) + 20rpx);
+}
+.ulgoods scroll-view{
+	height: 77vh;
+	/* height: calc(100vh - var(--search_height) + var(--search_padding) + var(--bar_height) + 500rpx); */
+}
+.ulgoods .paging-loading{
+	font-size: 14px;
+	color: #666;
+	padding: 5rpx 0 10rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.ulgoods .paging-loading image{
+	width: 30rpx;
+	height: 30rpx;
+	margin-left: 20rpx;
 }
 .ulgoods .li{
     padding: 18rpx 20rpx;
@@ -143,4 +163,8 @@
     font-size: 24rpx;
     font-weight: var(--w5);
     color: var(--zc9);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 450rpx;
 }

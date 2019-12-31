@@ -12,40 +12,68 @@ Page({
 	    ...cusAppData,
 	  warp: {
 	    style: {
-	      backgroundColor: '#ee7700'
 	    }
 	  },
 	  content: {
-	    text: '查找附近商品',
+	    text: '查找附近售卖机',
 	    style: {
-	      color: 'white'
 	    }
 	  },
 	  left: {
-		  class: 'goback'
+		  class: 'goback-black'
 	  }
 	},
+	inputValue: '',
+	history:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	$.thisLocation.call(this)
+	  console.log(options)
+  },
+
+  submit () {
+	let value = $.trim(this.data.inputValue)
+	if(value){
+		app.searchvalue = value
+		wx.switchTab({
+			url: '/pages/device/device',
+			success:()=>{
+				// console.log(value)
+			}
+		})
+	}
+	else
+	wx.showToast({
+		title: '请输入要搜索的内容',
+		icon: 'none',
+	})
+  },
+
+  inputedit(e){
+	this.data.inputValue = e.detail.value
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+	
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+	wx.getStorage({
+	  key: 'hyt_searchDevice',
+	  success: (res)=> {
+	    console.log(res.data)
+		if(res.data) this.setData({history:JSON.parse(res.data)})
+	  }
+	})
   },
 
   /**

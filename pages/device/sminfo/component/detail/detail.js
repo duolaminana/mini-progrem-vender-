@@ -67,6 +67,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
+	imagesOnload(e){
+		this.data.imgScaleCC = this.data.imgScaleCC || {}
+		this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * e.currentTarget.dataset.height) + 'rpx'
+		this.setData({
+			imgScaleCC: this.data.imgScaleCC
+		})
+	},
 	hideCartAir () { // 加入购物车按钮是否隐藏
 		if(this.data.parentData.categoryId == 182)
 		this.setData({
@@ -111,7 +118,6 @@ Component({
 		this.triggerEvent('customTouchcart', { click: ++this.data.close })
 	},
 	setParentData (data) { // 在父级调用.设置详情数据
-		console.log(data)
 		this.setData({
 			parentData: data
 		})
