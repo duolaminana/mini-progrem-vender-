@@ -1,6 +1,6 @@
 // pages/device/device.js
 const {app,$,cusAppData} = require('../../utils/public')
-import { loopLocation } from '../../utils/Location.js';
+import { loopLocation } from '../../utils/location.js';
 import { queryNearbyDevice, memberFindOrderByMachCode } from '../../api/api.js';
 
 Page({
@@ -44,13 +44,7 @@ Page({
     })
   },
   
-  imagesOnload(e){
-  		this.data.imgScaleCC = this.data.imgScaleCC || {}
-  		this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * 100) + '%'
-  		this.setData({
-  			imgScaleCC: this.data.imgScaleCC
-  		})
-  	},
+  imagesOnload: $.ZOOM_IMG_FNC(),
 
 	searchInput(){
 		if(this.data.inputvalue) return
@@ -60,9 +54,6 @@ Page({
 	},
 
 	searchImg(){
-		if(this.data.inputvalue){
-			this.searchTouch()
-		}else
 		wx.navigateTo({
 			url:`/pages/device/search/index`
 		})
@@ -80,16 +71,15 @@ Page({
 	
 	goToDeviceInfo(e){
 		let code = e.currentTarget.dataset.code
-		for(let item of this.data.ThisShopData_All){
-			if(item.machineCode == code)
-			wx.navigateTo({
-			  url: `/pages/device/info/index`,
-			  success: res => {
-			    // 通过eventChannel向被打开页面传送数据
-			    res.eventChannel.emit('acceptDataFromOpenerPage', item)
-			  }
-			})
-		}
+		let data = this.data.ThisShopData_All
+		let old = 'machineCode'
+		wx.navigateTo({
+		  url: `/pages/device/info/index`,
+		  success: res => {
+		    // 通过eventChannel向被打开页面传送数据
+		    res.eventChannel.emit('acceptDataFromOpenerPage', $.getArrItem(data, old, code))
+		  }
+		})
 	},
 	
 	gotoDeviceMap(){
@@ -123,6 +113,9 @@ Page({
 	if(app.searchvalue){
 		this.searchTouch()
 	}else{
+		this.setData({
+			inputvalue: ''
+		})
 		this.firstInitTouch()
 	}
   },
@@ -135,7 +128,7 @@ Page({
   		if(app.globalData.wxUserInfo){
   			callback()
   	  	}else{
-  			wx.showLoading({title:'获取用户信息',mask:true})
+  			wx.showLoading({title:'获取用户信息'})
   	  		app.wxLoginGetMemberInfoResponseCallback = res => { // 未获取到会员用户信息/ app.js 获取会员响应回调
   				wx.hideLoading()
   				callback()
@@ -145,7 +138,7 @@ Page({
   },
 
   getThisData(q,callback){ // queryNearbyDevice
-	wx.showLoading({title:'正在查询中',mask:true})
+	wx.showLoading({title:'正在查询中'})
   	queryNearbyDevice(q).then(res=>{
 		wx.hideLoading()
 		console.log(res)
@@ -212,6 +205,7 @@ Page({
 	  	pageNum: 1,
 	  	pageSize: 10
 	  }
+	  app.searchvalue = null
 		this.Officers(()=>{
 			this.getThisData(q)
 		})

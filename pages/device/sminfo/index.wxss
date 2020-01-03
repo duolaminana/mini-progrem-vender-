@@ -19,10 +19,17 @@
 .sbinfo .pic{
     width: 120rpx;
     height: 120rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.sbinfo .pic image{
+    width: 100%;
+    height: 100%;
 }
 .sbinfo .left{
     float: left;
-    width: 172rpx;
+    width: var(--sbinfo_height);
     height: var(--sbinfo_height);
     border-radius: 4rpx;
     background-color: #FFEACF;
@@ -151,8 +158,7 @@
 	position: relative;
 }
 .goodsshow .right .li .pic image{
-    /* width: calc(var(--pscale) * 110rpx); */
-    /* height: 110rpx; */
+    width: 100%;
 	height: 100%;
 }
 .goodsshow .icus-couplet{

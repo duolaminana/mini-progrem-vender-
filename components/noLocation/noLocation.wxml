@@ -1,0 +1,14 @@
+<!--components/noLocation/noLocation.wxml-->
+<wxs src="../../wxs/common.wxs" module="wxsCom" />
+<view wx:if="{{show}}" class="com-notLocation" style="height:{{height}}rpx">
+	<view class="warp">
+		<view class="com-notLocation-pic">
+			<image 
+			src="/images/icon/locat.png" 
+			mode="widthFix"
+			style="width:{{icosize}}rpx"
+			/>
+		</view>
+		<view class="com-notLocation-text" style="height:{{size}}rpx">{{text}}</view>
+	</view>
+</view>

@@ -6,14 +6,15 @@
 	<view class="title">商品详情<image class="close" src="/static/img/icon/close_btn.png" bindtap="closeThisComp" /></view>
 	<scroll-view class="com-goodsdetail-main cus-lan" scroll-y="true">
 		<view class="top">
-			<view class="pic">
-				<image 
-				src="{{parentData.imageAddress}}" 
-				bindload="imagesOnload" 
-				data-scale="{{'hotgoods_img_'}}" 
-				data-height="{{200}}" 
-				style="width:{{imgScaleCC['hotgoods_img_']}}"
-				/>
+			<view class="leftt">
+				<view class="pic">
+					<image
+					src="{{parentData.imageAddress}}" 
+					bindload="imagesOnload"
+					data-cssimgkey="cssimgkey"
+					style="{{wxsCom.objToString(cssimgkey[0])}}"
+					/>
+				</view>
 			</view>
 			<view class="info">
 				<view class="name">{{parentData.productName}}</view>

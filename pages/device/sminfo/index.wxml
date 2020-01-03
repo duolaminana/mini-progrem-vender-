@@ -2,7 +2,6 @@
 <import src="/template/head/head.wxml"></import>
 <import src="/template/showNotdata/common.wxml"></import>
 <wxs src="../../../wxs/common.wxs" module="wxsCom" />
-<wxs src="../../../wxs/bySmInfo.wxs" module="wxsCus" />
 
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
@@ -11,7 +10,13 @@
         <!-- 设备 -->
         <view class="sbinfo cus-lan">
             <view class="left">
-                <image class="pic" src="{{sbinfoData.imageAddress}}"/>
+                <view class="pic">
+					<image
+					src="{{sbinfoData.imageAddress}}"
+					bindload="imagesOnload" 
+					style="{{wxsCom.objToString(ZOOM_IMG[0])}}"
+					/>
+				</view>
             </view>
             <view class="right">
                 <view class="title">
@@ -20,7 +25,7 @@
                     <!-- <text class="dec">200m</text> -->
                 </view>
                 <view class="type">商品种类:{{sbinfoData.items}}种</view>
-                <view class="sign">{{alreadyPay?'购买过的':' '}}</view>
+                <view class="sign">{{alreadyPay?'购买过的  ':' '}} 支持线上购买</view>
                 <view class="addr">
                     <image class="cus-addr" src="/static/img/icon/address.png"/>
                     <text class="text">{{sbinfoData.positionAddress}}</text>
@@ -39,16 +44,18 @@
         <view class="right-warp">
 			<block wx:if="{{goodsList.length > 0}}">
 			<block wx:for="{{goodsList}}" wx:key="item">
-            <view wx:if="{{wxsCus.showCur(barCurrent,index)}}" class="right">
+            <view wx:if="{{wxsCom.showBarCurrent(barCurrent,index)}}" class="right">
                 <view class="title">{{item.categoryName}}</view>
                 <view class="li" wx:for="{{item.products}}" wx:key="option" wx:for-item="option" wx:for-index="idx" bindtap="openComDetail" data-productCode="{{option.productCode}}">
                     <view class="pic">
 						<view wx:if="{{option.activityPrice}}" class="icus-couplet">热销</view>
                         <image 
 						src="{{option.imageAddress}}" 
-						bindload="imagesOnload" 
-						data-scale="{{'goodsshow'+idx+option.productCode}}" 
-						style="width:{{imgScaleCC['goodsshow'+idx+option.productCode]}}" 
+						bindload="imagesOnload"
+						data-cssimgidx="{{idx}}" 
+						data-cssimgidxTop="{{index}}" 
+						data-cssimgkey="cssimgkey"
+						style="{{wxsCom.objToString(cssimgkey[index][idx])}}"
 						/>
                     </view>
                     <view class="info">

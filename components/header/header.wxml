@@ -1,0 +1,8 @@
+<!--components/header/header.wxml-->
+<view class="com-header">
+	<view class="body">
+		<view class="left goback-black" bind:tap="close"></view>
+		<view class="content">自助售卖系统</view>
+		<view class="right"></view>
+	</view>
+</view>

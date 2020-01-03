@@ -20,6 +20,13 @@
 .sbinfo .pic{
     width: 120rpx;
     height: 120rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.sbinfo .pic image{
+    height: 100%;
+    width: 100%;
 }
 .sbinfo .left{
     float: left;
@@ -141,8 +148,12 @@
     font-size: 24rpx;
     font-weight: var(--w5);
     color: var(--zc3);
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	width: 100%;
 }
-.goodslist .li .pic{
+.goodslist .li .pictitle{
     width: 110rpx;
     height: 110rpx;
     padding: 15rpx 0;
@@ -151,9 +162,16 @@
     align-items: center;
     justify-content: center;
 }
-.goodslist .li .pic image{
-    width: 110rpx;
+.goodslist .li .pic{
     height: 110rpx;
+	width: 110rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.goodslist .li .pic image{
+    height: 100%;
+	width: 100%;
 }
 .goodslist .li .bot{
     height: 30rpx;
@@ -179,4 +197,24 @@
     color: var(--zc9);
     font-weight: var(--w5);
     text-align: right;
+}
+
+.pagebtns{
+	position: fixed;
+	bottom: 15rpx;
+	left: 0;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.pagebtns .left{
+	width: 35%;
+	position: relative;
+	margin-left: 18rpx;
+}
+.pagebtns .right{
+	width: 65%;
+	position: relative;
+	margin-right: 10rpx;
 }

@@ -12,9 +12,10 @@
                 <view class="pic">
                     <image 
 					src="{{item.imageAddress}}" 
-					bindload="imagesOnload" 
-					data-scale="{{'goodsshow'+index}}" 
-					style="width:{{imgScaleCC['goodsshow'+index]}}" />
+					bindload="imagesOnload"
+					data-cssimgidx="{{index}}"
+					style="{{wxsCom.objToString(ZOOM_IMG[index])}}"
+					/>
                 </view>
                 <view class="info">
                     <view class="top">
@@ -36,7 +37,7 @@
             <text class="d">{{totalActivityPrice}}</text>
         </view>
     </view>
-    <view class="deduction">
+    <view class="deduction" wx:if="{{rebate}}">
         <view class="confix cus-lan-m">
             <view class="info">
                 <image class="icon" src="/static/img/icon/red_packet_small.png" />

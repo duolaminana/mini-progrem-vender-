@@ -1,0 +1,56 @@
+/* pages/pay/finish/components/getCargo.wxss */
+.getCargo{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0,0,0,.5);
+}
+.getCargo .main{
+	width: 90%;
+	background-color: white;
+	text-align: center;
+	border-radius: 18rpx;
+	font-family:PingFang SC;
+}
+.getCargo .title{
+	font-size: 36rpx;
+	font-family: '宋体';
+	font-weight: 550;
+	padding-top: 20rpx;
+	height: 65rpx;
+	line-height: 65rpx;
+	padding-top: 40rpx;
+}
+.getCargo .miss{
+	font-size: 36rpx;
+	color: #999;
+	font-family: '宋体';
+}
+.getCargo .miss.success{
+	color: #3FCF77;
+}
+.getCargo .miss.fail{
+	color: #D73F3C;
+}
+.getCargo .con text{
+	font-size: 26rpx;
+	color: #999;
+	font-family: '微软雅黑';
+}
+.getCargo .con{
+	padding: 25rpx 0 28rpx;
+}
+.getCargo .main .btn{
+	height: 110rpx;
+	line-height: 110rpx;
+	border-top: 1px solid #f3f3f3;
+	font-size: 36rpx;
+	font-family: '宋体';
+	font-weight: 550;
+}

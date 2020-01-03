@@ -1,0 +1,42 @@
+/* components/authorization/authorization.wxss */
+.com-author{
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: white;
+	box-sizing: border-box;
+	padding-top: var(--height--);
+}
+.com-author .author-header {
+    margin: 90rpx 0 90rpx 50rpx;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    width: 650rpx;
+    height: 300rpx;
+    line-height: 450rpx;
+}
+ 
+.com-author .author-header image {
+    width: 170rpx;
+    height: 170rpx;
+}
+ 
+.com-author .author-content {
+    margin-left: 50rpx;
+    margin-bottom: 90rpx;
+}
+ 
+.com-author .author-content text {
+    display: block;
+    color: #9d9d9d;
+    margin-top: 40rpx;
+}
+ 
+.com-author .author-bottom {
+    border-radius: 80rpx;
+    font-size: 35rpx;
+	width: 85%;
+}

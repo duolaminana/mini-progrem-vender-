@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+	  "COM-winButton": "/components/winButton/winButton",
+	  "COM-header": "/components/header/header"
+  }
+}

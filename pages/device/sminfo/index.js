@@ -75,13 +75,7 @@ Page({
     })
   },
   
-  imagesOnload(e){
-  	this.data.imgScaleCC = this.data.imgScaleCC || {}
-  	this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * 100) + '%'
-  	this.setData({
-  		imgScaleCC: this.data.imgScaleCC
-  	})
-  },
+  imagesOnload: $.ZOOM_IMG_FNC(),
   
   touchcartfnc (e) { // 刷新购物车和底部导航的显示/跟打开关闭相关
 	this.setData({

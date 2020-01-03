@@ -1,0 +1,7 @@
+<wxs src="../wxs/common.wxs" module="wxsCom" />
+
+<template name="tpl-showNotdata">
+    <view class="tpl-showNotdata" style="{{wxsCom.objToString({height:height,backgroundColor:backgroundColor})}}">
+        <view class="tpl-showNotdata-con">{{text}}</view>
+    </view>
+</template>

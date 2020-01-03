@@ -34,7 +34,7 @@
 	text="暂无轮播图数据哦!!"
 	></COM-emptyData>
   </view>
-  
+
   <!-- 热销商品 -->
   <view class="hot-goods icus-goods-list">
     <view class="icus-couplet cus-lan">热销商品</view>
@@ -56,17 +56,16 @@
 	previous-margin="18rpx" 
 	next-margin="18rpx"
 	>
-      <block wx:for-items="{{hotGoodsArr}}" wx:key="index">
-        <swiper-item>
+        <swiper-item wx:for-items="{{hotGoodsArr}}" wx:key="index">
           <view bind:tap="goToHotDeviceInfo" data-code="{{item.machineCode}}">
             <view class="lis">
-              <view wx:if="{{item.activityPrice}}" class="susp bcolor2">热销商品</view>
+              <view wx:if="{{item.activityPrice}}" class="susp" style="{{'background-color:' + wxsCom.toColor1(174)}}">热销商品</view>
               <view class="pic">
                 <image
 					src="{{item.productImageAddress}}" 
-					bindload="imagesOnload" 
-					data-scale="{{'hotgoods_img_'+index}}" 
-					style="width:{{imgScaleCC['hotgoods_img_'+index]}}"
+					bindload="imagesOnload"
+					data-cssimgidx="{{index}}" 
+					style="{{wxsCom.objToString(ZOOM_IMG[index])}}"
 				/>
               </view>
               <view class="name cus-sl200">{{item.productName}}</view>
@@ -80,53 +79,64 @@
             </view>
           </view>
         </swiper-item>
-      </block>
     </swiper>
   </view>
   
   <!-- 推荐商品 -->
   <view class="recommend-goods icus-goods-list">
     <view class="icus-couplet cus-lan">为你推荐</view>
+	
     <COM-noLocation
     show="{{!LOCATION}}"
     height="256"
     size="27"
     icosize="118"
     ></COM-noLocation>
+	
 	<COM-emptyData
-	show="{{recommendGoodsArr.length <= 0}}" 
+	show="{{!recommendGoodsArr.length}}" 
 	height="256"
 	size="27"
 	text="暂无推荐商品数据哦!!"
 	></COM-emptyData>
-    <swiper wx:if="{{recommendGoodsArr.length > 0}}" display-multiple-items="{{recommendGoodsArr.length<4?'3':'3.5'}}" previous-margin="18rpx" next-margin="18rpx">
-      <block wx:for-items="{{recommendGoodsArr}}" wx:key="*this">
-        <swiper-item>
+	
+    <swiper 
+	wx:if="{{recommendGoodsArr.length}}" 
+	display-multiple-items="{{recommendGoodsArr.length<4?'3':'3.5'}}" 
+	previous-margin="18rpx" 
+	next-margin="18rpx"
+	>
+        <swiper-item wx:for-items="{{recommendGoodsArr}}" wx:key="machineCode">
           <view bind:tap="goToDeviceInfo" data-code="{{item.machineCode}}">
-            <view class="lis {{item.type==0?'bcolor-yan':item.type==1?'bcolor-yao':'bcolor-tang'}}">
-              <view class="susp {{item.susp==1?'bcolor2':'bcolor1'}}" wx:if="{{item.susp==0?false:true}}">{{item.susp==1?'购买过的':'新款发售'}}</view>
-              <view class="title {{item.type==0?'fcolor1':item.type==1?'fcolor2':'fcolor3'}}">{{wxsCom.toChinses(item.categoryId)}}</view>
+            <view class="lis"
+			style="{{'background-color:' + wxsCom.toColor2(item.categoryId)}}"
+			>
+              <view class="susp"
+			  style="{{'background-color:' + wxsCom.toColor1(174)}}"
+			  wx:if="{{item.bought==1?true:false}}"
+			  >购买过的</view>
+              <view class="title" style="{{'color:' + wxsCom.toColor1(item.categoryId)}}">{{wxsCom.toChinses(item.categoryId)}}</view>
               <view class="pic-warp">
 				  <view class="pic">
 				    <image 
 					src="{{item.machineImageAddress}}"
 					bindload="imagesOnload"
-					data-scale="{{'recommendgoods_img_'+index}}" 
-					style="width:{{imgScaleCC['recommendgoods_img_'+index]}}"
+					data-cssimgkey="cssimgkey" 
+					data-cssimgidx="{{index}}" 
+					style="{{wxsCom.objToString(cssimgkey[index])}}"
 					/>
 				  </view>
 			  </view>
               <view class="bot">
-                <image class="cus-addr" src="/static/img/icon/my_address.png" mode="widthFix"/>
-                <text class="distance">{{wxsCom.toFixed(item.distance)}}m</text>
+                <image class="cus-addr" src="/static/img/icon/my_address.png"/>
+                <text class="distance">{{wxsCom.distRuler(item.distance)}}</text>
                 <text class="addr cus-sl80">{{item.positionAddress}}</text>
               </view>
             </view>
           </view>
         </swiper-item>
-      </block>
     </swiper>
+	
   </view>
 </view>
 <COM-winButton text="扫码购买" icon="/static/img/icon/saoyisao_icon.png" type="scan"></COM-winButton>
-<!-- <com-floatGlass wx:if="{{showFloatGlass}}" bind:customClickTab="floatGlass"></com-floatGlass> -->

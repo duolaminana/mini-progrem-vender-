@@ -1,0 +1,8 @@
+<!--components/winButton/winButton.wxml-->
+<wxs src="../../wxs/common.wxs" module="wxsCom" />
+<view class="com-winButton">
+    <view class="com-winButton-con cus-lan-m {{stylec}}" bind:tap="touchTo">
+        <image class="com-winButton-icon" wx:if="{{icon}}" src="{{icon}}" mode="widthFix"/>
+        <text class="com-winButton-text">{{text}}</text>
+    </view>
+</view>

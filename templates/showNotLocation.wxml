@@ -1,0 +1,8 @@
+<template name="tpl-showNotLocation">
+    <view class="tpl-showNotLocation" style="--paddingTop:{{paddingTop}}rpx">
+        <view class="tpl-showNotLocation-pic">
+            <image src="/images/icon/locat.png"/>
+        </view>
+        <view class="tpl-showNotLocation-text">定位服务暂未开启，请先开启定位服务</view>
+    </view>
+</template>

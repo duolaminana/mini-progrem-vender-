@@ -13,13 +13,13 @@
             <view class="input">
                 <image class="icon" 
 				src="/static/img/icon/search_icon.png" 
-				bind:tap="searchImg"
 				mode="widthFix"/>
                 <input class="text" 
 				type="text" 
 				value="{{inputvalue}}" 
 				bind:tap="searchInput"
 				bindinput="bindInputChange"/>
+				<view class="iconjt" bind:tap="searchImg">搜索</view>
             </view>
             <view class="btn" bind:tap="gotoDeviceMap">
                 <image src="/static/img/icon/location_btn.png"/>
@@ -59,26 +59,29 @@
 			<view 
 			class="li" 
 			wx:for-items="{{ThisShopData_All}}" 
-			wx:key="*index" 
+			wx:key="machineCode" 
 			bind:tap="goToDeviceInfo" 
 			data-code="{{item.machineCode}}"
 			wx:if="{{barArr[barCurrent].categoryId === ''?true:item.categoryId === barArr[barCurrent].categoryId?true:false}}"
 			>
 				<view class="left">
-					<image class="pic" 
-					src="{{item.machineImageAddress}}"
-					bindload="imagesOnload"
-					data-scale="{{'recommendgoods_img_'+index}}" 
-					style="width:{{imgScaleCC['recommendgoods_img_'+index]}}"/>
+					<view class="pic">
+						<image
+						src="{{item.machineImageAddress}}"
+						bindload="imagesOnload"
+						data-cssimgidx="{{index}}" 
+						style="{{wxsCom.objToString(ZOOM_IMG[index])}}"
+						/>
+					</view>
 				</view>
 				<view class="right">
 					<view class="title">
 						<text class="no">{{item.machineCode}}</text>
 						<text class="name">{{item.machineName}}</text>
-						<text class="dec">{{wxsCom.toFixed(item.distance)}}km</text>
+						<text class="dec">{{wxsCom.distRuler(item.distance)}}</text>
 					</view>
 					<view class="type">商品种类: {{item.articleCategory}}种</view>
-					<view class="sign">{{item.bought==1?'购买过的':' '}}</view>
+					<view class="sign">{{item.bought==1?'购买过的  ':' '}} 支持线上购买</view>
 					<view class="addr">
 						<image class="cus-addr" src="/static/img/icon/address.png"/>
 						<text class="text">{{item.positionAddress}}</text>

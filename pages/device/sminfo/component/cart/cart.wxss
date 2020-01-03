@@ -40,16 +40,20 @@
     height: 122rpx;
 	position: relative;
 }
+.com-shopcart-ul .li .left{
+	padding-right: 20rpx;
+	padding-left: 32rpx;
+}
 .com-shopcart-ul .li .pic{
     width: 86rpx;
     height: 86rpx;
-    padding-right: 20rpx;
-    padding-left: 32rpx;
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .com-shopcart-ul .li .pic image{
-    width: calc(var(--pscale) * 86rpx);
-    height: 86rpx;
+    width: 100%;
+    height: 100%;
 }
 .com-shopcart-ul .li .info-warp{
     display: flex;

@@ -71,7 +71,7 @@ Page({
   execThis(data){
 	  for(let item of data){
 		this.data.markers.push({
-			latitude: item.latitude,
+			latitude: item.laytitude,
 			longitude: item.longitude,
 				callout:{
 					content: item.positionAddress,

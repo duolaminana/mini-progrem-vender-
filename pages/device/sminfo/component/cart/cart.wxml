@@ -11,14 +11,16 @@
 	<view class="com-shopcart-ul">
 		<block wx:if="{{thisData.length>0}}">
 		<view class="li" wx:for="{{thisData}}" wx:key="*this">
-			<view class="pic">
-				<image 
-				src="{{item.imageAddress}}"
-				bindload="imagesOnload"
-				data-scale="{{'hotgoods_img_'+index}}" 
-				data-height="{{86}}" 
-				style="width:{{imgScaleCC['hotgoods_img_'+index]}}"
-				/>
+			<view class="left">
+				<view class="pic">
+					<image
+					src="{{item.imageAddress}}"
+					bindload="imagesOnload"
+					data-cssimgidx="{{index}}" 
+					data-cssimgkey="cssimgkey"
+					style="{{wxsCom.objToString(cssimgkey[index])}}"
+					/>
+				</view>
 			</view>
 			<view class="info-warp">
 				<view class="info">

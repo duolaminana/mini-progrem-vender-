@@ -34,13 +34,15 @@ Page({
 	orderId: null,
 	jfText: '领取',
 	fxText: '领取',
-	jfcolor: ''
+	jfcolor: '',
+	getCargoShow: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+	  
     console.log(options)
 	if(options.fail){
 		this.setData({
@@ -51,7 +53,10 @@ Page({
 		})
 		return
 	}
-	this.setData({orderId:options.orderId})
+	this.setData({
+		orderId:options.orderId,
+		getCargoShow:true,
+	})
 	if(this.data.shippingWay == 0){
 		new QRCode('myQrcode',{
 		  text: this.data.orderId,
@@ -79,21 +84,21 @@ Page({
 		  console.log('积分')
 		  wx.showLoading({
 		  	title: "领取中",
-					mask: true
+				mask: true
 		  })
 		  pullMoneyIntegral(this.data.orderId, 1).then(res=>{
 			if(!res){
 				wx.showToast({
-				  title:'领取失败!',
-				  icon: 'none',
+					title:'领取失败!',
+					icon: 'none',
 					mask: true
 				})
 				return
 			}
 			wx.showToast({
-			  title:'领取成功!',
-			  icon: 'success',
-			  mask: true
+				title:'领取成功!',
+				icon: 'success',
+				mask: true
 			})
 			this.setData({
 				jfText: '已领取',
@@ -101,8 +106,8 @@ Page({
 			})
 		  },res=>{
 			  wx.showToast({
-				  title:'领取失败!',
-				  icon: 'none',
+					title:'领取失败!',
+					icon: 'none',
 					mask: true
 			  })
 		  })
@@ -110,21 +115,21 @@ Page({
 		  console.log('返现')
 		  wx.showLoading({
 		  	title: "领取中",
-					mask: true
+				mask: true
 		  })
 		  pullMoneyIntegral(this.data.orderId, 2).then(res=>{
 			if(!res){
 				wx.showToast({
-				  title:'领取失败!',
-				  icon: 'none',
+					title:'领取失败!',
+					icon: 'none',
 					mask: true
 				})
 				return
 			}
 			wx.showToast({
-			  title:'领取成功!',
-			  icon: 'success',
-			  mask: true
+				title:'领取成功!',
+				icon: 'success',
+				mask: true
 			})
 			this.setData({
 				fxText: '已领取',
@@ -132,8 +137,8 @@ Page({
 			})
 		  },res=>{
 			  wx.showToast({
-				  title:'领取失败!',
-				  icon: 'none',
+					title:'领取失败!',
+					icon: 'none',
 					mask: true
 			  })
 		  })

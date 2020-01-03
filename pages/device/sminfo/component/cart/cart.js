@@ -1,5 +1,5 @@
 // pages/device/sminfo/component/cart/cart.js
-const app = getApp()
+const { app , $ } = require('../../../../../utils/public.js')
 
 Component({
   /**
@@ -83,13 +83,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-	imagesOnload(e){
-		this.data.imgScaleCC = this.data.imgScaleCC || {}
-		this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * e.currentTarget.dataset.height) + 'rpx'
-		this.setData({
-			imgScaleCC: this.data.imgScaleCC
-		})
-	},
+	imagesOnload: $.ZOOM_IMG_FNC(),
 	clearCartData () { // 清空购物车事件
 		app.CartStockApi.subAll()
 		this.triggerEvent('customTouchcart', { click: 'clearCompCart' })

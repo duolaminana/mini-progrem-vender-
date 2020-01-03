@@ -1,7 +1,5 @@
 /**index.wxss**/
 @import '/template/yqnav/index.wxss';
-@import '/template/freebtn/index.wxss';
-@import '/template/showNotLocation/index.wxss';
 /* 轮播图 */
 page{
   background-color: white;
@@ -13,7 +11,17 @@ page{
 }
 .banner image{
   width: 100%;
+  position: relative;
 }
+/* .banner image.befroe:before{
+  width: 100%;
+  height: 100%;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #e3e3e3;
+} */
 .banner swiper{
   height: calc(118rpx*var(--bs));
 }
@@ -80,7 +88,9 @@ page{
   position: absolute;
   right: 0;
   height: 33rpx;
-  line-height: 31rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-left: 10rpx;
   padding-right: 10rpx;
   border-radius: 2rpx;
@@ -88,12 +98,12 @@ page{
   font-weight: var(--w7);
   color: var(--wc);
 }
-.icus-goods-list .susp.bcolor1{
+/* .icus-goods-list .susp.bcolor1{
   background-color: #D73F3C;
 }
 .icus-goods-list .susp.bcolor2{
   background-color: var(--zc);
-}
+} */
 
 /* 热销 */
 .hot-goods swiper{
@@ -102,13 +112,14 @@ page{
 .hot-goods .pic{
   width: 144rpx;
   height: 144rpx;
-  padding: 17rpx 0;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  padding: 17rpx 0;
 }
 .hot-goods .pic image{
+  width: 100%;
   height: 100%;
 }
 .hot-goods .name{
@@ -118,6 +129,8 @@ page{
   color: var(--zc3);
   white-space: nowrap; /*不换行*/
   overflow: hidden;
+  text-overflow:ellipsis;
+  width: 100%;
 }
 .hot-goods .price{
   padding: 0 10rpx;
@@ -160,29 +173,26 @@ page{
 .recommend-goods .pic{
   width: 88rpx;
   height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-bottom: 16rpx;
   margin: 0 auto;
-  text-align: center;
 }
 .recommend-goods .pic image{
-  height: 88rpx;
+  width: 100%;
+  height: 100%;
 }
 .recommend-goods .title{
   font-size: 24rpx;
   font-weight: var(--w5);
-  padding: 10rpx;
   position: absolute;
-  top: 0;
-  left: 0;
-}
-.recommend-goods .title.fcolor1{
-  color: var(--zc);
-}
-.recommend-goods .title.fcolor2{
-  color: var(--zcl);
-}
-.recommend-goods .title.fcolor3{
-  color: var(--zch);
+  top: 13rpx;
+  left: 13rpx;
+  height: 24rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 .recommend-goods .bot{
   padding: 0 10rpx;
@@ -207,4 +217,8 @@ page{
   font-weight: var(--w5);
   color: var(--zc);
   text-align: right;
+}
+.recommend-goods .cus-addr{
+	width: 16rpx;
+	height: 20rpx;
 }

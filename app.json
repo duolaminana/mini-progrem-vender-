@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/user/verify/facial/index",
     "pages/index/index",
     "pages/device/sminfo/index",
     "pages/pay/finish/index",
     "pages/user/verify/index",
-    "pages/user/verify/facial/index",
     "pages/signIn/author/author",
     "pages/pay/pay",
     "pages/signIn/signIn",
@@ -25,12 +25,13 @@
     "pages/index/yqfriend/index"
   ],
   "window": {
-    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "环阳通信息技术",
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom",
-    "backgroundColor": "#F8F8F8"
+    "enablePullDownRefresh": false,
+    "backgroundTextStyle": "dark",
+    "backgroundColor":"#eee"
   },
   "tabBar": {
     "color": "#999999",

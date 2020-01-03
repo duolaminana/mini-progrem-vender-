@@ -9,16 +9,23 @@
         <!-- 设备 -->
         <view class="sbinfo cus-lan">
             <view class="left">
-                <image class="pic" src="{{thisDeviceDetails.machineImageAddress}}"/>
+                <view class="pic">
+					<image 
+					src="{{thisDeviceDetails.machineImageAddress}}"
+					bindload="imagesOnload"
+					data-cssimgkey="cssimgkey" 
+					style="{{wxsCom.objToString(cssimgkey[0])}}"
+					/>
+				</view>
             </view>
             <view class="right">
                 <view class="title">
                     <text class="no">{{thisDeviceDetails.machineCode}}</text>
                     <text class="name">{{thisDeviceDetails.machineName}}</text>
-                    <text class="dec">{{wxsCom.toFixed(thisDeviceDetails.distance)}}m</text>
+                    <text class="dec">{{wxsCom.distRuler(thisDeviceDetails.distance)}}</text>
                 </view>
                 <view class="type">商品种类:{{thisDeviceDetails.articleCategory}}种</view>
-                <view class="sign">{{item.bought==1?'购买过的':' '}}</view>
+                <view class="sign">{{item.bought==1?'购买过的  ':' '}} 支持线上购买</view>
                 <view class="addr">
                     <image class="cus-addr" src="../../../static/img/icon/my_address.png"/>
                     <text class="text">{{thisDeviceDetails.positionAddress}}</text>
@@ -35,19 +42,30 @@
     <!-- 商品展示 -->
     <view class="goodslist cus-lan">
         <block wx:if="{{thisGoods.length>0}}">
-            <view class="li" wx:for="{{thisGoods[barCurrent].products}}" wx:key="*this">
-                <view class="name">{{item.productName}}</view>
-                <view class="pic">
-                    <image src="{{item.imageAddress}}" />
-                </view>
+        <block wx:for="{{thisGoods}}" wx:key="item"> 
+        <block wx:if="{{wxsCom.showBarCurrent(barCurrent,index)}}">
+            <view class="li" wx:for="{{item.products}}" wx:key="option" wx:for-item="option" wx:for-index="idx">
+                <view class="name">{{option.productName}}</view>
+                <view class="pictitle">
+					<view class="pic">
+					    <image 
+						src="{{option.imageAddress}}"
+						bindload="imagesOnload"
+						data-cssimgidx="{{idx}}" 
+						style="{{wxsCom.objToString(ZOOM_IMG[idx])}}"
+						/>
+					</view>
+				</view>
                 <view class="bot">
                     <text class="price">
-                        <text class="a">{{item.activityPrice?item.activityPrice:item.actualPrice}}</text>
+                        <text class="a">{{option.activityPrice?option.activityPrice:option.actualPrice}}</text>
                         <text class="b">元</text>
                     </text>
-                    <text class="number">{{item.stock}}{{item.dictUnitName}}</text>
+                    <text class="number">{{option.stock}}{{option.dictUnitName}}</text>
                 </view>
             </view>
+        </block>
+        </block>
         </block>
 		<COM-emptyData
 		show="{{thisGoods.length <= 0}}"
@@ -58,4 +76,7 @@
     </view>
 
 </view>
-<COM-winButton text="去这里" icon="/static/img/icon/go_addr.png" type="tap" bind:touch="goThatAddress"></COM-winButton>
+<view class="pagebtns">
+	<COM-winButton class="left" text="去这里" stylec="absolute address" icon="/static/img/icon/go_addr.png" type="tap" bind:touch="goThatAddress"></COM-winButton>
+	<COM-winButton class="right" text="去购买" stylec="absolute pay" type="tap" bind:touch="goSminfo"></COM-winButton>
+</view>

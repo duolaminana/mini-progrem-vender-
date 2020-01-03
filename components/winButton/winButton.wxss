@@ -1,0 +1,43 @@
+/* components/winButton/winButton.wxss */
+.com-winButton{
+    width: 100%;
+    height:108rpx;
+}
+.com-winButton .com-winButton-con{
+    display: flex;
+    align-items:center; /*垂直居中*/
+    justify-content: center; /*水平居中*/
+    width: 92%;
+	margin: 0 auto;
+    height:88rpx;
+    border-radius:8rpx;
+}
+.com-winButton .com-winButton-con.address{
+    background-color:#333333;
+}
+.com-winButton .com-winButton-con.pay{
+    background-color:#EE7700;
+}
+.com-winButton .com-winButton-con.fixed{
+    position: fixed;
+    bottom: 20rpx;
+    left: 32rpx;
+}
+.com-winButton .com-winButton-con.absolute{
+    position: absolute;
+    bottom: 20rpx;
+    left: 32rpx;
+}
+.com-winButton .com-winButton-con .com-winButton-text{
+    display: inline-block;
+    font-size: 30rpx;
+    font-weight: Medium;
+    color: var(--wc);
+    line-height: 0;
+}
+.com-winButton .com-winButton-con .com-winButton-icon{
+    display: inline-block;
+    width: 30rpx;
+    padding-right: 16rpx;
+    margin-top: .5rpx;
+}

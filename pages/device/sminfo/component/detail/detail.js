@@ -1,5 +1,5 @@
 // pages/device/sminfo/component/detail/detail.js
-const app = getApp()
+const { app , $ } = require('../../../../../utils/public.js')
 
 Component({
   /**
@@ -67,13 +67,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-	imagesOnload(e){
-		this.data.imgScaleCC = this.data.imgScaleCC || {}
-		this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * e.currentTarget.dataset.height) + 'rpx'
-		this.setData({
-			imgScaleCC: this.data.imgScaleCC
-		})
-	},
+	imagesOnload: $.ZOOM_IMG_FNC(),
 	hideCartAir () { // 加入购物车按钮是否隐藏
 		if(this.data.parentData.categoryId == 182)
 		this.setData({

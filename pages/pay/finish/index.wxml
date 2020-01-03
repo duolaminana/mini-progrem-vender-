@@ -37,5 +37,6 @@
         </view>
     </view>
 
+	<Get-cargo show="{{getCargoShow}}"></Get-cargo>
     <template is="tpl-freebtn" data="{{...fbData}}"></template>
 </view>

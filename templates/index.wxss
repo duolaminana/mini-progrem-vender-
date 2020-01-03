@@ -1,0 +1,41 @@
+.tpl-showNotdata{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    height: 100rpx;
+}
+.tpl-showNotdata .tpl-showNotdata-con{
+    font-weight: 400;
+    font-size: 24rpx;
+    color: var(--zc9);
+    width: 270rpx;
+    text-align: center;
+}
+
+
+.tpl-showNotLocation{
+    --img-top: 35rpx;
+    width: 100%;
+    height: 256rpx;
+    background-color: #f5f5f5;
+    padding-top: calc(var(--paddingTop,0) - var(--img-top));
+}
+.tpl-showNotLocation-pic{
+    width: 118rpx;
+    /* height: 128rpx; */
+    margin: 0 auto;
+    padding: var(--img-top) 0 27rpx;
+}
+.tpl-showNotLocation-pic image{
+    width: 118rpx;
+    height: 128rpx;
+}
+.tpl-showNotLocation-text{
+    text-align: center;
+    font-weight: var(--w4);
+    font-size: 24rpx;
+    color: var(--zc9);
+    line-height: 24rpx;
+}

@@ -77,7 +77,7 @@ Page({
 			// 通过eventChannel向被打开页面传送数据
 			res.eventChannel.emit('acceptDataFromOpenerPage', this.data.ajaxUserInfo)
 		}
-	})  
+	})
   },
 
   /**

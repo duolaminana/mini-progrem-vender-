@@ -1,14 +1,20 @@
 <!--pages/index/hotsell/index.wxml-->
 <import src="/template/head/head.wxml"></import>
-<import src="/template/showNotdata/common.wxml"></import>
 <wxs src="../../../wxs/common.wxs" module="wxsCom" />
 
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
 
     <view class="thisgoods cus-lan">
-        <view class="pic">
-            <image src="/static/img/goods.png"/>
+        <view class="left">
+            <view class="pic">
+				<image
+				src="{{thisGoodsData.productImageAddress}}" 
+				bindload="imagesOnload"
+				data-cssimgkey="cssimgkey" 
+				style="{{wxsCom.objToString(cssimgkey[0])}}"
+				/>
+			</view>
         </view>
         <view class="info">
             <view class="title">
@@ -38,13 +44,20 @@
 			data-code="{{item.machineCode}}"
 			>
                 <view class="left">
-                    <image class="pic" src="{{item.imageAddress}}"/>
+                    <view  class="pic">
+						<image
+						src="{{item.imageAddress}}"
+						bindload="imagesOnload"
+						data-cssimgidx="{{index}}" 
+						style="{{wxsCom.objToString(ZOOM_IMG[index])}}"
+						/>
+					</view>
                 </view>
                 <view class="right">
                     <view class="title">
                         <text class="no">{{item.machineCode}}</text>
                         <text class="name">{{item.machineName}}</text>
-                        <text class="dec">{{wxsCom.toFixed(item.distance)}}km</text>
+                        <text class="dec">{{wxsCom.distRuler(item.distance)}}</text>
                         <view class="price">
                             <view class="ral">
                                 <text class="ral-b">￥</text>
@@ -53,8 +66,8 @@
                             <text class="fake" wx:if="{{item.activityPrice}}">￥{{item.sellPrice}}</text>
                         </view>
                     </view>
-                    <view class="type">商品种类: {{thisDeviceDetails.articleCategory}}种</view>
-                    <view class="sign">{{item.isBuy==1?'购买过的':' '}}</view>
+                    <view class="type">商品种类: {{item.catalogNum}}种</view>
+                    <view class="sign">{{item.isBuy==1?'购买过的  ':' '}} 支持线上购买</view>
                     <view class="addr">
                         <image class="cus-addr" src="/static/img/icon/address.png"/>
                         <text class="text">{{item.positionAddress}}</text>

@@ -1,0 +1,13 @@
+<!--pages/pay/finish/components/getCargo.wxml-->
+<view class="getCargo" 
+animation="{{animation}}" hidden="{{!show}}"
+>
+	<view class="main">
+		<view class="title">出货提示</view>
+		<view class="con">
+			<view class="miss {{missClass}}">{{miss}}</view>
+			<text>{{text}}</text>
+		</view>
+		<view class="btn" bind:tap="check">确定</view>
+	</view>
+</view>

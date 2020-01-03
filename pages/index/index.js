@@ -1,5 +1,6 @@
 import { getGoodsHotData, queryNearbyDevice } from '../../api/api.js';
-import { loopLocation } from '../../utils/Location.js';
+import { loopLocation } from '../../utils/location.js';
+import { PullDownRefresh } from '../../utils/PullDownRefresh.js';
 const {app,$,cusAppData} = require('../../utils/public.js')
 
 Page({
@@ -43,19 +44,13 @@ Page({
 	})
   },
 
-  imagesOnload(e){
-		this.data.imgScaleCC = this.data.imgScaleCC || {}
-		this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * 100) + '%'
-		this.setData({
-			imgScaleCC: this.data.imgScaleCC
-		})
-	},
+  imagesOnload: $.ZOOM_IMG_FNC(),
 	
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	  
+	console.log('index.html,onLoad')
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -105,30 +100,28 @@ Page({
 
   goToDeviceInfo(e){
 	let code = e.currentTarget.dataset.code
-	for(let item of this.data.recommendGoodsArr){
-		if(item.machineCode == code)
-		wx.navigateTo({
-			url: `/pages/device/info/index`,
-			success: res => {
-				// 通过eventChannel向被打开页面传送数据
-				res.eventChannel.emit('acceptDataFromOpenerPage', item)
-			}
-		})
-	}
+	let data = this.data.recommendGoodsArr
+	let old = 'machineCode'
+	wx.navigateTo({
+		url: `/pages/device/info/index`,
+		success: res => {
+			// 通过eventChannel向被打开页面传送数据
+			res.eventChannel.emit('acceptDataFromOpenerPage', $.getArrItem(data, old, code))
+		}
+	})
   },
 
   goToHotDeviceInfo(e){
 	let code = e.currentTarget.dataset.code
-	for(let item of this.data.hotGoodsArr){
-		if(item.machineCode == code)
-		wx.navigateTo({
-			url: `/pages/index/hotsell/index`,
-			success: res => {
-				// 通过eventChannel向被打开页面传送数据
-				res.eventChannel.emit('acceptDataFromOpenerPage', item)
-			}
-		})
-	}
+	let data = this.data.hotGoodsArr
+	let old = 'machineCode'
+	wx.navigateTo({
+		url: `/pages/index/hotsell/index`,
+		success: res => {
+			// 通过eventChannel向被打开页面传送数据
+			res.eventChannel.emit('acceptDataFromOpenerPage', $.getArrItem(data, old, code))
+		}
+	})
   },
 
   /**
@@ -147,7 +140,19 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+	// wx.startPullDownRefresh()
+	// PullDownRefresh().then(()=>{
+	// 	console.log('刷新成功')
+	// 	this.onLoad()
+	// 	wx.stopPullDownRefresh()
+	// }).catch(()=>{
+	// 	wx.showToast({
+	// 		title: '刷新失败',
+	// 		icon: 'none'
+	// 	})
+	// 	wx.stopPullDownRefresh()
+	// })
+	// wx.stopPullDownRefresh()
   },
 
   /**

@@ -1,0 +1,5 @@
+<!--components/emptyData/emptyData.wxml-->
+<wxs src="../../wxs/common.wxs" module="wxsCom" />
+<view wx:if="{{show}}" class="com-emptyData" style="height:{{height}}rpx">
+	<view class="com-emptyData-con" style="font-size: {{size}}rpx">{{text}}</view>
+</view>

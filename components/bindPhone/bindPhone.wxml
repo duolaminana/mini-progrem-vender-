@@ -1,0 +1,30 @@
+<!--components/bindPhone/bindPhone.wxml-->
+<view hidden="{{show}}" class="com-initButton cus-layer" animation="{{animationCusLayer}}">
+	<view class="content">
+		<!-- 已经同步过的微信用户 -->
+		<block>
+			<button class="shortcut" type="primary"  open-type="getPhoneNumber" bindgetphonenumber="bindPhoneNumber">
+				<image src="/static/img/icon/wxicon.png"></image>
+				<text>微信用户快速登录</text>
+			</button>
+			<button class="nav-warp">
+				<view class="gosignIn" bind:tap="gotoSignIn">输入手机号码登录/注册</view>
+			</button>
+		</block>
+		<!-- 还未同步过的微信用户 -->
+		<!-- <block wx:else>
+			<button class="shortcut" open-type="getUserInfo" bindgetuserinfo="getUserInfo" >
+				<button type="primary"open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+					<image src="/static/img/icon/wxicon.png"></image>
+					<text>微信用户快速登录</text>
+				</button>
+			</button>
+			<button class="nav-warp" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+				<navigator class="gosignIn" url="/pages/signIn/signIn">输入手机号码登录/注册</navigator>
+			</button>
+		</block> -->
+		<image class="close" bind:tap="hideBlock" src="/static/img/icon/close_btn.png"></image>
+	</view>
+</view>
+<COM-signIn show="{{hiddenSignIn}}" bind:touch="hideBlock"></COM-signIn>
+<!-- <view class="errmsgajax" wx:if="{{isWelcome}}"></view> -->

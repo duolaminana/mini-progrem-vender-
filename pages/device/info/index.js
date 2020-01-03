@@ -25,9 +25,13 @@ Page({
     },
     barCurrent: 0,
 	thisDeviceDetails:{},
-	thisGoods:[]
+	thisGoods:[{
+		categoryName: '全部'
+	}]
   },
 
+	imagesOnload: $.ZOOM_IMG_FNC(),
+	
   barAir (e) { // 导航事件
     this.setData({
       barCurrent: e.currentTarget.dataset.type
@@ -51,9 +55,17 @@ Page({
     //   }
     // })
     wx.openLocation({
-        latitude:this.data.thisDeviceDetails.latitude,
-        longitude:this.data.thisDeviceDetails.longitude
+        latitude:this.data.thisDeviceDetails.laytitude,
+        longitude:this.data.thisDeviceDetails.longitude,
+		name:'',
+		address:this.data.thisDeviceDetails.positionAddress
     })
+  },
+  
+  goSminfo () {
+	wx.navigateTo({
+		url: `/pages/device/sminfo/index?machineCode=${this.data.thisDeviceDetails.machineCode}&channelId=${this.data.thisDeviceDetails.channelId}`
+	})
   },
 
   /**
@@ -73,6 +85,7 @@ Page({
 	  console.log('index.wxml',data)
 	  that.execThis(data)
 	})
+	// this.setData({thisGoods:this.data.thisGoods.concat([{"categorylId":223,"categoryName":"香烟","categoryId":174,"products":[{"buyPrice":15.00,"categorylId":223,"categorylName":"香烟","productCode":"6901028224277","actualPrice":20.00,"dictUnitName":"包","imageAddress":"http://vendor-platform-dev.oss-cn-shenzhen.aliyuncs.com/2019111411100032c8321506b39b99276da8831b23dad2c.png","sort":1,"stock":5,"categoryId":174,"productName":"金圣(智圣出山)"},{"buyPrice":15.00,"categorylId":223,"categorylName":"香烟","productCode":"6901028075763","actualPrice":20.00,"dictUnitName":"包","imageAddress":"http://vendor-platform-dev.oss-cn-shenzhen.aliyuncs.com/201911130938053b47943e3f80df63ecd4ee222a282db0f.png","sort":2,"stock":4,"categoryId":174,"productName":"中华(硬)"}]}])})
   },
   
   execThis(data){
@@ -81,7 +94,9 @@ Page({
 	  })
 	  getDeviceGoods(data.machineCode).then(res=>{
 		  console.log(res)
-		  this.setData({thisGoods:res.result})
+		  this.setData({
+			  thisGoods: this.data.thisGoods.concat(res.result)
+		  })
 	  })
   },
 

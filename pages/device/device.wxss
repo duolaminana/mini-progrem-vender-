@@ -45,6 +45,14 @@
     width: 60rpx;
     height: 60rpx;
 }
+.search .iconjt{
+	width: 80rpx;
+	height: 60rpx;
+	font-size: 30rpx;
+	color: white;
+	padding: 0 20rpx;
+	margin-right: 15rpx;
+}
 
 
 .bar{
@@ -104,6 +112,13 @@
 .ulgoods .pic{
     width: 88rpx;
     height: 88rpx;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.ulgoods .pic image{
+	height: 100%;
+	width: 100%;
 }
 .ulgoods .left{
     width: 124rpx;

@@ -45,16 +45,17 @@ function regMax(str){
 
 function toFixed(val, dig){
 	/**
-	 * 保留两位小数
+	 * 默认保留两位小数
 	 * 超过位数的直接截取，采用四舍五入（若不采用四舍五入，截取2位，则把Math.round改为Math.floor）
 	 * @param { string || number }  val 传入的数值
 	 * @param { undefiend || number }  dig 要保留多少位小数
+	 * @return {String} s_x
 	 * */
-	dig = dig ? (dig * 100) : 100;
+	dig = dig ? Math.pow(10,dig) : 100;
 	if(!val && val != 0) return '--';
 	var f_x = parseFloat(val);
 	if(isNaN(f_x)){
-		return 0;
+		return '0';
 	}
 	var f_x = Math.floor(val*dig)/dig;
 	var s_x = f_x.toString();
@@ -84,7 +85,7 @@ module.exports = {
         var keys = objectKeys(obj)
         var str = ''
         keys.forEach(function(item,idx,arr){
-            str += (regMax(item) +':'+ obj[item] + ';')
+            str += (regMax(item) + ':' + obj[item] + ';')
         })
         return str
     },
@@ -96,10 +97,35 @@ module.exports = {
 		return toFixed(val, dig).split(".")[1]
 	},
 	plusZero: function(num){
-		return num.toString().length!=1?num:'0'+num.toString()
+		return num.toString().length != 1 ? num : '0' + num.toString()
 	},
-	toChinses: function(val){
-		switch (typeof val == 'string' ? val : val.toString())
+	showBarCurrent: function (a, b){
+		/**
+		 * smInfo.wxml页面goodsList展示的切换选择
+		 * info.wxml...
+		 * */
+		if(a == 0){
+			if(b == 0){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			if(a == b){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	},
+	toChinses: function(value){ // 编号转文字
+		if(typeof value !== 'string' && typeof value !== 'number'){
+			return 'HYT'
+		}
+		if(typeof value == 'number'){
+			value = value.toString()
+		}
+		switch (value)
 		{
 			case '157':
 				return '药品'
@@ -116,5 +142,71 @@ module.exports = {
 			case '':
 				return '全部'
 		}
+	},
+	toColor1: function(value){ // 字体颜色
+		if(typeof value !== 'string' && typeof value !== 'number'){
+			return '#333333'
+		}
+		if(typeof value == 'number'){
+			value = value.toString()
+		}
+		switch (value)
+		{
+			case '157':
+				return '#4588EC'
+			case '174':
+				return '#EE7700'
+			case '175':
+				return '#D73F3C'
+			case '182':
+				return '#2D8CF0'
+			case '183':
+				return '#FFB6C1'
+			case '0':
+				return '#F26033'
+			case '':
+				return '#333333'
+		}
+	},
+	toColor2: function(value){ // 背景颜色
+		if(typeof value !== 'string' && typeof value !== 'number'){
+			return '#ffffff'
+		}
+		if(typeof value == 'number'){
+			value = value.toString()
+		}
+		switch (value)
+		{
+			case '157':
+				return '#E7F2F8'
+			case '174':
+				return '#FFEACF'
+			case '175':
+				return '#FFE6E6'
+			case '182':
+				return '#DCFFED'
+			case '183':
+				return '#FAE2FF'
+			case '0':
+				return '#FFC4B8'
+			case '':
+				return '#ffffff'
+		}
+	},
+	distRuler: function(value){
+		// value m
+		// m / km
+		var ruler = 'm'
+		if(typeof value !== 'string' && typeof value !== 'number'){
+			return value
+		}
+		if(typeof value == 'string'){
+			value = parseFloat(string)
+		}
+		if(value >= 1000){
+			value = value / 1000
+			ruler = 'km'
+		}
+		return toFixed(value, 2) + ruler
 	}
 }

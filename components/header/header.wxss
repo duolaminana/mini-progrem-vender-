@@ -1,0 +1,62 @@
+/* components/header/header.wxss */
+/* 头部 */
+.com-header{
+    width: 100%;
+    height: var(--tpl-header_height);
+	--body_height: 100rpx;
+}
+.body{
+    position: fixed;
+	top: 0;
+    left: 0;
+    z-index: var(--zindex_hd);
+    width: 100%;
+    height: var(--body_height);
+    padding-top: calc(var(--tpl-header_height) - var(--body_height));
+    background-color: white;
+    display: flex;
+    align-items:center; /*垂直居中*/
+}
+.body .left,.body .content,.body .right{
+    flex: 1;
+    height: var(--body_height);
+    line-height: var(--body_height);
+}
+.body .content{
+    font-size: 30rpx;
+    font-weight: var(--w7);
+    color: var(--bc);
+    text-align: center;
+}
+/* 头部返回按钮样式 .goback .goback-color-black*/
+.body .goback,.body .goback-black{
+    position: relative;
+}
+.body .goback::before{ /*border-color*/
+    --bc: white;
+}
+.body .goback-black::before{ /*border-color*/
+    --bc: black;
+}
+.body .goback::before,.goback-black::before{
+    content: '';
+    width: 23rpx;
+    height: 23rpx;
+    border: 4rpx solid transparent;
+    border-left-color: var(--bc);
+    border-top-color: var(--bc);
+    transform: rotate(-45deg);
+    border-radius: 4rpx;
+    position: absolute;
+    top: calc(50% - 12rpx);
+    left: 45rpx;
+}
+.body .goback::after,.goback-black::after{
+    content: attr(data-text);
+    position: absolute;
+    left: 80rpx;
+	font-size: 30rpx;
+	/* font-weight: var(--w7); */
+	color: var(--bc);
+	text-align: center;
+}

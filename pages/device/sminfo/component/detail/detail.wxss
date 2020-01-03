@@ -58,6 +58,10 @@
     align-items: center;
 	position: relative;
 }
+.com-goodsdetail .com-goodsdetail-main .top .leftt{
+    height: 200rpx;
+    width: 200rpx;
+}
 .com-goodsdetail .com-goodsdetail-main .top .pic{
     display: flex;
     align-items: center;
@@ -66,13 +70,13 @@
     width: 200rpx;
 }
 .com-goodsdetail .com-goodsdetail-main .top .pic image{
-    height: 200rpx;
-	width: calc(var(--pscale) * 200rpx);
+    height: 100%;
+	width: 100%;
 }
 .com-goodsdetail .info{
     width: 100%;
     height: 200rpx;
-    padding-left: 10rpx;
+    padding-left: 15rpx;
 }
 .com-goodsdetail .info .name{
     font-weight: Medium;

@@ -38,13 +38,7 @@ Page({
 	dummy: false
   },
   
-  imagesOnload(e){
-  	this.data.imgScaleCC = this.data.imgScaleCC || {}
-  	this.data.imgScaleCC[e.currentTarget.dataset.scale] = (e.detail.width / e.detail.height * 100) + '%'
-  	this.setData({
-  		imgScaleCC: this.data.imgScaleCC
-  	})
-  },
+  imagesOnload: $.ZOOM_IMG_FNC(),
 
   /**
    * 生命周期函数--监听页面加载
@@ -70,7 +64,7 @@ Page({
       memberId:app.globalData.wxUserInfo.id
     }).then((res)=>{ // 返现数据请求
       this.setData({
-        rebate: res.remainingProfit
+        rebate: (res.remainingProfit < 0) || (!res.remainingProfit) ? 0 : res.remainingProfit
       })
       this.clickRebate()
     })
@@ -108,7 +102,7 @@ Page({
       "price": this.data.dummy ? app.CartStockApi_Dummy.totalActivityPrice : app.CartStockApi.totalActivityPrice,
       "productNums": this.data.totalArticle,
       "realPrice": this.data.totalActivityPrice,
-      "preferentialPrice": this.data.rebate
+      "preferentialPrice": this.data.rebateIcon ? this.data.rebate : null
     }).then((res) => {
       console.log('createPayByWxMini',res)
       wx.requestPayment({
@@ -126,16 +120,9 @@ Page({
             app.CartStockApi.sub({productCode:item.productCode})
           }
           app.globalData.orderNO.push(res.orderId)
-          wx.showModal({
-            title: '系统提示',
-            content: '请等待出货...',
-            showCancel: false,
-            success() {
-              wx.navigateTo({
-                url: `/pages/pay/finish/index?orderId=${res.orderId}`
-              })
-            }
-          })
+		  wx.navigateTo({
+		    url: `/pages/pay/finish/index?orderId=${res.orderId}`
+		  })
         },
         fail (res) {
           wx.navigateTo({

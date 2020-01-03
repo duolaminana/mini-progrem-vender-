@@ -1,4 +1,4 @@
-//app.js // version 9.2.7
+//app.js // version 9.3.1
 const host = require('./utils/config/host')
 const request = require('./utils/request/request')
 const CartStockApi = require('./lib/cartstock/api')
@@ -47,8 +47,10 @@ App({
   },
   onShow(options) {
 	// Do something when show.
+	console.log('------------------\n app.js=>noShow \n------------------')
   },
   onHide() {
+	console.log('------------------\n app.js=>onHide \n------------------')
     // Do something when hide.
   },
   onError(msg) {
