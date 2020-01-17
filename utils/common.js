@@ -16,19 +16,27 @@ module.exports = {
 		}
 		return obj
 	},
-	getArrItem: function(arrData, oldVal, newVal){
+	getArrItem: function(arrData, key, val){
 		// 查找返回单个
 		for(let item of arrData){
-			if(item[oldVal] == newVal)
+			if(item[key] == val)
 			return item
 		}
 		return {}
 	},
-	getArrItems: function(arrData, oldVal, newVal){
+	getArrItemByIdx: function(arrData, idx){
+		// 查找返回单个
+		for(let [index, item] of arrData.entries()){
+			if(index == idx)
+			return item
+		}
+		return {}
+	},
+	getArrItems: function(arrData, key, val){
 		// 查找返回多个
 		let arr = []
 		for(let item of arrData){
-			if(item[oldVal] == newVal)
+			if(item[key] == val)
 			return arr.push(item)
 		}
 		return arr

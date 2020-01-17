@@ -1,0 +1,125 @@
+/* pages/user/rebate/index.wxss */
+.container,.containerX{
+    padding-left: 0;
+    padding-right: 0;
+}
+.ib-couplet{
+    width: calc(100% - 65rpx);
+    margin: 20rpx auto;
+    padding-top: 24rpx;
+    padding-bottom: 24rpx;
+    background-color: var(--wc);
+    border-radius: 8rpx;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.ib-couplet .pic{
+    width: 100rpx;
+    height: 100rpx;
+    margin-left: 24rpx;
+    margin-right: 21rpx;
+}
+.ib-couplet .pic image{
+    width: 100%;
+    height: 100%;
+}
+.ib-couplet .info .num{
+    font-weight: bold;
+    font-size: 48rpx;
+    color: var(--zc3);
+}
+.ib-couplet .info .num .jl{
+    font-weight: Regular;
+    font-size: 28rpx;
+    color: var(--zc3);
+}
+.ib-couplet .info .text{
+    font-weight: var(--w5);
+    font-size: 24rpx;
+    color: var(--zc3);
+}
+.ib-couplet .tonav{
+    font-weight: var(--w5);
+    font-size: 24rpx;
+    color: var(--zc);
+    position: absolute;
+    right: 41rpx;
+}
+
+
+
+.ib-info{
+    background-color: white;
+    padding-left: 32rpx;
+    box-sizing: border-box;
+    width: 100%;
+}
+.ib-info .li{
+    border-bottom: 1rpx solid #D4D4D4;
+    height: 90rpx;
+    line-height: 90rpx;
+    padding-right: 32rpx;
+    position: relative;
+}
+.ib-info .li:last-of-type{
+    border-bottom: none;
+}
+.ib-info .li .icon{
+    float: left;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.ib-info .li .icon image{
+    width: 46rpx;
+    height: 46rpx;
+}
+.ib-info .handle{
+    float: left;
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc3);
+    width: 180rpx;
+    text-indent: 40rpx;
+    padding-right: 20rpx;
+    box-sizing: border-box;
+}
+.ib-info .fx-handle{
+    float: left;
+    font-weight: var(--w5);
+    font-size: 30rpx;
+    color: var(--zc3);
+    text-indent: 40rpx;
+}
+.ib-info .time{
+    float: left;
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc9);
+}
+.ib-info .fx-time{
+    float: right;
+    margin-right: 105rpx;
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc9);
+}
+.ib-info .note{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: var(--zc3);
+    position: absolute;
+    right: 32rpx;
+}
+.ib-info .noteK{
+    font-family: var(--fa);
+    font-weight: var(--w4);
+    font-size: 30rpx;
+    color: #D73F3C;
+    position: absolute;
+    right: 32rpx;
+}

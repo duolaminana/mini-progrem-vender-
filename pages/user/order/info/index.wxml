@@ -1,13 +1,10 @@
 <!--pages/user/order/info/index.wxml-->
 <import src="/template/head/head.wxml"></import>
-<import src="/pages/common/sbinfo/index.wxml" />
-<import src="/pages/common/goodsinfo/index.wxml" />
-<import src="/pages/common/orderinfo/index.wxml" />
-<import src="/template/showNotdata/common.wxml"></import>
+<wxs src="../../../../wxs/common.wxs" module="wxsCom" />
 
 <view class="container cus-lan" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
-    <block wx:if="{{true}}">
+    <block wx:if="{{thisList.orderNo}}">
         <view class="sbinfo">
             <view class="title">
                 <view class="pic">
@@ -16,7 +13,16 @@
                 <view class="text">设备信息</view>
             </view>
             <view class="con-warp">
-                <template is="sb-info"></template>
+				<view class="tpl_sb_info">
+				    <view class="pic">
+				        <image src="{{thisList.imageAddress}}" />
+				    </view>
+				    <view class="info">
+				        <view class="no cus-sl400">{{thisList.machineCode}}</view>
+				        <view class="addr cus-sl400">{{thisList.positionAddress}}</view>
+				        <image class="icon" src="/static/img/icon/my_address.png" />
+				    </view>
+				</view>
             </view>
         </view>
         <view class="goodsinfo">
@@ -27,7 +33,33 @@
                 <view class="text">商品信息</view>
             </view>
             <view class="con-warp">
-                <template is="goods-info"></template>
+				<view class="tpl_goods_info">
+				    <view class="li" wx:for="{{thisList.commodityInformation}}" wx:key="option" wx:for-item="option" wx:for-index="idx">
+				        <view class="goods-pic">
+				            <image src="{{option.imageAddress}}" />
+				        </view>
+				        <view class="info">
+				            <view class="top">
+				                <view class="name cus-sl250">{{option.productName}}</view>
+				                <view class="price">
+				                    <text class="a" wx:if="{{option.activityPrice}}">¥{{option.actualPrice}}</text>
+				                    <text class="b">¥</text>
+				                    <text class="c">{{option.activityPrice?wxsCom.toFrontFixed(option.activityPrice):wxsCom.toFrontFixed(option.actualPrice)}}.</text>
+				                    <text class="d">{{option.activityPrice?wxsCom.toBackFixed(option.activityPrice):wxsCom.toBackFixed(option.actualPrice)}}</text>
+				                </view>
+				            </view>
+				            <view class="num">×{{option.productNumber}}</view>
+				        </view>
+				    </view>
+				</view>
+				<view class="tpl_goods_info_total">
+				    <text class="f">使用返现 ¥{{thisList.couponAmount}}</text>
+				    <text class="a">已优惠 ¥{{discounts}}</text>
+				    <text class="b">合计</text>
+				    <text class="e">¥</text>
+				    <text class="c">{{wxsCom.toFrontFixed(thisList.payAmount)}}.</text>
+				    <text class="d">{{wxsCom.toBackFixed(thisList.payAmount)}}</text>
+				</view>
             </view>
         </view>
         <view class="orderinfo">
@@ -38,9 +70,27 @@
                 <view class="text">订单信息</view>
             </view>
             <view class="con-warp">
-                <template is="order-info"></template>
+				<view class="tpl_order_info">
+				    <view class="li">
+				        <text class="ll">订单号码</text>
+				        <text class="rr">{{thisList.orderNo}}</text>
+				    </view>
+				    <view class="li">
+				        <text class="ll">下单时间</text>
+				        <text class="rr">{{thisList.createDate}}</text>
+				    </view>
+				    <view class="li">
+				        <text class="ll">支付方式</text>
+				        <text class="rr">{{
+							thisList.paymentType == 1 ? '微信'
+							: thisList.paymentType == 2 ? '支付宝'
+							: thisList.paymentType == 3 ? '人脸支付'
+							: thisList.paymentType == 4 ? '微信小程序支付'
+							: ''
+							}}</text>
+				    </view>
+				</view>
             </view>
         </view>
     </block>
-    <template wx:else is="tpl-showNotdata" data="{{text:'订单详情页面无数据或错误加载',height:'800rpx'}}"></template>
 </view>

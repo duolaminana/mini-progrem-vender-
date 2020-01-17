@@ -1,5 +1,5 @@
 <!--components/bindPhone/bindPhone.wxml-->
-<view hidden="{{show}}" class="com-initButton cus-layer" animation="{{animationCusLayer}}">
+<view hidden="{{hide}}" class="com-initButton cus-layer" animation="{{animationCusLayer}}">
 	<view class="content">
 		<!-- 已经同步过的微信用户 -->
 		<block>

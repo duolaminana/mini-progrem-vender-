@@ -7,9 +7,10 @@
 	justify-content: center;
 }
 .com-notLocation-pic{
-    width: 118rpx;
+    /* width: 118rpx; */
 	/* max-height: 140rpx; */
 	margin: 0 auto;
+	text-align: center;
 }
 .com-notLocation-pic image{
     width: 118rpx;

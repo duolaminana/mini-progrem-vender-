@@ -3,6 +3,8 @@
 <import src="/template/showNotdata/common.wxml"></import>
 <wxs src="../../../wxs/common.wxs" module="wxsCom" />
 
+<COM-deviceStatus id="com-deviceStatus"></COM-deviceStatus>
+
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
 
@@ -11,11 +13,7 @@
         <view class="sbinfo cus-lan">
             <view class="left">
                 <view class="pic">
-					<image
-					src="{{sbinfoData.imageAddress}}"
-					bindload="imagesOnload" 
-					style="{{wxsCom.objToString(ZOOM_IMG[0])}}"
-					/>
+					<image src="{{sbinfoData.imageAddress}}" mode="aspectFit"></image>
 				</view>
             </view>
             <view class="right">
@@ -25,7 +23,9 @@
                     <!-- <text class="dec">200m</text> -->
                 </view>
                 <view class="type">商品种类:{{sbinfoData.items}}种</view>
-                <view class="sign">{{alreadyPay?'购买过的  ':' '}} 支持线上购买</view>
+                <view class="sign">
+					<text decode="{{true}}" space="{{true}}">{{alreadyPay?'购买过的  ':' '}} {{shippingWay == 0?'支持线上购买':''}}</text>
+				</view>
                 <view class="addr">
                     <image class="cus-addr" src="/static/img/icon/address.png"/>
                     <text class="text">{{sbinfoData.positionAddress}}</text>
@@ -49,14 +49,7 @@
                 <view class="li" wx:for="{{item.products}}" wx:key="option" wx:for-item="option" wx:for-index="idx" bindtap="openComDetail" data-productCode="{{option.productCode}}">
                     <view class="pic">
 						<view wx:if="{{option.activityPrice}}" class="icus-couplet">热销</view>
-                        <image 
-						src="{{option.imageAddress}}" 
-						bindload="imagesOnload"
-						data-cssimgidx="{{idx}}" 
-						data-cssimgidxTop="{{index}}" 
-						data-cssimgkey="cssimgkey"
-						style="{{wxsCom.objToString(cssimgkey[index][idx])}}"
-						/>
+						<image src="{{option.imageAddress}}" mode="aspectFit"></image>
                     </view>
                     <view class="info">
                         <view class="name">{{option.productName}}</view>
@@ -67,7 +60,8 @@
 							<text class="c" wx:if="{{option.activityPrice}}">{{wxsCom.toFixed(option.actualPrice)}}<text>元</text></text>
 						</view>
                     </view>
-					<block wx:if="{{item.categoryId == 182}}">
+					<view wx:if="{{item.categoryId == 182 && option.activityNum}}" class="hbd-paynumber">{{option.activityNum}}个限免</view>
+					<block wx:if="{{item.categoryId == 99999999}}">
 						<button class="hbd-gopay" catchtap="gotoPayOrderPage" data-categoryId="{{item.categoryId}}" data-productCode="{{option.productCode}}">去付款</button>
 						<view class="hbd-paynumber">仅限1个</view>
 					</block>

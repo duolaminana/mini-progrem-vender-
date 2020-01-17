@@ -8,12 +8,7 @@
     <view class="thisgoods cus-lan">
         <view class="left">
             <view class="pic">
-				<image
-				src="{{thisGoodsData.productImageAddress}}" 
-				bindload="imagesOnload"
-				data-cssimgkey="cssimgkey" 
-				style="{{wxsCom.objToString(cssimgkey[0])}}"
-				/>
+				<image src="{{thisGoodsData.productImageAddress || thisGoodsData.imageAddress}}"  mode="aspectFit"></image>
 			</view>
         </view>
         <view class="info">
@@ -41,16 +36,11 @@
 			wx:for="{{thisGoods}}" 
 			wx:key="*this" 
 			bind:tap="goToDeviceInfo"
-			data-code="{{item.machineCode}}"
+			data-code="{{index}}"
 			>
                 <view class="left">
                     <view  class="pic">
-						<image
-						src="{{item.imageAddress}}"
-						bindload="imagesOnload"
-						data-cssimgidx="{{index}}" 
-						style="{{wxsCom.objToString(ZOOM_IMG[index])}}"
-						/>
+						<image src="{{item.imageAddress}}" mode="aspectFit"></image>
 					</view>
                 </view>
                 <view class="right">
@@ -61,13 +51,15 @@
                         <view class="price">
                             <view class="ral">
                                 <text class="ral-b">￥</text>
-                                <text class="ral-a">{{item.activityPrice?item.activityPrice:item.sellPrice}}</text>
+                                <text class="ral-a">{{item.activityPrice || item.sellPrice}}</text>
                             </view>
                             <text class="fake" wx:if="{{item.activityPrice}}">￥{{item.sellPrice}}</text>
                         </view>
                     </view>
                     <view class="type">商品种类: {{item.catalogNum}}种</view>
-                    <view class="sign">{{item.isBuy==1?'购买过的  ':' '}} 支持线上购买</view>
+                    <view class="sign">
+						<text decode="{{true}}" space="{{true}}">{{item.isBuy==1?'购买过的&nbsp;&nbsp;&nbsp;&nbsp;':' '}}{{item.shippingWay == 0?'支持线上购买':''}}</text>
+					</view>
                     <view class="addr">
                         <image class="cus-addr" src="/static/img/icon/address.png"/>
                         <text class="text">{{item.positionAddress}}</text>

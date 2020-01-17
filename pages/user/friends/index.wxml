@@ -11,17 +11,17 @@
         <template is="tpl-yqnav-user"></template>
     </navigator>
     
-    <view wx:if="{{true}}" class="ullist">
-        <view class="lis" wx:for="{{4}}" wx:key="*this">
+    <view wx:if="{{thisList.length}}" class="ullist">
+        <view class="lis" wx:for="{{thisList}}" wx:key="*this">
             <view class="pic">
                 <image src="/static/img/user/user_img.png" />
             </view>
             <view class="info">
                 <view class="left">
-                    <view class="name cus-sl300">奋斗哈哈哈奋斗哈哈哈奋斗哈哈哈奋斗哈哈哈</view>
-                    <view class="phone">18865954789</view>
+                    <view class="name cus-sl300">{{item.nickName}}</view>
+                    <view class="phone">{{item.memberPhone}}</view>
                 </view>
-                <view class="right">2019-10-31 16:06:05</view>
+                <view class="right">{{item.createDate}}</view>
             </view>
         </view>
     </view>

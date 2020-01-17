@@ -50,7 +50,7 @@ Component({
 	totalCount () { // 价钱总和更换函数
 		this.setData({
 			totalActivityPrice: app.CartStockApi.totalActivityPrice,
-			totalArticle: app.CartStockApi.totalArticle,
+			totalArticle: app.CartStockApi.totalCount,
 			totalPrice: app.CartStockApi.totalPrice
 		})
 	}

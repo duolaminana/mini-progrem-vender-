@@ -2,6 +2,7 @@
 const {app,$,cusAppData} = require('../../../utils/public.js')
 const { returnMoney , pullMoneyIntegral } = require('../../../api/api.js')
 const QRCode = require('../../../libs/weapp-qrcode.js')
+
 Page({
 
   /**
@@ -24,7 +25,6 @@ Page({
       text: '返回首页',
       click: 'air',
     },
-	shippingWay: app.globalData.shippingWay,
 	isWin: true,
 	iconTitle: '支付成功',
 	iconColor: '#EE7700',
@@ -34,15 +34,15 @@ Page({
 	orderId: null,
 	jfText: '领取',
 	fxText: '领取',
-	jfcolor: '',
-	getCargoShow: false
+	jfcolor: 'color',
+	getCargoShow: false,
+    shippingWay: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	  
     console.log(options)
 	if(options.fail){
 		this.setData({
@@ -53,40 +53,55 @@ Page({
 		})
 		return
 	}
+	getApp().globalData.isPayment_state = true
 	this.setData({
-		orderId:options.orderId,
-		getCargoShow:true,
+		orderId: options.orderId,
+		shippingWay: app.globalData.shippingWay
 	})
 	if(this.data.shippingWay == 0){
-		new QRCode('myQrcode',{
+		new QRCode('myQrcode',{ // 字段shippingWay生成二维码 === 显示支持线上支付
 		  text: this.data.orderId,
-		  width: 160,
-		  height: 160,
-		  padding: 12, // 生成二维码四周自动留边宽度，不传入默认为0
+		  width: 150,
+		  height: 150,
+		  padding: 10, // 生成二维码四周自动留边宽度，不传入默认为0
 		  correctLevel: QRCode.CorrectLevel.L, // 二维码可辨识度
 		  callback: (res) => {
-		    console.log(res.path)
+		    console.log('生成二维码回调:',res.path)
 		    // 接下来就可以直接调用微信小程序的api保存到本地或者将这张二维码直接画在海报上面去，看各自需求
 		  }
 		})
+	}else{
+		this.setData({
+			getCargoShow:true,
+		})
 	}
 	returnMoney({orderId:this.data.orderId}).then(res=>{
+		console.log('支付成功页面获取积分接口:', res)
+		let val = res.result
+		if(val <= 0){
+			this.setData({
+				jfcolor: 'color'
+			})
+			return
+		}
 		this.setData({
-			integral: res.result * 100,
-			backMoney: res.result
+			integral: $.Mul(val , 100),
+			backMoney: val,
+			jfcolor: 'color2'
 		})
 	})
   },
   
   checked (e) {
-	  if(this.data.jfcolor) return
+	  if(this.data.jfcolor != 'color2') return
 	  if(e.currentTarget.dataset.who == 0){
 		  console.log('积分')
 		  wx.showLoading({
 		  	title: "领取中",
 				mask: true
 		  })
-		  pullMoneyIntegral(this.data.orderId, 1).then(res=>{
+		  pullMoneyIntegral(this.data.orderId, 1, this.data.backMoney).then(res=>{
+			console.log('支付成功领取积分接口:', res)
 			if(!res){
 				wx.showToast({
 					title:'领取失败!',
@@ -104,11 +119,11 @@ Page({
 				jfText: '已领取',
 				jfcolor: 'color'
 			})
-		  },res=>{
+		  }).catch(res=>{
 			  wx.showToast({
-					title:'领取失败!',
-					icon: 'none',
-					mask: true
+				title:'领取失败!',
+				icon: 'none',
+				mask: true
 			  })
 		  })
 	  }else{
@@ -117,7 +132,8 @@ Page({
 		  	title: "领取中",
 				mask: true
 		  })
-		  pullMoneyIntegral(this.data.orderId, 2).then(res=>{
+		  pullMoneyIntegral(this.data.orderId, 2, this.data.backMoney).then(res=>{
+			console.log('支付成功领取返现接口:', res)
 			if(!res){
 				wx.showToast({
 					title:'领取失败!',
@@ -135,11 +151,11 @@ Page({
 				fxText: '已领取',
 				jfcolor: 'color'
 			})
-		  },res=>{
+		  }).catch(res=>{
 			  wx.showToast({
-					title:'领取失败!',
-					icon: 'none',
-					mask: true
+				title:'领取失败!',
+				icon: 'none',
+				mask: true
 			  })
 		  })
 	  }

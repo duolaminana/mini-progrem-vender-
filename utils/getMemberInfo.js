@@ -1,34 +1,51 @@
 import { getMemberInfo } from '../api/api.js';
 
-export default function appGetMemberInfo(callback){
-  getMemberInfo().then(res => {
-	// {
-	// 	code: 200
-	// 	message: "操作成功"
-	// 	result:{
-	// 		data: {id: 99, cardNo: null, appOpenId: "ozJ2-4nABXGTsGws-2tY1gFxmf-w", memberImg: "https://wx.qlogo.cn/mmopen/vi_32/zIZWvmoXC36QzDpex…bhziaZKER1f6SO1gatskxXORHmTIUA1FfMYhexsTTkcfg/132", nickName: "该用户没有昵称", …}
-	// 		isBindingCard: false
-	// 		isBindingPhone: true
-	// 		isSyn: true,
-	// 	}
-	// }
-  	console.log('用户信息 [data]',res)
-  	res = res.result
-	
-  	getApp().globalData.isSyn = res.isSyn
-  	getApp().globalData.isBindingPhone = res.isBindingPhone
-  	getApp().globalData.isBindingCard = res.isBindingCard
-	
-  	getApp().globalData.wxUserInfo = res.data
-	if(callback) callback(res.data)
-  }, res => {
-  	wx.showModal({
-  		title: '提示',
-  		content: res,
-  		confirmText: '重新加载',
-  		success: res => {
-			if(res.confirm == true) appGetMemberInfo()
-  		}
-  	})
-  })
+export default function appGetMemberInfo(callback, callback2){
+	wx.login({
+		success: res => {
+			// 发送 res.code 到后台换取 openId, sessionKey, unionId
+			getApp().globalData.code = res.code
+			getMemberInfo(this.memberId).then(res => {
+				/* *
+				 * 用户id: id
+				 * openId: appOpenId
+				 * 身份证卡号: cardNo
+				 * 用户头像: memberImg
+				 * 用户头像: nickName
+				 * 是否同步过用户信息: isSyn
+				 * 是否绑定过手机号码: isBindingPhone
+				 * 是否进行过脸证核验: isBindingCard
+				 * */
+				res = res.result
+				getApp().globalData.isSyn = res.isSyn
+				getApp().globalData.isBindingPhone = res.isBindingPhone
+				getApp().globalData.isBindingCard = res.isBindingCard
+				getApp().globalData.wxUserInfo = res.data
+				if(callback) callback(res.data)
+			}).catch(res=>{
+				if(callback2) callback2(res)
+				wx.showModal({
+					title: '',
+					content: res.message || res.msg || '请检查网络状态!',
+					confirmText: '确定',
+					showCancel: false,
+					success: res => {
+						// if(res.confirm == true) appGetMemberInfo()
+					}
+				})
+			})
+		},
+		fail(res) {
+			if(callback2) callback2(res)
+			wx.showModal({
+				title: '',
+				content: res.message || res.msg || '请检查网络状态!',
+				confirmText: '确定',
+				showCancel: false,
+				success: res => {
+					// if(res.confirm == true) appGetMemberInfo()
+				}
+			})
+		}
+	})
 }

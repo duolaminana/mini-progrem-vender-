@@ -65,7 +65,6 @@
   margin-top: 50rpx;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 .thisgoods .price .ral{
   display: flex;
@@ -176,7 +175,7 @@
     font-weight: var(--w7);
 }
 .ulgoods .ral-b{
-    font-size: 20rpx;
+    font-size: 26rpx;
     color: var(--zc3);
 }
 .ulgoods .type{

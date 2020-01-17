@@ -1,5 +1,6 @@
 // pages/user/friends/index.js
 const {app,$,cusAppData} = require('../../../utils/public.js')
+const { getFriendList } = require('../../../api/api.js')
 
 Page({
 
@@ -22,6 +23,7 @@ Page({
         class: 'goback-black'
       }
     },
+	thisList: []
   },
 
   /**
@@ -35,7 +37,10 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+	getFriendList().then(res=>{
+		console.log('获取好友列表接口',res)
+		this.thisList = res.result || []
+	})
   },
 
   /**

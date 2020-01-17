@@ -1,6 +1,5 @@
 <!--pages/signIn/signIn.wxml-->
 <import src="/template/head/head.wxml"></import>
-<import src="/template/freebtn/common.wxml"></import>
 
 <view class="container">
     <template is="tpl-header" data="{{...hdData}}"></template>
@@ -16,5 +15,11 @@
 		<!-- <view class="get-code">获取不到验证码?</view> -->
 		<!-- <button open-type="contact" bindcontact="handleContact">客服</button> -->
 	</view>
-	<template is="tpl-freebtn" data="{{...fbData}}"></template>
+	<COM-winButton 
+	text="绑定" 
+	stylec="auto" 
+	type="tap" 
+	bind:touch="memberBangdingPhone"
+	style="margin-top: 140rpx;"
+	></COM-winButton>
 </view>

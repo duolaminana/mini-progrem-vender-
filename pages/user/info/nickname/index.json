@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+	"COM-winButton": "/components/winButton/winButton"
+  },
   "navigationBarTitleText": "设置昵称"
 }

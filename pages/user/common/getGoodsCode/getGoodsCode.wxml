@@ -7,18 +7,72 @@
     <view class="content">
         <view class="title">取件码</view>
         <view class="pic">
-            <image src="/static/img/code.png" />
+            <image src="{{thisItem.code_src}}" />
         </view>
         <view class="exp">请将二维码对准设备扫描口进行扫描完成取货</view>
 
         <view class="xline"></view>
-        <template is="sb-info"></template>
+        <view class="tpl_sb_info">
+            <view class="pic">
+                <image src="{{thisItem.imageAddress}}" />
+            </view>
+            <view class="info">
+                <view class="no cus-sl400">{{thisItem.machineCode}}</view>
+                <view class="addr cus-sl400">{{thisItem.positionAddress}}</view>
+                <image class="icon" src="/static/img/icon/my_address.png" />
+            </view>
+        </view>
 
         <view class="xline"></view>
-        <template is="order-info"></template>
+        <view class="tpl_order_info">
+            <view class="li">
+                <text class="ll">订单号码</text>
+                <text class="rr">{{thisItem.orderNo}}</text>
+            </view>
+            <view class="li">
+                <text class="ll">下单时间</text>
+                <text class="rr">{{thisItem.createDate}}</text>
+            </view>
+            <view class="li">
+                <text class="ll">支付方式</text>
+                <text class="rr">{{
+							thisItem.paymentType == 1 ? '微信'
+							: thisItem.paymentType == 2 ? '支付宝'
+							: thisItem.paymentType == 3 ? '人脸支付'
+							: thisItem.paymentType == 4 ? '微信小程序支付'
+							: ''
+							}}</text>
+            </view>
+        </view>
 
         <view class="xline"></view>
-        <template is="goods-info"></template>
+        <view class="tpl_goods_info">
+			<view class="li" wx:for="{{thisItem.commodityInformation}}" wx:key="option" wx:for-item="option" wx:for-index="idx">
+				<view class="goods-pic">
+				    <image src="{{option.imageAddress}}" />
+				</view>
+				<view class="info">
+				    <view class="top">
+				        <view class="name cus-sl250">{{option.productName}}</view>
+				        <view class="price">
+				            <text class="a" wx:if="{{option.activityPrice}}">¥{{option.actualPrice}}</text>
+				            <text class="b">¥</text>
+				            <text class="c">{{option.activityPrice?wxsCom.toFrontFixed(option.activityPrice):wxsCom.toFrontFixed(option.actualPrice)}}.</text>
+				            <text class="d">{{option.activityPrice?wxsCom.toBackFixed(option.activityPrice):wxsCom.toBackFixed(option.actualPrice)}}</text>
+				        </view>
+				    </view>
+				    <view class="num">×{{option.productNumber}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="tpl_goods_info_total">
+			<text class="f">使用返现 ¥{{thisItem.couponAmount}}</text>
+			<text class="a">已优惠 ¥{{discounts}}</text>
+			<text class="b">合计</text>
+			<text class="e">¥</text>
+			<text class="c">{{wxsCom.toFrontFixed(thisItem.payAmount)}}.</text>
+			<text class="d">{{wxsCom.toBackFixed(thisItem.payAmount)}}</text>
+		</view>
 
         <view class="close" bind:tap="tagClose">
             <image src="/static/img/icon/close_btn_big.png" />

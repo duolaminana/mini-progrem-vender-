@@ -16,6 +16,7 @@ Component({
 		 * absolute
 		 * address
 		 * pay
+		 * auto
 		 * */
       }
     },
@@ -35,7 +36,7 @@ Component({
     },
     type:{
       type: String,
-      value: 'free', // free scan
+      value: 'free', // free scan tap
       observer(newVal,oldVal,path){
         // console.log(newVal)
       }
@@ -66,11 +67,13 @@ Component({
         case 'scan':{
           wx.scanCode({
             onlyFromCamera: false,
+			// scanType: 'WX_CODE',
             success: res =>{
-				let result = $.getUrlParam(res.result)
-				if(result.machineCode && result.channelId)
+				console.log('扫码结果:',res)
+				// let result = $.getUrlParam(res.result)
+				if(res.path)
 				wx.navigateTo({
-					url: `/pages/device/sminfo/index?machineCode=${result.machineCode}&channelId=${result.channelId}`
+					url: `/pages/device/sminfo/index?machineCode=${res.machineCode}`
 				})
 				else
 				wx.showModal({

@@ -19,7 +19,7 @@
 				value="{{inputvalue}}" 
 				bind:tap="searchInput"
 				bindinput="bindInputChange"/>
-				<view class="iconjt" bind:tap="searchImg">搜索</view>
+				<view class="iconjt" bind:tap="searchText">搜索</view>
             </view>
             <view class="btn" bind:tap="gotoDeviceMap">
                 <image src="/static/img/icon/location_btn.png"/>
@@ -42,12 +42,13 @@
     <view class="ulgoods cus-lan">
 		<COM-noLocation
 			show="{{!LOCATION}}"
-			height="300"
-			size="27"
-			icosize="118"
+			height="450"
+			size="28"
+			space="10"
+			icosize="130"
 		></COM-noLocation>
         <COM-emptyData
-			show="{{ThisShopData_All.length <= 0}}"
+			show="{{LOCATION && ThisShopData_All.length <= 0}}"
 			height="500"
 			size="27"
 			text="没有发现附近设备啊!!"
@@ -61,17 +62,18 @@
 			wx:for-items="{{ThisShopData_All}}" 
 			wx:key="machineCode" 
 			bind:tap="goToDeviceInfo" 
-			data-code="{{item.machineCode}}"
+			data-code="{{index}}"
 			wx:if="{{barArr[barCurrent].categoryId === ''?true:item.categoryId === barArr[barCurrent].categoryId?true:false}}"
 			>
 				<view class="left">
 					<view class="pic">
-						<image
+						<image src="{{item.machineImageAddress}}" mode="aspectFit"></image>
+						<!-- <image
 						src="{{item.machineImageAddress}}"
 						bindload="imagesOnload"
 						data-cssimgidx="{{index}}" 
 						style="{{wxsCom.objToString(ZOOM_IMG[index])}}"
-						/>
+						/> -->
 					</view>
 				</view>
 				<view class="right">
@@ -81,7 +83,9 @@
 						<text class="dec">{{wxsCom.distRuler(item.distance)}}</text>
 					</view>
 					<view class="type">商品种类: {{item.articleCategory}}种</view>
-					<view class="sign">{{item.bought==1?'购买过的  ':' '}} 支持线上购买</view>
+					<view class="sign">
+						<text decode="{{true}}" space="{{true}}">{{item.bought==1?'购买过的  ':' '}} {{item.shippingWay == 0?'支持线上购买':''}}</text>
+					</view>
 					<view class="addr">
 						<image class="cus-addr" src="/static/img/icon/address.png"/>
 						<text class="text">{{item.positionAddress}}</text>

@@ -10,6 +10,20 @@ Component({
       observer (e) {
         // console.log(e)
       }
+    },
+    thisItem: {
+      type: Object,
+      value: {},
+      observer (newVal) {
+        // console.log(e)
+		if(newVal.commodityInformation){
+			let addt = 0
+			for(let option of newVal.commodityInformation){
+				addt += option.discounts
+			}
+			this.setData({discounts:addt})
+		}
+      }
     }
   },
 
@@ -17,7 +31,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+	discounts:0
   },
 
   /**

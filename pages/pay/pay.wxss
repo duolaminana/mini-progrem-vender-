@@ -132,3 +132,7 @@
     align-items: center;
     justify-content: center;
 }
+.deduction .confix .nosel{
+	font-size: 24rpx;
+	color: #999;
+}

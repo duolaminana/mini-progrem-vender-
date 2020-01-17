@@ -1,0 +1,59 @@
+/* components/deviceStatus/deviceStatus.wxss */
+.com-deviceStatus-warp{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1000;
+	background-color: rgba(0,0,0,.75);
+}
+.com-deviceStatus{
+	position: fixed;
+	top: 3vh;
+	width: 90vw;
+	left: 5vw;
+	z-index: 1000;
+	background-color: white;
+	border-radius: 25rpx;
+	height: 30vh;
+	overflow: hidden;
+}
+.com-deviceStatus .text{
+	text-align: center;
+	position: absolute;
+	bottom: 100rpx;
+	width: 100%;
+	font-size: 32rpx;
+}
+.com-deviceStatus .icon{
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	bottom: 170rpx;
+	width: 100%;
+}
+.com-deviceStatus .go-home{
+	position: absolute;
+	bottom: 0rpx;
+	width: 100%;
+	height: 80rpx;
+	line-height: 80rpx;
+	color: var(--zc);
+	background-color: #f3f3f3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.com-deviceStatus .go-home::before{
+	content: '';
+	display: block;
+	width: 15rpx;
+	height: 15rpx;
+	border: 4rpx solid var(--zc);
+	border-left-color: transparent;
+	border-top-color: transparent;
+	border-radius: 2rpx;
+	transform: rotate(135deg);
+	display: none;
+}

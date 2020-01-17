@@ -1,5 +1,4 @@
 <!--pages/user/info/index.wxml-->
-<!-- 羊毛出在羊身上，功成名就建立在枯骨烂肉之上，江湖就在脚下 -->
 <import src="/template/head/head.wxml"></import>
 
 <view class="container cus-lan" style="--height--:{{__hdHeight__}};">
@@ -16,19 +15,17 @@
             <view class="text">手机号码</view>
             <view class="note">{{infoData.memberPhone}}</view>
         </view>
-        <view class="li arrow">
-            <navigator url="/pages/user/info/nickname/index">
+        <view class="li">
+            <view>
                 <view class="text">昵称</view>
-                <view class="note cus-sl500">{{infoData.nickName}}</view>
-            </navigator>
+                <view class="note">{{infoData.nickName}}</view>
+            </view>
         </view>
-        <view class="li arrow">
-            <navigator url="/pages/user/info/identity/index">
-                <view class="text">实名认证</view>
-                <view class="note{{infoData.isAutonym==1?' love':' notlove'}}">
-                    <view>{{infoData.isAutonym==1?'已认证':'未认证'}}</view>
-                </view>
-            </navigator>
+        <view class="li">
+			<view class="text">实名认证</view>
+			<view class="note{{infoData.isAutonym==1?' love':' notlove'}}">
+				<view>{{infoData.isAutonym==1?'已认证':'未认证'}}</view>
+			</view>
         </view>
     </view>
 </view>

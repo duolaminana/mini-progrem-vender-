@@ -38,18 +38,18 @@ Page({
 	let value = $.trim(this.data.inputValue)
 	if(value){
 		app.searchvalue = value
-		wx.switchTab({
-			url: '/pages/device/device',
-			success:()=>{
-				// console.log(value)
-			}
+		wx.switchTab({ url:'/pages/device/device' })
+	}else{
+		wx.showToast({
+			title: '请输入要搜索的内容',
+			icon: 'none',
 		})
 	}
-	else
-	wx.showToast({
-		title: '请输入要搜索的内容',
-		icon: 'none',
-	})
+  },
+  
+  btnsSubmit (e) {
+	app.searchvalue = e.currentTarget.dataset.text
+	wx.switchTab({ url:'/pages/device/device' })
   },
 
   inputedit(e){
@@ -70,7 +70,7 @@ Page({
 	wx.getStorage({
 	  key: 'hyt_searchDevice',
 	  success: (res)=> {
-	    console.log(res.data)
+	    // console.log('getStorage打印:',res.data)
 		if(res.data) this.setData({history:JSON.parse(res.data)})
 	  }
 	})

@@ -1,0 +1,20 @@
+<!--components/deviceStatus/deviceStatus.wxml-->
+<view 
+	class="com-deviceStatus-warp" 
+	animation="{{animationWarp}}" 
+	hidden="{{hideWarp}}" 
+	bindtap="closeCartComp"
+></view>
+<view 
+	class="com-deviceStatus" 
+	id="com-deviceStatus" 
+	animation="{{animationData}}" 
+	hidden="{{hideMain}}" 
+	style="transform: translateY({{initTranslateY}});"
+>
+	<view class="icon">
+		<icon type="warn" size="60" color="red"></icon>
+	</view>
+	<view class="text">当前设备异常，无法完成购买</view>
+	<navigator class="go-home" open-type="switchTab" url="/pages/index/index">去首页</navigator>
+</view>

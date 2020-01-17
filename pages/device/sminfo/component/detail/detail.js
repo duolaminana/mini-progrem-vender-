@@ -49,7 +49,7 @@ Component({
    */
   data: {
 	cus_layer_display_begin: false,
-	shopcart_translateY_begin: 0,
+	shopcart_translateY_begin: '1006rpx',
 	parentData: {
 		productName: '',
 		stock: 0,
@@ -67,7 +67,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-	imagesOnload: $.ZOOM_IMG_FNC(),
 	hideCartAir () { // 加入购物车按钮是否隐藏
 		if(this.data.parentData.categoryId == 182)
 		this.setData({
@@ -115,13 +114,13 @@ Component({
 		this.setData({
 			parentData: data
 		})
-		this.hideCartAir()
+		// this.hideCartAir()
 	},
 	customComputeCountFnc (e) {
-		this.data.parentData.dev_custom_count = e.detail.ComponentTemporaryCountArray[0].count
+		this.data.parentData.dev_custom_count = e.detail ? e.detail.ComponentTemporaryCountArray[0].count : e
 		this.triggerEvent('customComputeCount', { ComponentTemporaryCountArray: [{
 				productCode: this.data.parentData.productCode,
-				count: e.detail.ComponentTemporaryCountArray[0].count
+				count: this.data.parentData.dev_custom_count
 			}] })
 	},
 	judgeModuls () {
@@ -140,11 +139,12 @@ Component({
 		}
 		if(this.data.parentData.dev_custom_count == 0){ // 没添加数量
 			wx.showToast({
-				title: '请先点击添加数量!',
+				title: '已自动为你添加数量1',
 				icon: 'none',
-				duration: 2000
+				duration: 1500
 			})
-			return false
+			this.customComputeCountFnc(1)
+			// return false
 		}
 		return true
 	}

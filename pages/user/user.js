@@ -1,6 +1,14 @@
 // pages/user/user.js
 const {app,$,cusAppData} = require('../../utils/public.js')
-const { returnMoney , queryPersonalInfo } = require('../../api/api.js')
+const { 
+returnMoney ,
+queryPersonalInfo , 
+queryOrderDetailes ,
+getCodeClaimGoods , 
+postRebateList ,
+postIntegraList
+} = require('../../api/api.js')
+const QRCode = require('../../libs/weapp-qrcode.js')
 
 Page({
   /**
@@ -25,10 +33,26 @@ Page({
 	ajaxUserInfo: null,
 	UserCashMoney: '-',
 	UserIntegral: '-',
-	UserOrderNO: [1]
+	UserOrderNO: [],
+	AUTHORIZATION:true, // 页面的展示状态(默认已授权状态)
+	
+	toGetgoodsItem: {}
+  },
+  
+  AUTHORIZATION_fnc (e){
+	  wx.hideLoading()
+  	  this.setData({AUTHORIZATION:true})
+  	  // this.selectComponent('#com-bindPhone').showThat()
+	  this.initUserInfo()
   },
 
-  gotoGetCodeCom () { // 去取货
+  gotoGetCodeCom (e) { // 去取货
+	let code = e.currentTarget.dataset.code
+	for(let item of this.data.UserOrderNO){
+		if(code == item.orderNo){
+			this.setData({toGetgoodsItem:item})
+		}
+	}
     this.setData({
       isGetgoods: true
     })
@@ -42,34 +66,53 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	if(app.globalData.wxUserInfo){
-		this.initUserInfo()
-	}else{
-		app.wxLoginGetMemberInfoResponseCallback = res => { // 未获取到会员用户信息/ app.js 获取会员响应回调
-			this.initUserInfo()
-		}
-	}
+	
   },
 
   initUserInfo (){
 	this.WX_USERLOGIN_STATE = true
-	returnMoney({orderId:this.data.orderId}).then(res=>{
+	postRebateList().then(res=>{
+		console.log('获取返现信息接口:', res.result)
 		this.setData({
-			UserIntegral: res.result * 100,
-			UserCashMoney: res.result
+			UserCashMoney: res.result.remainingProfitofit || 0
+		})
+	})
+	postIntegraList().then(res=>{
+		console.log('获取积分信息接口:', res.result)
+		this.setData({
+			UserIntegral: res.result.allIntegrals || 0
 		})
 	})
 	queryPersonalInfo().then(res=>{
+		console.log('获取用户信息接口:', res.result)
 		res = res.result
 		this.setData({
 			ajaxUserInfo: res,
 			UserImg: res.memberImg,
 			UserName: res.nickName,
-			UserAuth: res.isAutonym==1?'已实名认证':'未实名认证',
+			UserAuth: res.isAutonym == 1 ? '已实名认证' : '未实名认证',
 		})
 	})
+	getCodeClaimGoods().then(res=>{
+		console.log('去取货接口:', res.result)
+		this.setData({UserOrderNO:res.result})
+		for(let [index, item] of this.data.UserOrderNO.entries()){
+			new QRCode('myQrcode'+index,{ // 字段shippingWay生成二维码 === 显示支持线上支付
+			  text: item.orderNo,
+			  width: 66,
+			  height: 66,
+			  padding: 6, // 生成二维码四周自动留边宽度，不传入默认为0
+			  correctLevel: QRCode.CorrectLevel.L, // 二维码可辨识度
+			  callback: (res) => {
+			    console.log('生成二维码回调:',res.path)
+			    // 接下来就可以直接调用微信小程序的api保存到本地或者将这张二维码直接画在海报上面去，看各自需求
+				item.code_src = res.path
+			  }
+			})
+		}
+	})
   },
-  
+
   gotoUserInfoPage(){
 	wx.navigateTo({
 		url: `/pages/user/info/index`,
@@ -84,14 +127,21 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+	
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+	wx.showLoading({title: "加载中",mask: true})
+	if(app.globalData.wxUserInfo){
+		this.selectComponent('#com-authorization').author()
+	}else{
+		app.wxLoginGetMemberInfoResponseCallback = res => { // 未获取到会员用户信息/ app.js 获取会员响应回调
+			this.selectComponent('#com-authorization').author()
+		}
+	}
   },
 
   /**

@@ -1,11 +1,13 @@
 {
   "usingComponents": {
 	  "COM-authorization": "/components/authorization/authorization",
+	  "COM-deviceStatus": "/components/deviceStatus/deviceStatus",
 	  "COM-bindPhone": "/components/bindPhone/bindPhone",
 	  "com-cart": "./component/cart/cart",
 	  "com-detail": "./component/detail/detail",
 	  "com-footbar": "./component/footbar/footbar",
 	  "com-countKey": "./component/countKey/countKey",
 	  "com-getUserInfoUserPhone": "/pages/signIn/component/getUserInfoUserPhone/getUserInfoUserPhone"
-  }
+  },
+  "enablePullDownRefresh": true
 }

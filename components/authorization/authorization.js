@@ -31,17 +31,19 @@ Component({
 		if (e.detail.errMsg === 'getUserInfo:ok') {
 			this.requestSynInfo(e.detail)
 		}else{
-			wx.showModal({
-				title: '系统提示',
-				content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进行!!!',
-				showCancel: false,
-				confirmText: '返回授权',
-				success: function(res) {
-					if (res.confirm) {
-						// console.log('用户点击了“返回授权”');
-					}
-				}
-			})
+			this.setData({show:false})
+			// wx.showModal({
+			// 	title: '系统提示',
+			// 	content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进行!!!',
+			// 	showCancel: false,
+			// 	confirmText: '返回授权',
+			// 	success: (res)=> {
+			// 		this.setData({show:false})
+			// 		if (res.confirm) {
+			// 			// console.log('用户点击了“返回授权”');
+			// 		}
+			// 	}
+			// })
 		}
 	},
 	requestSynInfo: function(setting){

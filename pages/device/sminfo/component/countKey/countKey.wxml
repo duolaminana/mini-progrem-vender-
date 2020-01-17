@@ -1,5 +1,5 @@
 <!--pages/device/sminfo/component/countKey/countKey.wxml-->
-<view class="count" catchtouchstart>
+<view class="count">
 	<view class="min" catchtouchstart="sub" wx:if="{{result<=0?false:true}}">
 		<image src="/static/img/icon/sub_icon.png" />
 	</view>

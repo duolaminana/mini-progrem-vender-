@@ -1,0 +1,4 @@
+<!--components/officialAccount/officialAccount.wxml-->
+<view class="official" animation="{{animationData}}" style="transform: translateY(300rpx);">
+	<official-account class="account"></official-account>
+</view>

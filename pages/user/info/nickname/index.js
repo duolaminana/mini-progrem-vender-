@@ -1,5 +1,6 @@
 // pages/user/info/nickname/nickname.js
 const {app,$,cusAppData} = require('../../../../utils/public.js')
+const { updateNickName } = require('../../../../api/api.js')
 
 Page({
 
@@ -26,13 +27,36 @@ Page({
       text: '保存',
       click: 'air'
     },
+	name: '',
+	text: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+	this.setData({text: options.nickName})
+  },
 
+  submit () {
+	wx.showLoading({title: '加载中'})
+	updateNickName(this.data.name).then(res=>{
+		wx.hideLoading()
+		if(res.result){
+			wx.switchTab({url:'/pages/user/user?rev=nickname'})
+		}
+	}).catch(res=>{
+		wx.hideLoading()
+		wx.showToast({
+			title: res.message || res.msg || '网络错误!',
+			icon: 'none',
+			duration: 1500
+		})
+	})
+  },
+
+  inputName (e) {
+	this.setData({name: e.detail.value})
   },
 
   /**

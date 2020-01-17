@@ -6,6 +6,7 @@ const autoGetUserInfo = require('./autoGetUserInfo/autoGetUserInfo')
 const request = require('./request/request')
 const reg = require('./regular/common')
 const common = require('./common')
+const countNum = require('./countNum')
 
 
 // 用于引入页面的data的公共数据 ...cusAppData
@@ -17,5 +18,5 @@ const cusAppData = {
 module.exports = {
     app: app,
     cusAppData: cusAppData,
-    $: Object.assign(host, timer, getLocation, request, autoGetUserInfo, reg, common)
+    $: Object.assign(host, timer, getLocation, request, autoGetUserInfo, reg, common, countNum)
 }

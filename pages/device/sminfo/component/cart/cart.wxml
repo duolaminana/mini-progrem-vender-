@@ -13,13 +13,7 @@
 		<view class="li" wx:for="{{thisData}}" wx:key="*this">
 			<view class="left">
 				<view class="pic">
-					<image
-					src="{{item.imageAddress}}"
-					bindload="imagesOnload"
-					data-cssimgidx="{{index}}" 
-					data-cssimgkey="cssimgkey"
-					style="{{wxsCom.objToString(cssimgkey[index])}}"
-					/>
+					<image src="{{item.imageAddress}}" mode="aspectFit"></image>
 				</view>
 			</view>
 			<view class="info-warp">

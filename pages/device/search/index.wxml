@@ -19,7 +19,12 @@
 	<view class="history">
 		<view class="title">搜索历史</view>
 		<view class="list" wx:if="{{history.length>0}}">
-			<view wx:for="{{history}}" wx:key="*this">{{item}}</view>
+			<view 
+			wx:for="{{history}}" 
+			wx:key="*this" 
+			data-text="{{item}}"
+			bind:tap="btnsSubmit"
+			>{{item}}</view>
 		</view>
 	</view>
 </view>

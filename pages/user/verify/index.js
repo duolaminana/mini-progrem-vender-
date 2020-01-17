@@ -137,10 +137,8 @@ Page({
 	  })
   },
 
-  registerFace (res) { // 人脸认证
-	console.log('进入人证核验 registerFace方法')
-	wx.showToast({ 
-		icon: "loading",
+  registerFace (res) { // 认证人脸
+	wx.showLoading({
 		title: "正在上传中。。。",
 		mask: true
 	})
@@ -153,7 +151,8 @@ Page({
 	witnessCheck(q).then(res => {
 		this.data.bindingFace = true
 		this.showCamera()
-		console.log('卡号',this.gain.faceAttribute.card)
+		console.log('人证核验接口 api success响应',res)
+		// console.log('卡号',this.gain.faceAttribute.card)
 		setBindCard(this.gain.faceAttribute.card).then(res => {
 			console.log('绑定用户身份证接口 api success响应',res)
 			wx.hideLoading()
@@ -172,43 +171,36 @@ Page({
 				showCancel: false
 			})
 		})
-	}, res => {
+	}).catch(res => {
 		console.log('witnessCheck api fail响应:',res)
+		wx.hideLoading()
 		wx.showModal({
-			title: '提示',
+			title: '系统提示',
 			content: res,
 			showCancel: false
 		})
 	})
   },
 
-  loginFace (res) { // 人脸验证
-	wx.showToast({
-		icon: "loading",
-		title: "正在上传中。。。"
+  loginFace (res) { // 验证人脸
+	wx.showLoading({
+		title: "正在上传中。。。",
+		mask: true
 	})
 	let q = {
 		filePath: res.tempImagePath
 	}
-	checkFace(q).then(res => {
+	checkFace(q).then((res, resp) => {
 		console.log('checkFace api 响应:',res)
-		wx.hideLoading()
-		if(res.code != 200){
-			wx.showModal({
-				title: '提示',
-				content: '验证失败,请重新验证!',
-				showCancel: false
-			})
-			return
-		}
 		wx.navigateTo({
 			url: `/pages/pay/pay`
 		})
-	}, res => {
+	}).catch(res => {
+		console.log('checkFace api fail响应:',res)
 		wx.hideLoading()
 		wx.showModal({
-			title: '提示',
-			content: res,
+			title: '系统提示',
+			content: res || '验证失败,请重新验证!',
 			showCancel: false
 		})
 	})

@@ -38,6 +38,13 @@ Component({
 		observer(newVal,oldVal,path){
 		  // console.log(newVal)
 		}
+	},
+	space:{
+		type: String || Number,
+		value: 6,
+		observer(newVal,oldVal,path){
+		  // console.log(newVal)
+		}
 	}
   },
 

@@ -55,7 +55,7 @@ Component({
    */
   methods: {
 	sub () {
-		let result = this.data.result-1
+		let result = this.data.result - 1
 		if(result < this.data.stock){
 			this.setData({
 				addIconOk: true

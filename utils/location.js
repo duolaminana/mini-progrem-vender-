@@ -87,7 +87,7 @@ export function checkLocation() {
  * @param {Function} callback
  * @param {Array} getApp().globalData.myLocation
  */
-export function loopLocation(callback) {
+export function loopLocation(callback, callback2) {
     if(!checkLocation()){
         if(callback && typeof callback === 'function'){
             wx.showLoading({
@@ -100,6 +100,7 @@ export function loopLocation(callback) {
                     getApp().globalData.myLocation = res
                     callback(res)
                 }else{
+					if(callback2 && typeof callback2 === 'function') callback2()
                     wx.showModal({
                         title: '系统提示',
                         content: '请在手机系统设置中打开定位服务!',
@@ -111,7 +112,7 @@ export function loopLocation(callback) {
                                 content: '您确定打开手机定位服务了吗？',
                                 success: function (res) {
                                     if(res.confirm){
-                                        loopLocation(callback)
+                                        loopLocation(callback, callback2)
                                     }
                                 }
                             })

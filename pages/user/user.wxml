@@ -5,7 +5,7 @@
 
 <com-getUserInfo bind:customUserInfo="takeUserInfo"></com-getUserInfo>
 
-<com-getGoodsCode show="{{isGetgoods}}"></com-getGoodsCode>
+<com-getGoodsCode show="{{isGetgoods}}" thisItem="{{toGetgoodsItem}}"></com-getGoodsCode>
 
 <view class="container cus-lan" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
@@ -19,7 +19,7 @@
         </view>
     </view>
     <view class="bar">
-        <navigator class="left" url="/pages/user/integral/index">
+        <navigator class="left" url="/pages/user/rebate/index?who=integral">
             <image class="icon" src="/static/img/user/jifen_img.png" />
             <view class="con">
                 <view class="jifen">
@@ -31,7 +31,7 @@
                 </view>
             </view>
         </navigator>
-        <navigator class="right" url="/pages/user/backcash/index">
+        <navigator class="right" url="/pages/user/rebate/index?who=backcash">
             <image class="icon" src="/static/img/user/fanxian_img.png" />
             <view class="con">
                 <view class="fanxian">
@@ -49,23 +49,24 @@
         <template is="tpl-yqnav-user"></template>
     </navigator>
     <view class="dqh" wx:if="{{UserOrderNO.length>0}}">
-        <view class="title cus-lan">待取货（2）</view>
-        <swiper display-multiple-items="1.126" previous-margin="17.1rpx" next-margin="17.1rpx">
-            <block wx:for="{{2}}" wx:key="*this">
+        <view class="title cus-lan">待取货（{{UserOrderNO.length}}）</view>
+        <swiper display-multiple-items="{{UserOrderNO.length<2?UserOrderNO.length:'1.126'}}" previous-margin="17.1rpx" next-margin="17.1rpx">
+            <block wx:for="{{UserOrderNO}}" wx:key="*this">
                 <swiper-item>
-                    <view class="lineor" bind:tap="gotoGetCodeCom">
+                    <view class="lineor" bind:tap="gotoGetCodeCom" data-code="{{item.orderNo}}">
                         <view class="pic">
-                            <image src="/static/img/code.png" mode="widthFix"/>
+                            <!-- <image src="/static/img/code.png" mode="widthFix"/> -->
+							<canvas class="canvas-code" canvas-id="{{'myQrcode'+index}}" style="width: 66px;height: 66px;"/>
                         </view>
                         <view class="con">
                             <view class="row-a">
-                                <view class="no cus-sl300">H0001H0001H0001H0001H0001H0001H0001H0001</view>
+                                <view class="no cus-sl300">{{item.machineCode}}</view>
                                 <view class="tag">去取货</view>
                             </view>
-                            <view class="time">2019-10-30  11:01:s26</view>
+                            <view class="time">{{item.createDate}}</view>
                             <view class="addr">
                                 <image class="cus-addr" src="/static/img/icon/address.png"/>
-                                <text class="text cus-sl400">深圳市宝安区石岩街道办星城购物深圳市宝安区石岩街道办星城购物</text>
+                                <text class="text cus-sl400">{{item.positionAddress}}</text>
                             </view>
                         </view>
                     </view>
@@ -73,7 +74,7 @@
             </block>
         </swiper>
     </view>
-    
+
     <view class="ullist">
         <navigator class="li" url="/pages/user/order/index">
             <view class="icon-w"><image class="goumaijilu_icon" src="/static/img/user/goumaijilu_icon.png" /></view>
@@ -84,4 +85,7 @@
             <text class="text">好友列表</text>
         </navigator>
     </view>
+	
+	<COM-authorization id="com-authorization" show="{{!AUTHORIZATION}}" bind:touch="AUTHORIZATION_fnc"></COM-authorization>
+	<!-- <COM-bindPhone id="com-bindPhone"></COM-bindPhone> -->
 </view>

@@ -52,8 +52,8 @@ Page({
 			url:`/pages/device/search/index`
 		})
 	},
-
-	searchImg(){
+	
+	searchText(){
 		wx.navigateTo({
 			url:`/pages/device/search/index`
 		})
@@ -70,14 +70,13 @@ Page({
 	},
 	
 	goToDeviceInfo(e){
-		let code = e.currentTarget.dataset.code
+		let index = e.currentTarget.dataset.code
 		let data = this.data.ThisShopData_All
-		let old = 'machineCode'
 		wx.navigateTo({
 		  url: `/pages/device/info/index`,
 		  success: res => {
 		    // 通过eventChannel向被打开页面传送数据
-		    res.eventChannel.emit('acceptDataFromOpenerPage', $.getArrItem(data, old, code))
+		    res.eventChannel.emit('acceptDataFromOpenerPage', $.getArrItemByIdx(data, index))
 		  }
 		})
 	},
@@ -185,30 +184,30 @@ Page({
 		keyword: '',
 		categoryId: '',
 		pageNum: 1,
-		pageSize: 10
+		pageSize: 10,
 	}
 	this.Officers(()=>{
 		this.getThisData(q)
-		this.StorCode()
 	})
   },
   
   searchTouch(){ // 搜索加载
-	  this.setData({
-	  	inputvalue : app.searchvalue,
-	  	ThisShopData_All : []
-	  })
-	  let categoryId = this.data.barArr[this.data.barCurrent]
-	  var q = {
-	  	keyword: app.searchvalue,
-	  	categoryId: categoryId ? this.data.barArr[this.data.barCurrent].categoryId : '',
-	  	pageNum: 1,
-	  	pageSize: 10
-	  }
-	  app.searchvalue = null
-		this.Officers(()=>{
-			this.getThisData(q)
-		})
+	this.setData({
+		inputvalue : app.searchvalue,
+		ThisShopData_All : []
+	})
+	this.StorCode()
+	let categoryId = this.data.barArr[this.data.barCurrent]
+	var q = {
+		keyword: app.searchvalue,
+		categoryId: categoryId ? this.data.barArr[this.data.barCurrent].categoryId : '',
+		pageNum: 1,
+		pageSize: 10
+	}
+	app.searchvalue = null
+	this.Officers(()=>{
+		this.getThisData(q)
+	})
   },
 	
 	scrolltolower(e){ // 分页加载
@@ -222,7 +221,7 @@ Page({
 			keyword: this.data.inputvalue,
 			categoryId: this.data.barArr[this.data.barCurrent].categoryId,
 			pageNum: this.data.pageNum + 1,
-			pageSize: this.data.pageSize
+			pageSize: this.data.pageSize,
 		}
 		this.getThisData(q,()=>{
 			setTimeout(()=>{
@@ -235,13 +234,16 @@ Page({
 
   StorCode(){ // 缓存查询历史
 	let arr = []
+	if(this.data.inputvalue)
 	wx.getStorage({
-	  key: 'hyt_searchDevice',
+	  key: "hyt_searchDevice",
 	  success: (res)=> {
-		arr=typeof JSON.parse(res.data) == 'object'?JSON.parse(res.data): []
-		console.log(arr)
-		if(this.inputvalue){
+		arr = typeof JSON.parse(res.data) == 'object' ? JSON.parse(res.data) : []
+		if(arr.indexOf(this.data.inputvalue) == -1){
 			arr.push(this.data.inputvalue)
+			if(arr.length > 10){
+				arr.shift()
+			}
 			wx.setStorage({
 				key:"hyt_searchDevice",
 				data:JSON.stringify(arr)
@@ -249,9 +251,10 @@ Page({
 		}
 	  },
 	  fail:(res)=> {
+		arr.push(this.data.inputvalue)
 		wx.setStorage({
 			key:"hyt_searchDevice",
-			data:JSON.stringify(arr.push(this.data.inputvalue))
+			data:JSON.stringify(arr)
 		})
 	  }
 	})

@@ -83,7 +83,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-	imagesOnload: $.ZOOM_IMG_FNC(),
 	clearCartData () { // 清空购物车事件
 		app.CartStockApi.subAll()
 		this.triggerEvent('customTouchcart', { click: 'clearCompCart' })

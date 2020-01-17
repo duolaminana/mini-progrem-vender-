@@ -1,48 +1,50 @@
 <!--pages/user/order/index.wxml-->
 <import src="/template/head/head.wxml"></import>
 <import src="/template/showNotdata/common.wxml"></import>
+<wxs src="../../../wxs/common.wxs" module="wxsCom" />
 
 <view class="container cus-lan" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
 
     <block wx:if="{{true}}">
-        <navigator class="orderli" wx:for="{{10}}" wx:key="*this" url="/pages/user/order/info/index">
+        <!-- <navigator class="orderli" wx:for="{{thisList}}" wx:key="*this" data-code="{{index}}" url="/pages/user/order/info/index"> -->
+        <view class="orderli" wx:for="{{thisList}}" wx:key="*this" data-code="{{index}}" bind:tap="toDevices">
             <view class="pic">
-                <image src="/static/img/goods/yan_img.png" />
+                <image src="{{item.imageAddress}}"  mode="aspectFit" />
             </view>
             <view class="info">
                 <view class="xianshang">
                     <view class="top clearfix">
-                        <view class="no cus-sl500">H00001H00001H00001H00001H00001H00001</view>
+                        <view class="no cus-sl500">{{item.machineCode}}</view>
                     </view>
                     <view class="bottom">
                         <image class="cus-addr" src="/static/img/icon/address.png" />
-                        <text class="addr cus-sl500">深圳市宝安区石岩街道办星城购物中心深圳市宝安区石岩街道办星城购物中心</text>
+                        <text class="addr cus-sl500">{{item.positionAddress}}</text>
                     </view>
                 </view>
                 <view class="xianxia">
                     <view class="dataprice">
-                        <view class="time">2019-10-31 17:36:48</view>
+                        <view class="time">{{item.createDate}}</view>
                         <view class="price">
                             <text class="a">¥</text>
-                            <text class="b">85.</text>
-                            <text class="c">80</text>
+                            <text class="b">{{wxsCom.toFrontFixed(item.payAmount)}}.</text>
+                            <text class="c">{{wxsCom.toBackFixed(item.payAmount)}}</text>
                         </view>
                     </view>
                     <view class="rowlu">
-                        <view class="row clearfix row{{index}}" wx:for="{{2}}" wx:key="*this">
-                            <view class="name cus-sl400">黄鹤楼(致青春)黄鹤楼(致青春)黄鹤楼(致青春)黄鹤楼(致青春)</view>
-                            <view class="price">¥50.00</view>
-                            <view class="num">×1</view>
+                        <view class="row clearfix row{{index}}" wx:for="{{item.commodityInformation}}" wx:key="option" wx:for-item="option" wx:for-index="idx">
+                            <view class="name cus-sl400">{{option.productName}}</view>
+                            <view class="price">¥{{option.activityPrice || option.actualPrice}}</view>
+                            <view class="num">×{{option.productNumber}}</view>
                         </view>
                     </view>
-                    <view class="way">
+                    <view class="way" wx:if="{{item.couponAmount > 0}}">
                         <text class="text">使用返现</text>
-                        <text class="price">¥0.20</text>
+                        <text class="price">¥{{item.couponAmount}}</text>
                     </view>
                 </view>
             </view>
-        </navigator>
+        </view>
     </block>
     <template wx:else is="tpl-showNotdata" data="{{text:'暂无购买记录',height:'800rpx'}}"></template>
 </view>

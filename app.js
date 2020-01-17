@@ -1,4 +1,4 @@
-//app.js // version 9.3.1
+//app.js // version 9.6.2
 const host = require('./utils/config/host')
 const request = require('./utils/request/request')
 const CartStockApi = require('./lib/cartstock/api')
@@ -29,16 +29,10 @@ App({
 	      break;
 	  }
 	}
-	wx.login({
-		success: res => {
-			// 发送 res.code 到后台换取 openId, sessionKey, unionId
-			that.globalData.code = res.code
-			appGetMemberInfo(function(res){
-				console.log('用户信息:', res)
-				if(that.wxLoginGetMemberInfoResponseCallback){
-					that.wxLoginGetMemberInfoResponseCallback(res)
-				}
-			})
+	appGetMemberInfo.call(option.query,function(res){
+		console.log('用户信息:', res)
+		if(that.wxLoginGetMemberInfoResponseCallback){
+			that.wxLoginGetMemberInfoResponseCallback(res)
 		}
 	})
 	
@@ -78,6 +72,9 @@ App({
 	isBindingCard: false, // 是否有绑定身份证等
 	wxUserInfo: null ,// 会员信息
 	orderNO: [],
-	shippingWay: null
+	shippingWay: null,
+	isPayment_state: false,
+	DEVICE_STATUS: 1, // 当前设备状态 1激活 0未激活
+	NETWORK_STATUS: 1, // 机器网络状态 0离线 1在线
   }
 })

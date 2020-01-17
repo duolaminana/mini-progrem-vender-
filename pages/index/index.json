@@ -3,7 +3,9 @@
 	  "com-floatGlass": "/component/floatGlass/floatGlass",
 		"COM-winButton": "/components/winButton/winButton",
 		"COM-noLocation": "/components/noLocation/noLocation",
+		"COM-officialAccount": "/components/officialAccount/officialAccount",
 		"COM-emptyData": "/components/emptyData/emptyData"
   },
-  "navigationBarTitleText": "首页"
+  "navigationBarTitleText": "首页",
+  "enablePullDownRefresh": true
 }

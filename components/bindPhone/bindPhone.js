@@ -5,9 +5,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-	show:{
+	hide:{
 	  type: Boolean,
-	  value: false,
+	  value: true,
 	  observer(newVal,oldVal,path){
 	    // console.log(newVal)
 	  }
@@ -36,12 +36,11 @@ Component({
 						jsCode: res.code,
 						code: ''
 					}
-					console.log(res)
 					setBindPhone(q).then(res => {
 						getApp().globalData.isBindingPhone = true
 						getApp().globalData.wxUserInfo.id = res.result
 						this.setData({
-							show: true
+							hide: true
 						})
 						wx.showToast({
 							title: '系统已同步您的手机号!',
@@ -59,13 +58,14 @@ Component({
 		this.setData({hiddenSignIn:false})
 	},
 	showThat (){
+		if(!getApp().globalData.isBindingPhone)
 		this.setData({
-			show: getApp().globalData.isBindingPhone
+			hide: false
 		})
 	},
 	hideBlock (){
 		this.setData({
-			show: true
+			hide: true
 		})
 	}
   },

@@ -10,12 +10,13 @@
         <view class="sbinfo cus-lan">
             <view class="left">
                 <view class="pic">
-					<image 
-					src="{{thisDeviceDetails.machineImageAddress}}"
+					<image src="{{thisDeviceDetails.machineImageAddress || thisDeviceDetails.imageAddress}}" mode="aspectFit"></image>
+					<!-- <image 
+					src="{{thisDeviceDetails.machineImageAddress || thisDeviceDetails.imageAddress}}"
 					bindload="imagesOnload"
 					data-cssimgkey="cssimgkey" 
 					style="{{wxsCom.objToString(cssimgkey[0])}}"
-					/>
+					/> -->
 				</view>
             </view>
             <view class="right">
@@ -25,7 +26,9 @@
                     <text class="dec">{{wxsCom.distRuler(thisDeviceDetails.distance)}}</text>
                 </view>
                 <view class="type">商品种类:{{thisDeviceDetails.articleCategory}}种</view>
-                <view class="sign">{{item.bought==1?'购买过的  ':' '}} 支持线上购买</view>
+                <view class="sign">
+					<text decode="{{true}}" space="{{true}}">{{thisDeviceDetails.bought==1?'购买过的  ':' '}} {{thisDeviceDetails.shippingWay == 0?'支持线上购买':''}}</text>
+				</view>
                 <view class="addr">
                     <image class="cus-addr" src="../../../static/img/icon/my_address.png"/>
                     <text class="text">{{thisDeviceDetails.positionAddress}}</text>
@@ -42,27 +45,30 @@
     <!-- 商品展示 -->
     <view class="goodslist cus-lan">
         <block wx:if="{{thisGoods.length>0}}">
-        <block wx:for="{{thisGoods}}" wx:key="item"> 
+        <block wx:for="{{thisGoods}}" wx:key="item">
         <block wx:if="{{wxsCom.showBarCurrent(barCurrent,index)}}">
-            <view class="li" wx:for="{{item.products}}" wx:key="option" wx:for-item="option" wx:for-index="idx">
-                <view class="name">{{option.productName}}</view>
+            <view class="li {{option.stock <= 0 ? ' sellout-active' : ''}} {{option.activityPrice || option.activityNum ? ' hot-active' : ''}} {{option.activityNum ? ' xm' : ''}}" 
+			wx:for="{{item.products}}" wx:key="option" wx:for-item="option" wx:for-index="idx"
+			>
+				<view class="name">{{option.productName}}</view>
                 <view class="pictitle">
 					<view class="pic">
-					    <image 
-						src="{{option.imageAddress}}"
-						bindload="imagesOnload"
-						data-cssimgidx="{{idx}}" 
-						style="{{wxsCom.objToString(ZOOM_IMG[idx])}}"
-						/>
+						<image src="{{option.imageAddress}}" mode="aspectFit"></image>
 					</view>
 				</view>
                 <view class="bot">
                     <text class="price">
+                        <text class="b">￥</text>
                         <text class="a">{{option.activityPrice?option.activityPrice:option.actualPrice}}</text>
-                        <text class="b">元</text>
+						<!-- <text class="fake" wx:if="{{option.activityPrice}}">￥{{option.actualPrice}}</text> -->
                     </text>
                     <text class="number">{{option.stock}}{{option.dictUnitName}}</text>
                 </view>
+				
+				<view class="hot-active-border"></view>
+				<view class="sellout-view-active">
+					<image src="../../../images/icon/sellout.png" mode="aspectFit"/>
+				</view>
             </view>
         </block>
         </block>
@@ -75,8 +81,23 @@
 		></COM-emptyData>
     </view>
 
+	<view style="height: 140rpx;width: 100vw;"></view>
 </view>
 <view class="pagebtns">
-	<COM-winButton class="left" text="去这里" stylec="absolute address" icon="/static/img/icon/go_addr.png" type="tap" bind:touch="goThatAddress"></COM-winButton>
-	<COM-winButton class="right" text="去购买" stylec="absolute pay" type="tap" bind:touch="goSminfo"></COM-winButton>
+	<COM-winButton 
+	class="left" 
+	text="去这里" 
+	stylec="{{thisDeviceDetails.shippingWay == 0?'position':'fixed'}} address" 
+	icon="/static/img/icon/go_addr.png" 
+	type="tap" 
+	bind:touch="goThatAddress"
+	></COM-winButton>
+	<COM-winButton 
+	wx:if="{{thisDeviceDetails.shippingWay == 0?true:false}}"
+	class="right" 
+	text="去购买" 
+	stylec="absolute pay" 
+	type="tap" 
+	bind:touch="goSminfo"
+	></COM-winButton>
 </view>

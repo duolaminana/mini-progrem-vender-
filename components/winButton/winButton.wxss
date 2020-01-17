@@ -12,11 +12,16 @@
     height:88rpx;
     border-radius:8rpx;
 }
+.com-winButton .com-winButton-con.auto{
+    width: 92vw;
+	background-color:#333333;
+}
 .com-winButton .com-winButton-con.address{
     background-color:#333333;
 }
 .com-winButton .com-winButton-con.pay{
     background-color:#EE7700;
+	width: 94%;
 }
 .com-winButton .com-winButton-con.fixed{
     position: fixed;
@@ -25,8 +30,7 @@
 }
 .com-winButton .com-winButton-con.absolute{
     position: absolute;
-    bottom: 20rpx;
-    left: 32rpx;
+    left: 17rpx;
 }
 .com-winButton .com-winButton-con .com-winButton-text{
     display: inline-block;
@@ -34,6 +38,7 @@
     font-weight: Medium;
     color: var(--wc);
     line-height: 0;
+	width: auto;
 }
 .com-winButton .com-winButton-con .com-winButton-icon{
     display: inline-block;

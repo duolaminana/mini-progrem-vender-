@@ -109,6 +109,11 @@ page{
 .hot-goods swiper{
   height: 300rpx;
 }
+.hot-goods swiper swiper-item.flexleft{
+  justify-content: flex-start;
+  margin-left: 9rpx;
+  max-width: 58%;
+}
 .hot-goods .pic{
   width: 144rpx;
   height: 144rpx;
@@ -131,44 +136,65 @@ page{
   overflow: hidden;
   text-overflow:ellipsis;
   width: 100%;
+  padding-top: 4rpx;
 }
 .hot-goods .price{
   padding: 0 10rpx;
+  padding-top: 9rpx;
   padding-bottom: 15rpx;
+  display: flex;
+  align-items: flex-end;
 }
-.hot-goods .price .ral{
+.hot-goods .price .actUUU{
   display: inline-block;
+  font-family: var(--fa);
+  font-weight: var(--w4);
+  font-size: 30rpx;
+  color: var(--zc);
+  white-space:nowrap;
 }
-.hot-goods .price .fake{
+.hot-goods .price .actUUU .shrink{
   display: inline-block;
-  padding-left: 10rpx;
-  font-size: 24rpx;
+  font-size: 22rpx;
   font-weight: var(--w5);
+  color: var(--zc);
+  width: 19rpx;
+  margin-top: -2rpx;
+}
+.hot-goods .price .fakeUUU{
+  display: inline-block;
+  font-family: var(--fa);
+  font-weight: var(--w4);
+  font-size: 22rpx;
   color: var(--zc9);
   text-decoration: line-through;
+  white-space:nowrap;
+  margin-left: 18rpx;
+
 }
-.hot-goods .ral-a{
-  font-family: var(--fa);
-  font-size: 30rpx;
-  font-weight: var(--w4);
-  color: var(--zc);
-}
-.hot-goods .ral-b{
-  font-size: 20rpx;
-  font-weight: var(--w5);
-  color: var(--zc);
+.hot-goods .price .fakeUUU .shrink{
+  display: inline-block;
+  font-size: 18rpx;
+  width: 18rpx;
+  text-decoration: line-through;
+  margin-top: -2rpx;
 }
 
 /* 推荐 */
 .recommend-goods swiper{
   height: 250rpx;
 }
+.recommend-goods swiper swiper-item.flexleft{
+  justify-content: flex-start;
+  margin-left: 9rpx;
+  max-width: 58%;
+}
 .recommend-goods .pic-warp{
 	width: 100%;
 	height: 156rpx;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
 }
 .recommend-goods .pic{
   width: 88rpx;

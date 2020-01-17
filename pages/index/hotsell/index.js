@@ -26,8 +26,6 @@ Page({
 	thisGoodsData:{}
   },
   
-  imagesOnload: $.ZOOM_IMG_FNC(),
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -52,19 +50,19 @@ Page({
 		thisGoodsData: data
 	})
 	queryHotMachineProduct(data.productCode).then(res => {
+		console.log('热销商品获取设备列表接口:',res)
 		this.setData({thisGoods:res.result})
 	})
   },
   
   goToDeviceInfo(e){
   	let data = this.data.thisGoods
-  	let old = 'machineCode'
-  	let code = e.currentTarget.dataset.code
+  	let index = e.currentTarget.dataset.code
   	wx.navigateTo({
   	  url: `/pages/device/info/index`,
   	  success: res => {
   	    // 通过eventChannel向被打开页面传送数据
-  	    res.eventChannel.emit('acceptDataFromOpenerPage', $.getArrItem(data, old, code))
+  	    res.eventChannel.emit('acceptDataFromOpenerPage', $.getArrItemByIdx(data, index))
   	  }
   	})
   },

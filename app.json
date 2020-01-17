@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/user/verify/facial/index",
     "pages/index/index",
     "pages/device/sminfo/index",
+    "pages/user/verify/facial/index",
     "pages/pay/finish/index",
     "pages/user/verify/index",
     "pages/signIn/author/author",
@@ -19,10 +19,9 @@
     "pages/user/order/info/index",
     "pages/user/info/identity/index",
     "pages/user/info/index",
-    "pages/user/integral/index",
-    "pages/user/backcash/index",
     "pages/user/info/nickname/index",
-    "pages/index/yqfriend/index"
+    "pages/index/yqfriend/index",
+    "pages/user/rebate/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FFFFFF",
@@ -31,7 +30,7 @@
     "navigationStyle": "custom",
     "enablePullDownRefresh": false,
     "backgroundTextStyle": "dark",
-    "backgroundColor":"#eee"
+    "backgroundColor": "#eee"
   },
   "tabBar": {
     "color": "#999999",

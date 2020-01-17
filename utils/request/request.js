@@ -41,35 +41,38 @@ function thisRequest(resolve, reject, type, mask){
 			'content-type': this[2]
 		},
 		success (res) {
-			if(res.statusCode == 200){
-				if(res.data.code == 200)
-				resolve(res.data.result)
-				else
-				wx.showModal({
-					title: `系统提示${res.data.code}`,
-					content: res.data.message,
-					showCancel: false,
-					success (res) {}
-				})
-			}else{
+			if(res.statusCode != 200){
+				let msg = res.data.message || res.data.msg || '微信访问失败!'
+				reject(msg)
 				wx.showModal({
 					title: `微信提示${res.statusCode}`,
-					content: res.data.message,
+					content: msg,
 					showCancel: false,
 					success (res) {}
 				})
-				console.log('微信返回statusCode: ',res.statusCode)
+				return
 			}
+			if(res.data.code != 200){
+				let msg = res.data.message || res.data.msg || '系统访问失败!'
+				reject(msg)
+				wx.showModal({
+					title: `系统提示${res.data.code}`,
+					content: msg,
+					showCancel: false,
+					success (res) {}
+				})
+				return
+			}
+			resolve(res.data.result)
 		},
 		fail(res) {
-			console.log('请求fail错误: ',res)
+			reject()
 			wx.showModal({
 				title: `系统提示`,
 				content: `访问错误!\n${res.errMsg}`,
 				showCancel: false,
 				success (res) {}
 			})
-			reject()
 		},
 		complete: (res)=> {
 			if(mask && mask=='mask') wx.hideLoading()

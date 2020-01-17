@@ -14,11 +14,11 @@
         <block wx:if="{{isWin}}">
             <view wx:if="{{shippingWay == 1}}" class="txt">请在设备下方取走您的商品</view>
 			<block wx:else>
+				<view class="title">取件码</view>
 				<view class="pic">
-					<!-- <image src="/static/img/code.png" /> -->
-					<canvas class="canvas-code" canvas-id="myQrcode" style="width: 160px;height: 160px;"/>
+					<canvas class="canvas-code" canvas-id="myQrcode" style="width: 150px;height: 150px;"/>
 				</view>
-				<view class="jies">取件码可在“我的”页面中查看</view>
+				<view class="jies">取件码可在"我的"页面中查看</view>
 			</block>
         </block>
 		<view wx:else class="btn" bind:tap="toOrderPage">重新支付</view>
@@ -31,12 +31,12 @@
             <view class="sm">积分可用来兑换商品</view>
         </view>
         <view class="lis">
-            <view class="jf">¥{{wxsCom.toFixed(backMoney)}}</view>
+            <view class="jf">¥{{backMoney}}</view>
             <view class="lq {{jfcolor}}" bind:tap="checked" data-who="1">{{fxText}}</view>
             <view class="sm">下次购烟时可抵用</view>
         </view>
     </view>
 
-	<Get-cargo show="{{getCargoShow}}"></Get-cargo>
+	<Get-cargo show="{{getCargoShow}}" orderNo="{{orderId}}"></Get-cargo>
     <template is="tpl-freebtn" data="{{...fbData}}"></template>
 </view>

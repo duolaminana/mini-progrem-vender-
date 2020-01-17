@@ -8,12 +8,7 @@
 		<view class="top">
 			<view class="leftt">
 				<view class="pic">
-					<image
-					src="{{parentData.imageAddress}}" 
-					bindload="imagesOnload"
-					data-cssimgkey="cssimgkey"
-					style="{{wxsCom.objToString(cssimgkey[0])}}"
-					/>
+					<image src="{{parentData.imageAddress}}" mode="aspectFit"></image>
 				</view>
 			</view>
 			<view class="info">
@@ -26,10 +21,15 @@
 						<text class="b">.{{wxsCom.toBackFixed(parentData.activityPrice?parentData.activityPrice:parentData.actualPrice)}}元</text>
 						<text class="c" wx:if="{{parentData.activityPrice}}">{{wxsCom.toFixed(parentData.actualPrice)}}<text>元</text></text>
 					</view>
-					<block wx:if="{{parentData.categoryId == 182}}">
+					<block wx:if="{{parentData.categoryId == 99999999}}">
 						<view class="hbd-paynumber">仅限1个</view>
 					</block>
-					<com-countKey wx:else stock="{{parentData.stock}}" result="{{parentData.dev_custom_count}}" bind:customComputeCount="customComputeCountFnc"></com-countKey>
+					<com-countKey 
+					wx:else 
+					stock="{{parentData.stock}}" 
+					result="{{parentData.dev_custom_count}}" 
+					bind:customComputeCount="customComputeCountFnc"
+					></com-countKey>
 				</view>
 			</view>
 		</view>

@@ -9,6 +9,7 @@
     position: fixed;
     top: var(--tpl-header_height);
     width: 100%;
+	z-index: 1;
 }
 .sbinfo{
     overflow: hidden;
@@ -130,7 +131,7 @@
 
 .goodslist{
     width: 100%;
-    padding-top: calc(var(--sbinfo_height) + var(--sbinfo_padding) + var(--bar_height));
+    padding-top: calc(var(--sbinfo_height) + var(--sbinfo_padding) + var(--bar_height) + 10rpx);
 }
 .goodslist .li{
     float: left;
@@ -140,6 +141,68 @@
     padding: 18rpx;
     margin-right: 2.25%;
     margin-bottom: 18rpx;
+	border-radius: 10rpx;
+	overflow: hidden;
+}
+.goodslist .li .hot-active-border{
+	display: none;
+}
+.goodslist .li.hot-active .hot-active-border{
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	border: 2rpx solid #D73F3C;
+	border-radius: 10rpx;
+	box-sizing: border-box;
+}
+.goodslist .li.hot-active{
+	position: relative;
+}
+.goodslist .li.sellout-active{
+	position: relative;
+}
+.goodslist .li .sellout-view-active{
+	display: none;
+}
+.goodslist .li .sellout-view-active image{
+	width: 100rpx;
+}
+.goodslist .li.sellout-active .sellout-view-active{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,.45);
+}
+.goodslist .li.hot-active::before{
+	content: '';
+	width: 0;
+	height: 0;
+	position: absolute;
+	right: -50rpx;
+	top: -50rpx;
+	border: 50rpx solid transparent;
+	border-left-color: #D73F3C;
+	transform: rotate(-45deg);
+}
+.goodslist .li.hot-active::after{
+	content: '活动中';
+	font-size:18rpx;
+	color: white;
+	position: absolute;
+	top: 15rpx;
+	right: -6rpx;
+	transform: rotate(45deg);
+}
+.goodslist .li.hot-active.xm::after{
+	content: '限免中';
 }
 .goodslist .li:nth-of-type(3n){
     margin-right: 0;
@@ -176,7 +239,7 @@
 .goodslist .li .bot{
     height: 30rpx;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 .goodslist .li .price,.goodslist .li .number{
     flex: 1;
@@ -191,6 +254,14 @@
     font-size: 20rpx;
     font-weight: var(--w5);
     color: var(--zc);
+}
+.goodslist .li .price .fake{
+	display: inline-block;
+	padding-left: 10rpx;
+	font-size: 20rpx;
+	font-weight: var(--w5);
+	color: var(--zc9);
+	text-decoration: line-through;
 }
 .goodslist .li .number{
     font-size: 24rpx;
@@ -216,5 +287,5 @@
 .pagebtns .right{
 	width: 65%;
 	position: relative;
-	margin-right: 10rpx;
+	margin-right: 18rpx;
 }

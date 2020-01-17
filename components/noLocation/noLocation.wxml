@@ -2,13 +2,13 @@
 <wxs src="../../wxs/common.wxs" module="wxsCom" />
 <view wx:if="{{show}}" class="com-notLocation" style="height:{{height}}rpx">
 	<view class="warp">
-		<view class="com-notLocation-pic">
+		<view class="com-notLocation-pic" style="padding-bottom: {{space}}rpx">
 			<image 
 			src="/images/icon/locat.png" 
 			mode="widthFix"
 			style="width:{{icosize}}rpx"
 			/>
 		</view>
-		<view class="com-notLocation-text" style="height:{{size}}rpx">{{text}}</view>
+		<view class="com-notLocation-text" style="font-size:{{size}}rpx">{{text}}</view>
 	</view>
 </view>

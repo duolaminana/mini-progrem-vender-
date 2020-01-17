@@ -1,0 +1,47 @@
+<!--pages/user/rebate/index.wxml-->
+<import src="/template/head/head.wxml"></import>
+<wxs src="../../../wxs/common.wxs" module="wxsCom"/>
+
+<view class="container cus-lan" style="--height--:{{__hdHeight__}};">
+    <template is="tpl-header" data="{{...hdData}}"></template>
+	
+	<view class="ib-couplet">
+	    <view class="pic">
+	        <image src="{{secure.image}}"/>
+	    </view>
+		
+	    <view class="info">
+	        <view class="num">{{ who ? total : wxsCom.toFrontFixed(total) }}<text class="jl" hidden="{{who}}">.{{wxsCom.toBackFixed(total)}}</text></view>
+	        <view class="text">{{secure.title}}</view>
+	    </view>
+	    <view class="tonav">{{secure.way}}</view>
+	</view>
+	
+	<view class="ib-info" style="margin-bottom: 20rpx;" wx:for="{{thisList}}" wx:key="*this">
+	    <view class="li" wx:if="{{who}}">
+	        <view class="icon">
+	            <image src="{{secure.icon}}"/>
+	        </view>
+	        <view class="{{secure.handle}}">{{secure.note[0]}}</view>
+	        <view class="{{secure.time}}">{{item.createDate}}</view>
+	        <view class="noteK">-{{item.useProfit || 0}}</view>
+	    </view>
+		<view class="li" wx:if="{{who}}">
+		    <view class="icon">
+		        <image src="{{secure.icon}}"/>
+		    </view>
+		    <view class="{{secure.handle}}">{{secure.note[1]}}</view>
+		    <view class="{{secure.time}}">{{item.createDate}}</view>
+		    <view class="note">+{{item.userProfit || 0}}</view>
+		</view>
+		<view class="li">
+		    <view class="icon">
+		        <image src="{{secure.icon}}"/>
+		    </view>
+		    <view class="{{secure.handle}}">{{secure.note[2]}}</view>
+		    <view class="{{secure.time}}">{{item.createDate}}</view>
+		    <view class="note">{{(who ? '+'+(item.pprofit || 0) : 0) || item.userIntegral || 0}}</view>
+		</view>
+	</view>
+	
+</view>

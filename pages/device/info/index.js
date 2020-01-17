@@ -30,8 +30,6 @@ Page({
 	}]
   },
 
-	imagesOnload: $.ZOOM_IMG_FNC(),
-	
   barAir (e) { // 导航事件
     this.setData({
       barCurrent: e.currentTarget.dataset.type

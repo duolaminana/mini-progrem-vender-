@@ -10,12 +10,13 @@
         <view class="goodsul">
             <view class="li" wx:for="{{thisData}}" wx:key="*this">
                 <view class="pic">
-                    <image 
+					<image src="{{item.imageAddress}}" mode="aspectFit"></image>
+                    <!-- <image 
 					src="{{item.imageAddress}}" 
 					bindload="imagesOnload"
 					data-cssimgidx="{{index}}"
 					style="{{wxsCom.objToString(ZOOM_IMG[index])}}"
-					/>
+					/> -->
                 </view>
                 <view class="info">
                     <view class="top">
@@ -31,10 +32,10 @@
             </view>
         </view>
         <view class="total">
-            <text class="a">共{{totalArticle}}件</text>
+            <text class="a">共{{show_totalCount}}件</text>
             <text class="b">合计</text>
             <text class="c">¥</text>
-            <text class="d">{{totalActivityPrice}}</text>
+            <text class="d">{{show_realPrice}}</text>
         </view>
     </view>
     <view class="deduction" wx:if="{{rebate}}">
@@ -43,8 +44,11 @@
                 <image class="icon" src="/static/img/icon/red_packet_small.png" />
                 <text class="text">可用{{rebate}}元返现金额抵扣</text>
             </view>
-            <view class="sel" bindtap="clickRebate">
+            <view class="sel" bindtap="cutRebate" wx:if="{{showRebate}}">
                 <icon wx:if="{{rebateIcon}}" type="success" size="38rpx" color="#EE7700" />
+            </view>
+            <view class="nosel" wx:else>
+                不需要使用
             </view>
         </view>
     </view>
