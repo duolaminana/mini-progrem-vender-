@@ -3,10 +3,10 @@
 
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
-    <image class="pagebg" src="/static/img/yqfriend/invitation_bg.png" mode="widthFix" />
+    <image class="pagebg" src="/static/img/yqfriend/invitation_bg.png" mode="aspectFit" />
     <view class="content">
         <view class="title">优惠规则</view>
-        <text class="text">邀请好友，好友成功绑定账号 并购买香烟，即可获得交易额 3%的优惠金额；介绍人也可 获得交易额2%的优惠金额；</text>
+        <text class="text">邀请好友，好友成功绑定账号 并购买香烟，即可获得交易额0~99元的优惠金额；介绍人也可 获得交易额0~99元的优惠金额；</text>
         <image class="icon" src="/static/img/yqfriend/friend_img.png" />
         <button class="btn" open-type="share">去邀请</button>
     </view>

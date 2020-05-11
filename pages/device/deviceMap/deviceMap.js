@@ -36,8 +36,8 @@ Page({
 
   setLocation () { // 设置定位
     this.setData({
-        latitude: app.globalData.myLocation[0],
-        longitude: app.globalData.myLocation[1],
+        latitude: app.globalData.User_location[0],
+        longitude: app.globalData.User_location[1],
         markers: this.data.markers
     })
   },
@@ -82,7 +82,7 @@ Page({
 				}
 		})
 	  }
-	  if(app.globalData.myLocation)
+	  if(app.globalData.User_location)
 	  this.setLocation()
 	  else{
 		wx.showLoading({

@@ -112,7 +112,17 @@ page{
 .hot-goods swiper swiper-item.flexleft{
   justify-content: flex-start;
   margin-left: 9rpx;
+  max-width: 30%;
+}
+.hot-goods swiper swiper-item.flexleft2{
+  justify-content: flex-start;
+  margin-left: 9rpx;
   max-width: 58%;
+}
+.hot-goods swiper swiper-item.flexleft3{
+  justify-content: flex-start;
+  margin-left: 9rpx;
+  max-width: 87%;
 }
 .hot-goods .pic{
   width: 144rpx;
@@ -187,7 +197,17 @@ page{
 .recommend-goods swiper swiper-item.flexleft{
   justify-content: flex-start;
   margin-left: 9rpx;
+  max-width: 30%;
+}
+.recommend-goods swiper swiper-item.flexleft2{
+  justify-content: flex-start;
+  margin-left: 9rpx;
   max-width: 58%;
+}
+.recommend-goods swiper swiper-item.flexleft3{
+  justify-content: flex-start;
+  margin-left: 9rpx;
+  max-width: 87%;
 }
 .recommend-goods .pic-warp{
 	width: 100%;

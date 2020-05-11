@@ -48,7 +48,7 @@
                 <view class="title">{{item.categoryName}}</view>
                 <view class="li" wx:for="{{item.products}}" wx:key="option" wx:for-item="option" wx:for-index="idx" bindtap="openComDetail" data-productCode="{{option.productCode}}">
                     <view class="pic">
-						<view wx:if="{{option.activityPrice}}" class="icus-couplet">热销</view>
+						<view wx:if="{{option.activityPrice}}" class="icus-couplet">活动</view>
 						<image src="{{option.imageAddress}}" mode="aspectFit"></image>
                     </view>
                     <view class="info">

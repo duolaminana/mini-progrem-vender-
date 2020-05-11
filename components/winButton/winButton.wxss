@@ -43,6 +43,7 @@
 .com-winButton .com-winButton-con .com-winButton-icon{
     display: inline-block;
     width: 30rpx;
+    height: 30rpx;
     padding-right: 16rpx;
     margin-top: .5rpx;
 }

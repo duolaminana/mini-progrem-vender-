@@ -6,7 +6,7 @@
 			<image 
 			src="/images/icon/locat.png" 
 			mode="widthFix"
-			style="width:{{icosize}}rpx"
+			style="width:{{icosize}}rpx;max-height:135rpx;"
 			/>
 		</view>
 		<view class="com-notLocation-text" style="font-size:{{size}}rpx">{{text}}</view>

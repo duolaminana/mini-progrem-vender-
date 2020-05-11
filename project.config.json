@@ -11,8 +11,6 @@
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": true,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
 		"uglifyFileName": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
@@ -21,11 +19,13 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.8.3",
-	"appid": "wxd307cf191091c7d8",
+	"appid": "wx33bf4d7b02b89502",
 	"projectname": "vendor-mini-program",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -65,10 +65,10 @@
 					"scene": 1011
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "首页",
 					"pathName": "pages/index/index",
-					"query": "",
+					"query": "memberId=277",
 					"scene": null
 				},
 				{
@@ -145,8 +145,44 @@
 					"id": 12,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
-					"query": "memberId =190",
+					"query": "memberId=190",
 					"scene": 1047
+				},
+				{
+					"id": 13,
+					"name": "聊天记录",
+					"pathName": "pages/index/index",
+					"query": "memberId=209",
+					"scene": 1096
+				},
+				{
+					"id": 14,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "memberId=209",
+					"scene": 1007
+				},
+				{
+					"id": 15,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "memberId=209",
+					"scene": 1008
+				},
+				{
+					"id": 16,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "memberId=209",
+					"scene": 1036,
+					"referrerInfo": {}
+				},
+				{
+					"id": 17,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "memberId=209",
+					"scene": 1059
 				}
 			]
 		}

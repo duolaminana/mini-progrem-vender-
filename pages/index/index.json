@@ -4,7 +4,9 @@
 		"COM-winButton": "/components/winButton/winButton",
 		"COM-noLocation": "/components/noLocation/noLocation",
 		"COM-officialAccount": "/components/officialAccount/officialAccount",
-		"COM-emptyData": "/components/emptyData/emptyData"
+		"COM-emptyData": "/components/emptyData/emptyData",
+		"COM-bindPhone": "/components/bindPhone/bindPhone",
+		"COM-authorization": "/components/authorization/authorization"
   },
   "navigationBarTitleText": "首页",
   "enablePullDownRefresh": true

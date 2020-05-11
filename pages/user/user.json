@@ -2,7 +2,7 @@
   "usingComponents": {
     "com-getGoodsCode": "/pages/user/common/getGoodsCode/getGoodsCode",
     "COM-authorization": "/components/authorization/authorization",
-	"COM-bindPhone": "/components/bindPhone/bindPhone",
+	  "COM-bindPhone": "/components/bindPhone/bindPhone",
     "com-getUserInfo": "/component/getUserInfo/getUserInfo"
   },
   "navigationBarTitleText": "我的",

@@ -1,7 +1,6 @@
 <!--pages/user/friends/index.wxml-->
 <import src="/template/head/head.wxml"></import>
 <import src="/template/yqnav/common.wxml"></import>
-<import src="/template/showNotdata/common.wxml"></import>
 
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
@@ -19,11 +18,11 @@
             <view class="info">
                 <view class="left">
                     <view class="name cus-sl300">{{item.nickName}}</view>
-                    <view class="phone">{{item.memberPhone}}</view>
+                    <view class="phone">{{item.memberPhone || ''}}</view>
                 </view>
                 <view class="right">{{item.createDate}}</view>
             </view>
         </view>
     </view>
-    <template wx:else is="tpl-showNotdata" data="{{text:'暂无好友列表数据',height:'270rpx'}}"></template>
+    <COM-emptyData wx:else height="270" size="27" text="暂无轮播图数据哦!!"></COM-emptyData>
 </view>

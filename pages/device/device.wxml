@@ -13,7 +13,7 @@
             <view class="input">
                 <image class="icon" 
 				src="/static/img/icon/search_icon.png" 
-				mode="widthFix"/>
+				mode="aspectFit"/>
                 <input class="text" 
 				type="text" 
 				value="{{inputvalue}}" 

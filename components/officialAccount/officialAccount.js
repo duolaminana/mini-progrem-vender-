@@ -32,15 +32,15 @@ Component({
 	},
   },
   ready (){
-	  this.animation = wx.createAnimation({
-	  	duration: 1500,
-	  	timingFunction: 'ease',
-	  })
-	  setTimeout(()=>{
+	this.animation = wx.createAnimation({
+		duration: 1200,
+		timingFunction: 'ease',
+	})
+	setTimeout(()=>{
 		this.open()
-	  },1000)
-	  setTimeout(()=>{
+	},1000)
+	setTimeout(()=>{
 		this.close()
-	  },5000)
+	},7000)
   }
 })

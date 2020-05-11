@@ -50,20 +50,21 @@
 
 
 .ib-info{
-    background-color: white;
-    padding-left: 32rpx;
     box-sizing: border-box;
     width: 100%;
 }
 .ib-info .li{
+    background-color: white;
     border-bottom: 1rpx solid #D4D4D4;
     height: 90rpx;
     line-height: 90rpx;
+    padding-left: 32rpx;
     padding-right: 32rpx;
     position: relative;
 }
 .ib-info .li:last-of-type{
     border-bottom: none;
+    margin-bottom: 20rpx;
 }
 .ib-info .li .icon{
     float: left;

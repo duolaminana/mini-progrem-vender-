@@ -72,10 +72,10 @@ export function getLocation() {
 
 /**
  * 检测是否有定位
- * @param {Array} getApp().globalData.myLocation
+ * @param {Array} getApp().globalData.User_location
  */
 export function checkLocation() {
-    if(!getApp().globalData.myLocation || getApp().globalData.myLocation.length<=0)
+    if(!getApp().globalData.User_location || getApp().globalData.User_location.length<=0)
         return false
     else
 		return true
@@ -85,7 +85,7 @@ export function checkLocation() {
  * 循环获取定位信息
  * *** 此方法中获取到的定位，会赋值全局托管
  * @param {Function} callback
- * @param {Array} getApp().globalData.myLocation
+ * @param {Array} getApp().globalData.User_location
  */
 export function loopLocation(callback, callback2) {
     if(!checkLocation()){
@@ -97,7 +97,7 @@ export function loopLocation(callback, callback2) {
             getLocation().then(res=>{
                 wx.hideLoading()
                 if(res && res.length>0){
-                    getApp().globalData.myLocation = res
+                    getApp().globalData.User_location = res
                     callback(res)
                 }else{
 					if(callback2 && typeof callback2 === 'function') callback2()
@@ -122,6 +122,6 @@ export function loopLocation(callback, callback2) {
             })
         }
     }else{
-        callback(getApp().globalData.myLocation)
+        callback(getApp().globalData.User_location)
     }
 }

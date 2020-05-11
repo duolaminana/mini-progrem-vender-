@@ -23,7 +23,8 @@ Page({
         class: 'goback-black'
       }
     },
-	thisList: []
+    thisList: [],
+    pageNum: 0
   },
 
   /**
@@ -44,10 +45,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-	queryOrderDetailes().then(res=>{
-		console.log('订单记录:', res)
-		this.setData({thisList: res.result.list})
-	})
+    queryOrderDetailes(this.data.pageNum + 1).then(res=>{
+      console.log('订单记录:', res)
+      this.data.pageNum += 1
+      this.setData({
+        thisList: this.data.thisList.concat(res.result.list || [])
+      })
+    })
   },
   
   toDevices(e){
@@ -80,14 +84,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.onShow()
   },
 
   /**

@@ -2,7 +2,7 @@
 <wxs src="../../wxs/common.wxs" module="wxsCom" />
 <view class="com-winButton">
     <view class="com-winButton-con cus-lan-m {{stylec}}" bind:tap="touchTo">
-        <image class="com-winButton-icon" wx:if="{{icon}}" src="{{icon}}" mode="widthFix"/>
+        <image class="com-winButton-icon" wx:if="{{icon}}" src="{{icon}}" mode="aspectFit"/>
         <text class="com-winButton-text">{{text}}</text>
     </view>
 </view>

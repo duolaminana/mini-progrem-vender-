@@ -98,12 +98,12 @@ Page({
 		type: 2,
 		success () {
 			console.log('绑定手机号成功!')
-			app.globalData.isBindingPhone = true
+			app.globalData.User_isBindingPhone = true
 			// "将参数传回上一页"
 			const pages = getCurrentPages()
 			const prevPage = pages[pages.length-2] // 上一页
 			// 调用上一个页面的setData 方法，将数据存储
-			prevPage.update_navigate_isBindingPhoneBack_data(true)
+			prevPage.update_navigate_User_isBindingPhoneBack_data(true)
 			wx.navigateBack({
 				delta: 1
 			})

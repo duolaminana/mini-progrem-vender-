@@ -107,7 +107,7 @@ Component({
 			jsCode: '',
 		}
 		setBindPhone(q).then(res => {
-			getApp().globalData.isBindingPhone = true
+			getApp().globalData.User_isBindingPhone = true
 			getApp().globalData.wxUserInfo.id = res.result
 			this.setData({show: true})
 			this.triggerEvent('touch', { signInBindingPhone: 'ok' })

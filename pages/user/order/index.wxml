@@ -16,9 +16,10 @@
                 <view class="xianshang">
                     <view class="top clearfix">
                         <view class="no cus-sl500">{{item.machineCode}}</view>
+                        <view class="refund-status">{{item.refundStatus == 2 ? '已退款' : ''}}</view>
                     </view>
                     <view class="bottom">
-                        <image class="cus-addr" src="/static/img/icon/address.png" />
+                        <image class="cus-addr" src="/static/img/icon/address.png"/>
                         <text class="addr cus-sl500">{{item.positionAddress}}</text>
                     </view>
                 </view>

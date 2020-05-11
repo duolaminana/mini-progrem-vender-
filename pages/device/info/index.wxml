@@ -11,12 +11,6 @@
             <view class="left">
                 <view class="pic">
 					<image src="{{thisDeviceDetails.machineImageAddress || thisDeviceDetails.imageAddress}}" mode="aspectFit"></image>
-					<!-- <image 
-					src="{{thisDeviceDetails.machineImageAddress || thisDeviceDetails.imageAddress}}"
-					bindload="imagesOnload"
-					data-cssimgkey="cssimgkey" 
-					style="{{wxsCom.objToString(cssimgkey[0])}}"
-					/> -->
 				</view>
             </view>
             <view class="right">

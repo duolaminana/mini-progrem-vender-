@@ -67,21 +67,20 @@ Component({
         case 'scan':{
           wx.scanCode({
             onlyFromCamera: false,
-			// scanType: 'WX_CODE',
+			      // scanType: 'WX_CODE',
             success: res =>{
-				console.log('扫码结果:',res)
-				// let result = $.getUrlParam(res.result)
-				if(res.path)
-				wx.navigateTo({
-					url: `/pages/device/sminfo/index?machineCode=${res.machineCode}`
-				})
-				else
-				wx.showModal({
-					title: '系统提示',
-					content: '无效二维码!',
-					showCancel: false,
-					success: res => {}
-				})
+				      console.log('winButton组件扫码结果:',res)
+              if(res.path)
+                wx.navigateTo({
+                  url: `/${res.path}`
+                })
+              else
+                wx.showModal({
+                  title: '系统提示',
+                  content: '无效二维码!',
+                  showCancel: false,
+                  success: res => {}
+                })
             },
             fail: res =>{
               wx.showToast({

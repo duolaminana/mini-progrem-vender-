@@ -11,12 +11,6 @@
             <view class="li" wx:for="{{thisData}}" wx:key="*this">
                 <view class="pic">
 					<image src="{{item.imageAddress}}" mode="aspectFit"></image>
-                    <!-- <image 
-					src="{{item.imageAddress}}" 
-					bindload="imagesOnload"
-					data-cssimgidx="{{index}}"
-					style="{{wxsCom.objToString(ZOOM_IMG[index])}}"
-					/> -->
                 </view>
                 <view class="info">
                     <view class="top">
@@ -48,10 +42,10 @@
                 <icon wx:if="{{rebateIcon}}" type="success" size="38rpx" color="#EE7700" />
             </view>
             <view class="nosel" wx:else>
-                不需要使用
+                不能使用
             </view>
         </view>
     </view>
-    
+
     <template is="tpl-freebtn" data="{{...fbData}}"></template>
 </view>

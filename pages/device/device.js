@@ -38,14 +38,12 @@ Page({
 	pages: 0
   },
 
-  barAir (e) { // 导航事件
-    this.setData({
-      barCurrent: e.currentTarget.dataset.type
-    })
-  },
+	barAir (e) { // 导航事件
+		this.setData({
+			barCurrent: e.currentTarget.dataset.type
+		})
+	},
   
-  imagesOnload: $.ZOOM_IMG_FNC(),
-
 	searchInput(){
 		if(this.data.inputvalue) return
 		wx.navigateTo({
@@ -127,9 +125,7 @@ Page({
   		if(app.globalData.wxUserInfo){
   			callback()
   	  	}else{
-  			wx.showLoading({title:'获取用户信息'})
-  	  		app.wxLoginGetMemberInfoResponseCallback = res => { // 未获取到会员用户信息/ app.js 获取会员响应回调
-  				wx.hideLoading()
+  	  		app.wxLoginGetMemberInfoResponseCallback = res => {
   				callback()
   	  		}
   	  	}

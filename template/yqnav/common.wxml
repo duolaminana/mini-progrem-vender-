@@ -1,6 +1,6 @@
 <template name="tpl-yqnav-index">
     <view class="tpl-yqnav-index">
-        <text class="tpl-yqnav-index-con">邀请好友\n轻松获取返现</text>
+        <text class="tpl-yqnav-index-con">邀请好友\n轻松获取优惠</text>
         <!-- <button class="tpl-yqnav-index-btn" open-type="share">立即邀请</button> -->
         <button class="tpl-yqnav-index-btn">立即邀请</button>
     </view>
@@ -10,6 +10,6 @@
     <view class="tpl-yqnav-user">
         <!-- <button class="tpl-yqnav-user-btn" open-type="share">立即邀请</button> -->
         <button class="tpl-yqnav-user-btn">立即邀请</button>
-        <view class="tpl-yqnav-user-con">邀请好友，轻松获取返现</view>
+        <view class="tpl-yqnav-user-con">邀请好友，轻松获取优惠</view>
     </view>
 </template>

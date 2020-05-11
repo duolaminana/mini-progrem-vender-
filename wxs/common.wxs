@@ -137,6 +137,8 @@ module.exports = {
 				return '购物袋'
 			case '183':
 				return '电子烟'
+			case '193':
+				return '病历本'
 			case '0':
 				return '混合机'
 			case '':
@@ -155,8 +157,10 @@ module.exports = {
 			case '157':
 				return '#4588EC'
 			case '174':
+			case 'yellow':
 				return '#EE7700'
 			case '175':
+			case 'red':
 				return '#D73F3C'
 			case '182':
 				return '#2D8CF0'
@@ -166,6 +170,8 @@ module.exports = {
 				return '#F26033'
 			case '':
 				return '#333333'
+			default:
+				return '#F26033'
 		}
 	},
 	toColor2: function(value){ // 背景颜色
@@ -191,12 +197,14 @@ module.exports = {
 				return '#FFC4B8'
 			case '':
 				return '#ffffff'
+			default:
+				return '#FFC4B8'
 		}
 	},
-	distRuler: function(value){
+	distRuler: function(value, c){
 		// value m
 		// m / km
-		var ruler = 'm'
+		var ruler = 'm',reVal
 		if(typeof value !== 'string' && typeof value !== 'number'){
 			return value
 		}
@@ -207,6 +215,11 @@ module.exports = {
 			value = value / 1000
 			ruler = 'km'
 		}
-		return toFixed(value, 2) + ruler
+		if(c){
+			reVal = toFixed(value, c !=undefined ? c : 2).split('.')[0]
+		}else{
+			reVal = toFixed(value)
+		}
+		return reVal + ruler
 	}
 }

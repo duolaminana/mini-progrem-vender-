@@ -37,7 +37,7 @@ Component({
 						code: ''
 					}
 					setBindPhone(q).then(res => {
-						getApp().globalData.isBindingPhone = true
+						getApp().globalData.User_isBindingPhone = true
 						getApp().globalData.wxUserInfo.id = res.result
 						this.setData({
 							hide: true
@@ -58,7 +58,7 @@ Component({
 		this.setData({hiddenSignIn:false})
 	},
 	showThat (){
-		if(!getApp().globalData.isBindingPhone)
+		if(!getApp().globalData.User_isBindingPhone)
 		this.setData({
 			hide: false
 		})

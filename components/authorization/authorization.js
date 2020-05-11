@@ -50,7 +50,7 @@ Component({
 		getApp().globalData.setting = setting
 		synMemberInfo().then(res => {
 			console.log('同步用户信息成功')
-			getApp().globalData.isSyn = true
+			getApp().globalData.User_isSyn = true
 			wx.showToast({
 				title: '系统已同步您的会员!',
 				icon: 'none',
@@ -60,7 +60,7 @@ Component({
 			this.triggerEvent('touch', { authorization: 'ok' })
 		})
 	},
-	author (){ // 自动授权获取用户信息///授权失败再调用弹框手动授权
+	author: function(){ // 自动授权获取用户信息///授权失败再调用弹框手动授权
 		console.log('检查用户信息授权')
 		wx.getSetting({ // 查询微信授权
 			success: res => {

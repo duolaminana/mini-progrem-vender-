@@ -40,6 +40,7 @@ Component({
   methods: {
     tagClose () {
       // wx.showTabBar()
+			this.triggerEvent('touch', { click: 'ok' })
       this.setData({
         show: false
       })

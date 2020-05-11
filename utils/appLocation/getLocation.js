@@ -44,10 +44,10 @@ function thisLocation(isOpenLocation) {
      * 是否要执行定位
      * 定义tpl_isLocation属性（定位值），用于wxml、js文件
      * @param {Boolean} isOpenLocation 是否要执行定位功能参数
-     * @param app.globalData.myLocation
+     * @param app.globalData.User_location
      * @param this.data.tpl_isLocation
      */
-    if(!app.globalData.myLocation){
+    if(!app.globalData.User_location){
         if(isOpenLocation===true || typeof isOpenLocation == 'undefined' || typeof isOpenLocation == 'function'){
             wx.showLoading({
                 title:"定位中",
@@ -58,7 +58,7 @@ function thisLocation(isOpenLocation) {
             }).then(res=>{
                 wx.hideLoading()
                 if(res){
-                    app.globalData.myLocation = res
+                    app.globalData.User_location = res
                     this.setData({
                         tpl_isLocation: res
                     })
@@ -70,10 +70,10 @@ function thisLocation(isOpenLocation) {
         }
     }else{
         this.setData({
-            tpl_isLocation: app.globalData.myLocation
+            tpl_isLocation: app.globalData.User_location
         })
 		if(typeof isOpenLocation == 'function'){
-		    isOpenLocation(app.globalData.myLocation)
+		    isOpenLocation(app.globalData.User_location)
 		}
     }
 }

@@ -2,7 +2,7 @@ module.exports = {
   // 请求域名 格式： https://您的域名
   HTTP_REQUEST_URL:'https://vendor-platform-test.sun-hyt.com',
   // 请求域名 格式： https://您的域名(上传文件)
-  HTTP_REQUEST_UPLOAD:'http://vendor-miniprogram-aliy.sun-hyt.com',
+  HTTP_REQUEST_UPLOAD:'https://vendor-miniprogram-aliy.sun-hyt.com',
   // Socket链接 暂不做配置
   WSS_SERVER_URL:'',
   // 请求头

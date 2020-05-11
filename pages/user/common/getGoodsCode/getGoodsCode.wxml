@@ -2,6 +2,7 @@
 <import src="/pages/common/sbinfo/index.wxml" />
 <import src="/pages/common/goodsinfo/index.wxml" />
 <import src="/pages/common/orderinfo/index.wxml" />
+<wxs src="../../../../wxs/common.wxs" module="wxsCom" />
 
 <view class="container cus-layer" wx:if="{{show}}">
     <view class="content">
@@ -49,13 +50,13 @@
         <view class="tpl_goods_info">
 			<view class="li" wx:for="{{thisItem.commodityInformation}}" wx:key="option" wx:for-item="option" wx:for-index="idx">
 				<view class="goods-pic">
-				    <image src="{{option.imageAddress}}" />
+				    <image src="{{option.imageAddress}}" mode="aspectFit" />
 				</view>
 				<view class="info">
 				    <view class="top">
 				        <view class="name cus-sl250">{{option.productName}}</view>
 				        <view class="price">
-				            <text class="a" wx:if="{{option.activityPrice}}">¥{{option.actualPrice}}</text>
+				            <text class="a" wx:if="{{option.activityPrice}}">¥{{wxsCom.toFrontFixed(option.actualPrice)+'.'+wxsCom.toBackFixed(option.actualPrice)}} </text>
 				            <text class="b">¥</text>
 				            <text class="c">{{option.activityPrice?wxsCom.toFrontFixed(option.activityPrice):wxsCom.toFrontFixed(option.actualPrice)}}.</text>
 				            <text class="d">{{option.activityPrice?wxsCom.toBackFixed(option.activityPrice):wxsCom.toBackFixed(option.actualPrice)}}</text>
@@ -73,9 +74,9 @@
 			<text class="c">{{wxsCom.toFrontFixed(thisItem.payAmount)}}.</text>
 			<text class="d">{{wxsCom.toBackFixed(thisItem.payAmount)}}</text>
 		</view>
+    </view>
 
-        <view class="close" bind:tap="tagClose">
-            <image src="/static/img/icon/close_btn_big.png" />
-        </view>
+    <view class="close" bind:tap="tagClose">
+        <image src="/static/img/icon/close_btn_big.png" />
     </view>
 </view>

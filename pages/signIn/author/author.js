@@ -8,12 +8,14 @@ Page({
     },
  
     onLoad: function(options) {
+      console.log(options)
 		this.options = options.options
         // 获取用户信息
 		console.log('author参数:',JSON.parse(options.options))
     },
  
     bindGetUserInfo: function(e) {
+      console.log(e)
         if (e.detail.userInfo) {
 			app.globalData.unauthorized = false
 			app.globalData.setting = e.detail.setting

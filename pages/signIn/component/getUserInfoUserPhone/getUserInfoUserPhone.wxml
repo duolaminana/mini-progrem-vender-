@@ -1,8 +1,8 @@
 <!--pages/signIn/component/getUserPhone/getUserPhone.wxml-->
-<wxs wx:if="{{!isBindingPhone}}" src="../../../../wxs/common.wxs" module="wxsCom" />
-<view wx:if="{{!isBindingPhone}}" class="cus-layer" style="{{wxsCom.objToString(isShowtyle)}}"></view>
+<wxs wx:if="{{!User_isBindingPhone}}" src="../../../../wxs/common.wxs" module="wxsCom" />
+<view wx:if="{{!User_isBindingPhone}}" class="cus-layer" style="{{wxsCom.objToString(isShowtyle)}}"></view>
 
-<view wx:if="{{!isBindingPhone}}" class="com-initButton" style="{{wxsCom.objToString(isShowtyle)}}">
+<view wx:if="{{!User_isBindingPhone}}" class="com-initButton" style="{{wxsCom.objToString(isShowtyle)}}">
 	<view class="content">
 		<!-- 已经同步过的微信用户 -->
 		<block>

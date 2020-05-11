@@ -14,15 +14,19 @@
         <view class="info">
             <view class="title">
                 <text class="name">{{thisGoodsData.productName}}</text>
-                <text class="cuxiao">热销商品</text>
+                <text class="cuxiao">{{thisGoodsData.activityNum?'限免购买':thisGoodsData.activityPrice?'活动商品':''}}</text>
             </view>
             <view class="alias">{{thisGoodsData.categoryName}}</view>
             <view class="price">
                 <view class="ral">
-                    <text class="ral-a">{{thisGoodsData.activityPrice || thisGoodsData.sellPrice}}</text>
-                    <text class="ral-b">元</text>
+                    <text class="shrink" style="margin-right:-1.5px">￥</text>
+                    <text class="ral-a">{{wxsCom.toFrontFixed(thisGoodsData.activityPrice || thisGoodsData.sellPrice)}}</text>
+                    <text class="shrink">.{{wxsCom.toBackFixed(thisGoodsData.activityPrice || thisGoodsData.sellPrice)}}</text>
+                    <!-- <text class="ral-b">元</text> -->
                 </view>
-                <text class="fake" wx:if="{{thisGoodsData.activityPrice}}">{{thisGoodsData.sellPrice}}元</text>
+                <view class="fake" wx:if="{{thisGoodsData.activityPrice}}">
+                    ￥{{wxsCom.toFrontFixed(thisGoodsData.sellPrice)}}.{{wxsCom.toBackFixed(thisGoodsData.sellPrice)}}
+                </view>
             </view>
         </view>
     </view>
@@ -48,12 +52,23 @@
                         <text class="no">{{item.machineCode}}</text>
                         <text class="name">{{item.machineName}}</text>
                         <text class="dec">{{wxsCom.distRuler(item.distance)}}</text>
-                        <view class="price">
+                        <!-- <view class="price">
                             <view class="ral">
                                 <text class="ral-b">￥</text>
                                 <text class="ral-a">{{item.activityPrice || item.sellPrice}}</text>
                             </view>
                             <text class="fake" wx:if="{{item.activityPrice}}">￥{{item.sellPrice}}</text>
+                        </view> -->
+                        <view class="price">
+                            <view class="ral" style="margin-right: -6rpx;">
+                                <text class="shrink" style="margin-right:-1.5px">￥</text>
+                                <text class="ral-a">{{wxsCom.toFrontFixed(item.activityPrice || item.sellPrice)}}</text>
+                                <text class="shrink">.{{wxsCom.toBackFixed(item.activityPrice || item.sellPrice)}}</text>
+                                <!-- <text class="ral-b">元</text> -->
+                            </view>
+                            <view class="fake" wx:if="{{item.activityPrice}}">
+                                ￥{{wxsCom.toFrontFixed(item.sellPrice)}}.{{wxsCom.toBackFixed(item.sellPrice)}}
+                            </view>
                         </view>
                     </view>
                     <view class="type">商品种类: {{item.catalogNum}}种</view>

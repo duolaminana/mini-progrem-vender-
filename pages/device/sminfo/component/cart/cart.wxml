@@ -5,7 +5,7 @@
 <view class="cus-layer" animation="{{animationCusLayer}}" hidden="{{!cus_layer_display}}" bindtap="closeCartComp"></view>
 <view class="com-shopcart" id="com-shopcart" animation="{{animationData}}" hidden="{{!cus_layer_display}}" style="transform: translateY({{shopcart_translateY_begin}});">
 	<view class="com-shopcart-title" bindtouchstart="clearCartData">
-		<image class="icon" src="/static/img/icon/delete.png" mode="widthFix" />
+		<image class="icon" src="/static/img/icon/delete.png" mode="aspectFit" />
 		<text class="text">清空购物车</text>
 	</view>
 	<view class="com-shopcart-ul">

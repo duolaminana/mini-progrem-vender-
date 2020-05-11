@@ -39,7 +39,9 @@ Page({
   onReady: function () {
 	getFriendList().then(res=>{
 		console.log('获取好友列表接口',res)
-		this.thisList = res.result || []
+		this.setData({
+      thisList : res.result || []
+    })
 	})
   },
 

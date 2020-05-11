@@ -10,6 +10,7 @@
 }
 .banner image{
     width: 100%;
+    max-height: 130rpx;
 }
 .banner .tpl-yqnav-user{
     left: 69rpx;

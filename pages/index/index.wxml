@@ -7,137 +7,81 @@
   <template is="tpl-header" data="{{...hdData}}"></template>
   <!--轮播图-->
   <view class="banner">
-	<swiper 
-	indicator-dots="{{false}}" 
-	autoplay="{{true}}" 
-	interval="{{3000}}" 
-	duration="{{1200}}" 
-	circular="{{true}}" 
-	bindchange="swiperBannerIdx">
-		<navigator 
-		wx:for="{{SwiperData}}" 
-		wx:key="index" 
-		url="/pages/index/yqfriend/index">
-			<swiper-item class="cus-lan">
-				<image src="{{item.imgurl}}" mode="widthFix" />
-				<template is="tpl-yqnav-index"></template>
-			</swiper-item>
-		</navigator>
-	</swiper>
-	<view class="dots"><!-- 自定义下标 -->
-		<view wx:for="{{SwiperData.length}}" wx:key="index" class="{{index == Swiper_active ? 'active' : ''}}"></view> 
-	</view>
-	<COM-emptyData 
-	show="{{SwiperData.length <= 0}}"
-	height="270"
-	size="27"
-	text="暂无轮播图数据哦!!"
-	></COM-emptyData>
+    <swiper indicator-dots="{{false}}" autoplay="{{true}}" interval="{{3000}}" duration="{{1200}}" circular="{{true}}" bindchange="swiperBannerIdx">
+      <navigator wx:for="{{SwiperData}}" wx:key="index" url="/pages/index/yqfriend/index">
+        <swiper-item class="cus-lan">
+          <image src="{{item.imgurl}}" mode="widthFix" />
+          <template is="tpl-yqnav-index"></template>
+        </swiper-item>
+      </navigator>
+    </swiper>
+    <view class="dots">
+      <!-- 自定义下标 -->
+      <view wx:for="{{SwiperData.length}}" wx:key="index" class="{{index == Swiper_active ? 'active' : ''}}"></view>
+    </view>
+    <COM-emptyData show="{{SwiperData.length <= 0}}" height="270" size="27" text="暂无轮播图数据哦!!"></COM-emptyData>
   </view>
 
   <!-- 热销商品 -->
   <view class="hot-goods icus-goods-list">
     <view class="icus-couplet cus-lan">热销商品</view>
-	<COM-noLocation 
-	show="{{!LOCATION}}"
-	height="300"
-	size="27"
-	icosize="118"
-	></COM-noLocation>
-	<COM-emptyData 
-	show="{{LOCATION && hotGoodsArr.length <= 0}}" 
-	height="300"
-	size="27"
-	text="暂无热销商品数据哦!!"
-	></COM-emptyData>
-    <swiper 
-	wx:if="{{hotGoodsArr.length > 0}}" 
-	display-multiple-items="{{hotGoodsArr.length<4?hotGoodsArr.length:'3.5'}}" 
-	previous-margin="18rpx" 
-	next-margin="18rpx"
-	>
-        <swiper-item 
-		wx:for-items="{{hotGoodsArr}}" 
-		wx:key="index"
-		class="{{ hotGoodsArr.length < 4 ? 'flexleft' : '' }}"
-		>
-          <view bind:tap="goToHotDeviceInfo" data-code="{{index}}">
-            <view class="lis">
-              <view wx:if="{{item.activityPrice || item.activityNum}}" class="susp" style="{{'background-color:' + (item.activityNum?wxsCom.toColor1(174):wxsCom.toColor1(175))}}">
-				  {{item.activityNum?'限免购买':'活动商品'}}
-			  </view>
-              <view class="pic">
-                <image src="{{item.productImageAddress}}" mode="aspectFit" />
+    <swiper wx:if="{{hotGoodsArr.length > 0}}" display-multiple-items="{{hotGoodsArr.length<4?hotGoodsArr.length:'3.5'}}" previous-margin="18rpx" next-margin="18rpx">
+      <swiper-item wx:for-items="{{hotGoodsArr}}" wx:key="index" class="{{hotGoodsArr.length<4?hotGoodsArr.length==2?'flexleft2':hotGoodsArr.length==3?'flexleft3':'flexleft':''}}">
+        <view bind:tap="navigateToHotDeviceInfo" data-code="{{index}}">
+          <view class="lis">
+            <view wx:if="{{item.activityPrice || item.activityNum}}" class="susp" style="{{'background-color:' + (item.activityNum?wxsCom.toColor1('red'):wxsCom.toColor1('yellow'))}}">
+              {{item.activityNum?'限免购买':item.activityPrice?'活动商品':''}}
+            </view>
+            <view class="pic">
+              <image src="{{item.productImageAddress}}" mode="aspectFit" />
+            </view>
+            <view class="name cus-sl200">{{item.productName}}</view>
+            <view class="price">
+              <view class="actUUU">
+                <text class="shrink">￥</text>{{wxsCom.toFrontFixed(item.activityPrice || item.sellPrice)}}
+                <text class="shrink">.{{wxsCom.toBackFixed(item.activityPrice || item.sellPrice)}}</text>
               </view>
-              <view class="name cus-sl200">{{item.productName}}</view>
-              <view class="price">
-                <view class="actUUU">
-                	<text class="shrink">￥</text>{{wxsCom.toFrontFixed(item.activityPrice || item.sellPrice)}}<text class="shrink">.{{wxsCom.toBackFixed(item.activityPrice || item.sellPrice)}}</text>
-                </view>
-                <view class="fakeUUU" wx:if="{{item.activityPrice}}">
-					<text class="shrink"> ￥</text>{{wxsCom.toFixed(item.sellPrice)}}
-				</view>
+              <view class="fakeUUU" wx:if="{{item.activityPrice}}">
+                <text class="shrink"> ￥</text>{{wxsCom.toFixed(item.sellPrice)}}
               </view>
             </view>
           </view>
-        </swiper-item>
+        </view>
+      </swiper-item>
     </swiper>
+    <COM-noLocation show="{{!LOCATION}}" height="300" size="27" icosize="118"></COM-noLocation>
+    <COM-emptyData show="{{LOCATION && hotGoodsArr.length <= 0}}" height="300" size="27" text="暂无热销商品数据哦!!"></COM-emptyData>
   </view>
 
   <!-- 推荐商品 -->
   <view class="recommend-goods icus-goods-list">
     <view class="icus-couplet cus-lan">为你推荐</view>
-	
-    <COM-noLocation
-    show="{{!LOCATION}}"
-    height="256"
-    size="27"
-    icosize="118"
-    ></COM-noLocation>
-	
-	<COM-emptyData
-	show="{{LOCATION && !recommendGoodsArr.length}}" 
-	height="256"
-	size="27"
-	text="暂无推荐商品数据哦!!"
-	></COM-emptyData>
-	
-    <swiper 
-	wx:if="{{recommendGoodsArr.length}}" 
-	display-multiple-items="{{ recommendGoodsArr.length < 4 ? recommendGoodsArr.length : '3.5' }}" 
-	previous-margin="18rpx" 
-	next-margin="18rpx"
-	>
-        <swiper-item 
-		wx:for-items="{{recommendGoodsArr}}" 
-		wx:key="machineCode"
-		class="{{ recommendGoodsArr.length < 3 ? 'flexleft' : '' }}"
-		>
-          <view bind:tap="goToDeviceInfo" data-code="{{index}}">
-            <view class="lis"
-			style="{{'background-color:' + wxsCom.toColor2(item.categoryId)}}"
-			>
-              <view class="susp"
-			  style="{{'background-color:' + wxsCom.toColor1(174)}}"
-			  wx:if="{{item.bought==1?true:false}}"
-			  >购买过的</view>
-              <view class="title" style="{{'color:' + wxsCom.toColor1(item.categoryId)}}">{{wxsCom.toChinses(item.categoryId)}}</view>
-              <view class="pic-warp">
-				  <view class="pic">
-					<image src="{{item.machineImageAddress}}" mode="aspectFit"></image>
-				  </view>
-			  </view>
-              <view class="bot">
-                <image class="cus-addr" src="/static/img/icon/my_address.png"/>
-                <text class="distance">{{wxsCom.distRuler(item.distance)}}</text>
-                <text class="addr cus-sl80">{{item.positionName}}</text>
+    <swiper wx:if="{{recommendGoodsArr.length}}" display-multiple-items="{{recommendGoodsArr.length<4?recommendGoodsArr.length:'3.5'}}" previous-margin="18rpx" next-margin="18rpx">
+      <swiper-item wx:for-items="{{recommendGoodsArr}}" wx:key="machineCode" class="{{recommendGoodsArr.length<4?recommendGoodsArr.length==2?'flexleft2':recommendGoodsArr.length==3?'flexleft3':'flexleft':''}}">
+        <!--处理小程序swiper Bug-->
+        <view bind:tap="navigateToDeviceInfo" data-code="{{index}}">
+          <view class="lis" style="{{'background-color:' + wxsCom.toColor2(item.categoryId)}}">
+            <view class="susp" style="{{'background-color:' + wxsCom.toColor1(174)}}" wx:if="{{item.bought==1?true:false}}">购买过的</view>
+            <view class="title" style="{{'color:' + wxsCom.toColor1(item.categoryId)}}">{{wxsCom.toChinses(item.categoryId)}}</view>
+            <view class="pic-warp">
+              <view class="pic">
+                <image src="{{item.machineImageAddress}}" mode="aspectFit"></image>
               </view>
             </view>
+            <view class="bot">
+              <image class="cus-addr" src="/static/img/icon/my_address.png" />
+              <text class="distance">{{wxsCom.distRuler(item.distance, true)}}</text>
+              <text class="addr cus-sl80">{{item.positionName}}</text>
+            </view>
           </view>
-        </swiper-item>
+        </view>
+      </swiper-item>
     </swiper>
-	
+    <COM-noLocation show="{{!LOCATION}}" height="256" size="27" icosize="118"></COM-noLocation>
+    <COM-emptyData show="{{LOCATION && !recommendGoodsArr.length}}" height="256" size="27" text="暂无推荐商品数据哦!!"></COM-emptyData>
   </view>
 </view>
 <COM-winButton text="扫码购买" icon="/static/img/icon/saoyisao_icon.png" type="scan"></COM-winButton>
-<COM-officialAccount></COM-officialAccount>
+<COM-authorization id="com-authorization" show="{{!AUTHORIZATION}}" bind:touch="AUTHORIZATION_fnc"></COM-authorization>
+<COM-bindPhone id="com-bindPhone"></COM-bindPhone>
+<!-- <COM-officialAccount></COM-officialAccount> -->

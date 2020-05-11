@@ -26,6 +26,10 @@
 .xianshang .top{
     line-height: 24rpx;
 }
+.refund-status{
+    font-size:22rpx;
+    color: var(--zc)
+}
 .xianshang .top .no{
     font-family: var(--fa);
     font-weight: var(--w4);

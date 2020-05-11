@@ -33,7 +33,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	if(app.globalData.isBindingCard){
+	if(app.globalData.User_isBindingCard){
 		this.setData({
 			bindingFace: true,
 			bindingCard: true,
@@ -48,7 +48,7 @@ Page({
   },
 
   verfiyFace () {
-	if(app.globalData.isBindingCard){
+	if(app.globalData.User_isBindingCard){
 		this.showCamera()
 	}else{
 		if(this.data.bindingCard){
@@ -121,7 +121,7 @@ Page({
 	  ctx.takePhoto({
 		quality: 'high',
 		success: (res) => {
-			if(app.globalData.isBindingCard)
+			if(app.globalData.User_isBindingCard)
 			this.loginFace(res)
 			else
 			this.registerFace(res)
@@ -157,7 +157,7 @@ Page({
 			console.log('绑定用户身份证接口 api success响应',res)
 			wx.hideLoading()
 			res = res.result
-			app.globalData.isBindingCard = true
+			app.globalData.User_isBindingCard = true
 			app.globalData.wxUserInfo.id = res
 			wx.navigateTo({
 				url: `/pages/pay/pay`

@@ -5,7 +5,6 @@ const synMemberInfoAjax = require('../../signIn/bin/synMemberInfoAjax')
 import { memberFindOrderByMachCode , queryMachine , getGoodsyn , findMemberFreeProduct , findProductChannel } from "../../../api/api.js"
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -191,7 +190,7 @@ Page({
 	
 	let itemw = this.getProducts(productCode)
 	
-	// if(!app.globalData.isSyn || !app.globalData.isBindingPhone){
+	// if(!app.globalData.User_isSyn || !app.globalData.User_isBindingPhone){
 	// 	return this.COM_authorization.author()
 	// }
 	if(e.detail.click == 'footbar'){
@@ -255,8 +254,6 @@ Page({
 		wx.switchTab({ url:`/pages/index/index` })
     }
   },
-  
-  
 
   appGetwxUserInfoSuccess (callback){
     if(app.globalData.wxUserInfo){
@@ -275,13 +272,15 @@ Page({
   },
 
 	findMemberFreeProduct(arr){ // 环保袋剩余数量计算
+		let isExec = true
 		exec.call(this)
 		let timer = setInterval(res=>{
-			exec.call(this, timer)
-		})
+			if(isExec) exec.call(this, timer)
+		},50)
 		function exec(timer){
 			if(app.globalData.wxUserInfo){
-				findMemberFreeProduct(arr).then(res=>{
+				isExec = false
+				findMemberFreeProduct(arr, app.globalData.channelId).then(res=>{
 					console.log('获取环保袋限免购买过的数量接口:',res)
 					let data = this.data.goodsList
 					for(let [index, item] of data.entries()){ // 更正返回详情数据
@@ -344,7 +343,7 @@ Page({
 			creatArr = JSON.stringify(creatArr)
 			creatArr = creatArr.substring(1, creatArr.length)
 			creatArr = creatArr.substring(0, creatArr.length-1)
-			creatArr = creatArr.replace(/\"/g,'');
+			creatArr = creatArr.replace(/\"/g,'')
 			this.findMemberFreeProduct(creatArr)
 		})
   	})
@@ -358,6 +357,17 @@ Page({
   },
   
   refreshFcn () {
+	this.setData({
+		goodsList: [
+			{
+				categoryName: '全部',
+			}
+		],
+		barCurrent: 0,
+		sbinfoData: {},
+		alreadyPay: false,
+		isCardModule: 0,
+	})
 	this.selectComponent('#com-authorization').author()
 	memberFindOrderByMachCode(app.globalData.machineCode).then(res => {
 		// 是否购买过的
@@ -406,6 +416,15 @@ Page({
 		location: false
 	}).then(()=>{
 		console.log('刷新成功')
+		this.setData({
+			goodsList: [
+				{
+					categoryName: '全部',
+				}
+			],
+			barCurrent: 0, // 侧边导航初始选项
+		})
+		app.CartStockApi.subAll()
 		this.refreshFcn()
 		wx.stopPullDownRefresh()
 	}).catch(()=>{

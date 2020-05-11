@@ -1,6 +1,5 @@
 // pages/index/yqfriend/index.js
 const {app,$,cusAppData} = require('../../../utils/public.js')
-const $wxShare = require('../../../lib/wxsharedata/wxShare.js')
 
 Page({
 
@@ -23,8 +22,12 @@ Page({
     },
   },
   onShareAppMessage: function (res) { // 分享触发函数
-    if (res.from === 'button') {}
-    return $wxShare
+    // if (res.from === 'button') {}
+    return {
+      title: '环阳通云自购平台提供',
+      path: '/pages/index/index?memberId='+( getApp().globalData.wxUserInfo ? getApp().globalData.wxUserInfo.id : '' ),
+      imageUrl: '/images/icon/logo.png'
+    }
   },
 
   /**

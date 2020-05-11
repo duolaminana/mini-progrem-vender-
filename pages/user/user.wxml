@@ -5,7 +5,7 @@
 
 <com-getUserInfo bind:customUserInfo="takeUserInfo"></com-getUserInfo>
 
-<com-getGoodsCode show="{{isGetgoods}}" thisItem="{{toGetgoodsItem}}"></com-getGoodsCode>
+<com-getGoodsCode show="{{isGetgoods}}" thisItem="{{toGetgoodsItem}}" bind:touch="toGotoGetCodeCom_CODE_fnc"></com-getGoodsCode>
 
 <view class="container cus-lan" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
@@ -24,7 +24,7 @@
             <view class="con">
                 <view class="jifen">
                     <text class="num">{{UserIntegral}} </text>
-                    <text class="dw">积分(分)</text>
+                    <text class="dw">积分</text>
                 </view>
                 <view class="text">
                     <text>积分商城兑换好礼</text>
@@ -36,7 +36,7 @@
             <view class="con">
                 <view class="fanxian">
                     <text class="num">{{UserCashMoney}} </text>
-                    <text class="dw">返现(元)</text>
+                    <text class="dw">返现</text>
                 </view>
                 <view class="text">
                     <text>下次购烟时可抵扣</text>
@@ -45,7 +45,7 @@
         </navigator>
     </view>
     <navigator class="banner" url="/pages/index/yqfriend/index">
-        <image src="/static/img/user/banner_small.png" mode="widthFix"/>
+        <image src="/static/img/user/banner_small.png" mode="aspectFit"/>
         <template is="tpl-yqnav-user"></template>
     </navigator>
     <view class="dqh" wx:if="{{UserOrderNO.length>0}}">
@@ -55,8 +55,10 @@
                 <swiper-item>
                     <view class="lineor" bind:tap="gotoGetCodeCom" data-code="{{item.orderNo}}">
                         <view class="pic">
-                            <!-- <image src="/static/img/code.png" mode="widthFix"/> -->
-							<canvas class="canvas-code" canvas-id="{{'myQrcode'+index}}" style="width: 66px;height: 66px;"/>
+                            <image src="{{item.code_src}}" mode="widthFix"/>
+							<view style="position:fixed;bottom:-300rpx;">
+                                <canvas class="canvas-code" canvas-id="{{'myQrcode'+index}}"/>
+                            </view>
                         </view>
                         <view class="con">
                             <view class="row-a">

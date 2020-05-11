@@ -27,6 +27,7 @@
     font-size: 20rpx;
     font-weight: bold;
     color: #ED4014;
+	padding: 0;
 }
 
 .tpl-yqnav-user{

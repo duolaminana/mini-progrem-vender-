@@ -6,7 +6,7 @@
 <view class="container" style="--height--:{{__hdHeight__}};">
     <template is="tpl-header" data="{{...hdData}}"></template>
 	<view class="search cus-lan">
-		<image class="icon" src="/static/img/icon/ic_mall_search.png" mode="widthFix"/>
+		<image class="icon" src="/static/img/icon/ic_mall_search.png" mode="aspectFit"/>
 		<input 
 		class="input" 
 		type="text" 

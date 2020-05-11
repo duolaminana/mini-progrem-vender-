@@ -8,6 +8,7 @@ page{
 }
 .container .pagebg,.containerX .pagebg{
     width: 100%;
+    height: 100%;
     position: absolute;
     top: 0;
 }
@@ -16,7 +17,7 @@ page{
 } */
 .container .content,.containerX .content{
     position: absolute;
-    top: calc(147rpx*var(--bs));
+    top: calc(50% - ((351rpx*var(--bs)/2)));
     width: calc(246rpx*var(--bs));
     height: calc(351rpx*var(--bs));
     background-color: var(--wc);
@@ -46,7 +47,7 @@ page{
     display: block;
     width: calc(88.5rpx*var(--bs));
     height: calc(89rpx*var(--bs));
-    margin: 40rpx auto 70rpx;
+    margin: 20rpx auto 30rpx;
 }
 .container .content .btn,.containerX .content .btn{
     width: 304rpx;

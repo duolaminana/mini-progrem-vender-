@@ -20,8 +20,8 @@ Component({
 		opacity: 1,
 		transition: app.globalData.duration + "ms"
 	},
-	isSyn: true,
-	isBindingPhone: true
+	User_isSyn: true,
+	User_isBindingPhone: true
   },
 
   /**
@@ -66,9 +66,9 @@ Component({
 			console.log('您点击获取手机号授权的 <<确定>> 按钮!')
 			memberBindingPhoneAjax({...e.detail, id: app.globalData.wxUserInfo.id, type: 1, code: app.globalData.code, success: res => {
 				if(res){
-					app.globalData.isBindingPhone = true
+					app.globalData.User_isBindingPhone = true
 					this.setData({
-						isBindingPhone: true
+						User_isBindingPhone: true
 					})
 					wx.showToast({
 						title: '系统已同步您的手机号!',
@@ -85,14 +85,14 @@ Component({
 		}
 	},
 	initChange () {
-		// console.log('initChange',app.globalData.isBindingPhone)
-		if(app.globalData.isBindingPhone){
+		// console.log('initChange',app.globalData.User_isBindingPhone)
+		if(app.globalData.User_isBindingPhone){
 			this.setData({
-				isBindingPhone: true
+				User_isBindingPhone: true
 			})
 		}else{
 			this.setData({
-				isBindingPhone: false
+				User_isBindingPhone: false
 			})
 		}
 	}

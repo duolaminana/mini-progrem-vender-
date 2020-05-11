@@ -17,8 +17,8 @@
 	    <view class="tonav">{{secure.way}}</view>
 	</view>
 	
-	<view class="ib-info" style="margin-bottom: 20rpx;" wx:for="{{thisList}}" wx:key="*this">
-	    <view class="li" wx:if="{{who}}">
+	<view class="ib-info" wx:for="{{thisList}}" wx:key="*this">
+	    <view class="li" wx:if="{{who && item.useProfit}}">
 	        <view class="icon">
 	            <image src="{{secure.icon}}"/>
 	        </view>
@@ -26,7 +26,7 @@
 	        <view class="{{secure.time}}">{{item.createDate}}</view>
 	        <view class="noteK">-{{item.useProfit || 0}}</view>
 	    </view>
-		<view class="li" wx:if="{{who}}">
+		<view class="li" wx:if="{{who && item.userProfit}}">
 		    <view class="icon">
 		        <image src="{{secure.icon}}"/>
 		    </view>
@@ -34,7 +34,7 @@
 		    <view class="{{secure.time}}">{{item.createDate}}</view>
 		    <view class="note">+{{item.userProfit || 0}}</view>
 		</view>
-		<view class="li">
+		<view class="li" wx:if="{{item.pprofit || item.userIntegral}}">
 		    <view class="icon">
 		        <image src="{{secure.icon}}"/>
 		    </view>
